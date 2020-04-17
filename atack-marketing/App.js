@@ -6,7 +6,7 @@ import Login from "./src/screens/Login";
 import Register from "./src/screens/Register";
 import HomeScreen from "./src/screens/Home";
 import SearchScreen from "./src/screens/Search";
-import QRScannerScreen from "./src/screens/QRScan";
+import ScanScreen from "./src/screens/ScanScreen";
 import ProfileScreen from "./src/screens/Profile";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -37,7 +37,7 @@ const HomeTabNavigator = () => (
   >
     <Tab.Screen name="Home" component={HomeScreen} />
     <Tab.Screen name="Search" component={SearchScreen} />
-    <Tab.Screen name="QRScan" component={QRScannerScreen} />
+    <Tab.Screen name="QRScan" component={ScanScreen} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
     {/* Login + Register will be removed from tab bar upon SWITCH Navigation implementation */}
     <Tab.Screen name="Login" component={Login} />
