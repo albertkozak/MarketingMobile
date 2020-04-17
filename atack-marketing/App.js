@@ -35,6 +35,9 @@ const HomeTabNavigator = () => (
     <Tab.Screen name="Search" component={SearchScreen} />
     <Tab.Screen name="QRScan" component={QRScannerScreen} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
+    {/* Login + Register will be removed from tab bar upon SWITCH Navigation implementation */}
+    <Tab.Screen name="Login" component={Login} />
+    <Tab.Screen name="Register" component={Register} />
   </Tab.Navigator>
 );
 
