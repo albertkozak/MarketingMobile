@@ -10,13 +10,14 @@ const Stack = createStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Search" component={Search} />
-        
-      </Stack.Navigator>
-    </NavigationContainer>
+		<NavigationContainer>
+			<Stack.Navigator initialRouteName="Home">
+				<Stack.Screen name="Home" component={Home} />
+				<Stack.Screen name="Search" component={Search} />
+				<Stack.Screen name="Login" component={Login} />
+				<Stack.Screen name="Register" component={Register} />
+			</Stack.Navigator>
+		</NavigationContainer>
   );
 }
 
