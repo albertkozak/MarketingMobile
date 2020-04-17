@@ -4,10 +4,10 @@ import { Button } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from '../components/FormInput';
-import FormButton from '../components/FormButton.js'
+import FormButton from '../components/FormButton.js';
 import ErrorMessage from '../components/ErrorMessage';
 import { AsyncStorage } from 'react-native';
-//import firebase from '../firebase';
+import firebase from '../firebase';
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string()
@@ -23,13 +23,13 @@ const validationSchema = Yup.object().shape({
 export default function Login({ navigation }) {
 	const goToSignup = () => navigation.navigate('Register');
 
-	// async function _storeData(token) {
-	// 	try {
-	// 		await AsyncStorage.setItem('JWT_TOKEN', token);
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// }
+	async function _storeData(token) {
+		try {
+			await AsyncStorage.setItem('JWT_TOKEN', token);
+		} catch (error) {
+			console.error(error);
+		}
+	}
 	async function handleSubmit(values) {
 		return new Promise(async (resolve, reject) => {
 			if (values.email.length > 0 && values.password.length > 0) {
@@ -57,7 +57,7 @@ export default function Login({ navigation }) {
 				onSubmit={async (values) => {
 					try {
 						await handleSubmit(values);
-						navigation.navigate('Details');
+						navigation.navigate('Home');
 					} catch (error) {
 						//Fail
 						alert(error);
