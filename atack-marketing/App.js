@@ -10,8 +10,13 @@ import QRScannerScreen from "./src/screens/QRScan";
 import ProfileScreen from "./src/screens/Profile";
 import { Ionicons } from "@expo/vector-icons";
 
+import VendorList from './src/components/vendors/VendorList'
+import Vendor from './src/components//vendors/Vendor'
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const HomeStack = createStackNavigator();
 
 const HomeTabNavigator = () => (
   <Tab.Navigator
@@ -35,7 +40,7 @@ const HomeTabNavigator = () => (
       },
     })}
   >
-    <Tab.Screen name="Home" component={HomeScreen} />
+    <Tab.Screen name="Home" component={HomeStackNavigator} />
     <Tab.Screen name="Search" component={SearchScreen} />
     <Tab.Screen name="QRScan" component={QRScannerScreen} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
@@ -61,6 +66,15 @@ function getHeaderTitle(route) {
       return "Profile";
   }
 }
+
+const HomeStackNavigator = () => {
+  return(
+  <HomeStack.Navigator>
+    <HomeStack.Screen name="Home" component={HomeScreen}/>
+    <HomeStack.Screen name="VendorList" component={VendorList}/>
+    <HomeStack.Screen name="Vendor" component={Vendor}/>
+  </HomeStack.Navigator>
+  )}
 
 function App() {
   return (
