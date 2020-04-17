@@ -26,6 +26,10 @@ const HomeTabNavigator = () => (
           iconName = "ios-qr-scanner";
         } else if (route.name == "Profile") {
           iconName = "ios-person";
+        } else if (route.name == "Login") {
+          iconName = "ios-apps";
+        } else if (route.name == "Register") {
+          iconName = "ios-more";
         }
         return <Ionicons name={iconName} size={size} color={color} />;
       },
