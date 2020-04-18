@@ -1,6 +1,8 @@
 import * as React from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import EventItem from "./EventItem";
+import Event from "./Event";
 
 const EventList = ({ navigation }) => {
   const dummyData = [
