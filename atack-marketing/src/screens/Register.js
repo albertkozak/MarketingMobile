@@ -50,14 +50,17 @@ export default function Register({ navigation }) {
 											Authorization: `Bearer ${tokenResponse.token}`,
 										},
 									}).then((response) => {
+										alert(response);
 										if (response.status == 201) {
 											resolve(response.status);
+										
 										} else {
 											reject(
 												'API ERROR: ' +
 													JSON.stringify(response)
 											);
 										}
+										
 									});
 								});
 						})

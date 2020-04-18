@@ -42,6 +42,7 @@ export default function Login({ navigation }) {
 							.currentUser.getIdTokenResult()
 							.then((tokenResponse) => {
 								_storeData(tokenResponse.token);
+								console.log('token =  ' + tokenResponse.token);
 								resolve();
 							})
 							.catch((error) => reject('Firebase ' + error));
