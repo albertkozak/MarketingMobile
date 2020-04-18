@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 
-const Event = ({ route }) => {
+const Event = ({ route, navigation }) => {
   const { eventTitle } = route.params;
   return (
     <View style={styles.container}>

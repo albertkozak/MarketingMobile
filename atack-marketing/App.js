@@ -11,7 +11,6 @@ import ProfileScreen from "./src/screens/Profile";
 import { Ionicons } from "@expo/vector-icons";
 import EventList from "./src/components/events/EventList";
 import Event from "./src/components/events/Event";
-
 import VendorList from './src/components/vendors/VendorList'
 import Vendor from './src/components//vendors/Vendor'
 
@@ -73,6 +72,9 @@ const HomeStackNavigator = () => {
   return(
   <HomeStack.Navigator>
     <HomeStack.Screen name="Home" component={HomeScreen}/>
+    <HomeStack.Screen name="EventList" component={EventList}/>
+    <HomeStack.Screen name="Event" component={Event}/>
+    <HomeStack.Screen name="QRScan" component={QRScannerScreen}/>
     <HomeStack.Screen name="VendorList" component={VendorList}/>
     <HomeStack.Screen name="Vendor" component={Vendor}/>
   </HomeStack.Navigator>

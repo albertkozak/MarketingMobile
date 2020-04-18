@@ -25,7 +25,6 @@ const VendorList = ({ navigation }) => {
           </TouchableOpacity>
         }}
       >
-        <Vendor />
       </FlatList>
 
     </View>
