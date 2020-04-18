@@ -16,10 +16,12 @@ import Vendor from './src/components//vendors/Vendor'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const AppStack = createStackNavigator();
 
 const HomeStack = createStackNavigator();
+const SearchStack = createStackNavigator();
 
-const HomeTabNavigator = () => (
+const HomeTabNavigator = ({navigation, route}) => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
       tabBarIcon: ({ color, size }) => {
@@ -42,7 +44,7 @@ const HomeTabNavigator = () => (
     })}
   >
     <Tab.Screen name="Home" component={HomeStackNavigator} />
-    <Tab.Screen name="Search" component={SearchScreen} />
+    <Tab.Screen name="Search" component={SearchStackNavigator} />
     <Tab.Screen name="QRScan" component={QRScannerScreen} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
     {/* Login + Register will be removed from tab bar upon SWITCH Navigation implementation */}
@@ -68,30 +70,65 @@ function getHeaderTitle(route) {
   }
 }
 
-const HomeStackNavigator = () => {
+function shouldHeaderBeShown(route) {
+  const routeName = route.state ? route.state.routes[route.state.index].name: 'Home'
+  switch(routeName) {
+    case 'Home':
+      return false;
+    case 'Search':
+      return false;
+    case 'EventList':
+      return false;
+  }
+}
+
+const HomeStackNavigator = ({navigation, routes}) => {
   return(
   <HomeStack.Navigator>
     <HomeStack.Screen name="Home" component={HomeScreen}/>
-    <HomeStack.Screen name="EventList" component={EventList}/>
-    <HomeStack.Screen name="Event" component={Event}/>
-    <HomeStack.Screen name="QRScan" component={QRScannerScreen}/>
-    <HomeStack.Screen name="VendorList" component={VendorList}/>
-    <HomeStack.Screen name="Vendor" component={Vendor}/>
+    <HomeStack.Screen 
+      name="EventList" 
+      component={AppStackNavigator}
+      />
   </HomeStack.Navigator>
   )}
+
+  const SearchStackNavigator = ({navigation, routes}) => {
+    return(
+      <SearchStack.Navigator>
+      <SearchStack.Screen name="Home" component={SearchScreen}/>
+      <SearchStack.Screen name="EventList" component={AppStackNavigator} />
+    </SearchStack.Navigator>
+    )
+  }
+
+  const AppStackNavigator = ({navigation, routes}) => {
+    return (
+      <AppStack.Navigator>
+      <AppStack.Screen name="EventList" component={EventList} options={{ headerShown: false }}/>
+      <AppStack.Screen name="Event" component={Event}/>
+      <AppStack.Screen name="QRScan" component={QRScannerScreen}/>
+      <AppStack.Screen name="VendorList" component={VendorList}/>
+      <AppStack.Screen name="Vendor" component={Vendor}/>
+      </AppStack.Navigator>
+    )
+
+  }
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator 
+      initialRouteName="Home"
+      >
         <Stack.Screen
           options={({ route }) => ({
             title: getHeaderTitle(route),
+            headerShown: shouldHeaderBeShown(route)
           })}
           name="Home"
           component={HomeTabNavigator}
         />
-        <Stack.Screen name="Search" component={SearchScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
