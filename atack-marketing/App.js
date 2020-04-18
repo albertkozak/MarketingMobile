@@ -9,6 +9,8 @@ import SearchScreen from "./src/screens/Search";
 import QRScannerScreen from "./src/screens/QRScan";
 import ProfileScreen from "./src/screens/Profile";
 import { Ionicons } from "@expo/vector-icons";
+import EventList from "./src/components/events/EventList";
+import Event from "./src/components/events/Event";
 
 import VendorList from './src/components/vendors/VendorList'
 import Vendor from './src/components//vendors/Vendor'
