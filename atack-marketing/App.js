@@ -17,7 +17,6 @@ import Vendor from './src/components//vendors/Vendor'
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const AppStack = createStackNavigator();
-
 const HomeStack = createStackNavigator();
 const SearchStack = createStackNavigator();
 
@@ -53,6 +52,7 @@ const HomeTabNavigator = ({navigation, route}) => (
   </Tab.Navigator>
 );
 
+// CONFIRM WITH TEAM IF WE WANT TITLES FOR TAB SCREENS
 function getHeaderTitle(route) {
   const routeName = route.state
     ? route.state.routes[route.state.index].name
@@ -71,24 +71,31 @@ function getHeaderTitle(route) {
 }
 
 function shouldHeaderBeShown(route) {
-  const routeName = route.state ? route.state.routes[route.state.index].name: 'Home'
+  const routeName = route.state ? route.state.routes[route.state.index].name: 'EventList'
   switch(routeName) {
-    case 'Home':
-      return false;
-    case 'Search':
-      return false;
     case 'EventList':
+      return true;
+    case 'Event':
+    return false;
+    case 'VendorList':
+      return false;
+    case 'Vendor':
+      return false;
+    case 'QRScan':
       return false;
   }
 }
 
-const HomeStackNavigator = ({navigation, routes}) => {
+const HomeStackNavigator = ({navigation, routes, route}) => {
   return(
   <HomeStack.Navigator>
-    <HomeStack.Screen name="Home" component={HomeScreen}/>
+    <HomeStack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
     <HomeStack.Screen 
       name="EventList" 
       component={AppStackNavigator}
+      options={({ route }) => ({
+        headerShown: shouldHeaderBeShown(route)
+      })}
       />
   </HomeStack.Navigator>
   )}
@@ -96,13 +103,18 @@ const HomeStackNavigator = ({navigation, routes}) => {
   const SearchStackNavigator = ({navigation, routes}) => {
     return(
       <SearchStack.Navigator>
-      <SearchStack.Screen name="Home" component={SearchScreen}/>
-      <SearchStack.Screen name="EventList" component={AppStackNavigator} />
+      <SearchStack.Screen name="Search" component={SearchScreen} options={{ headerShown: false }}/>
+      <SearchStack.Screen name="EventList" 
+      component={AppStackNavigator}
+      options={({ route }) => ({
+        headerShown: shouldHeaderBeShown(route)
+      })}
+      />
     </SearchStack.Navigator>
     )
   }
 
-  const AppStackNavigator = ({navigation, routes}) => {
+  const AppStackNavigator = ({navigation, routes, route}) => {
     return (
       <AppStack.Navigator>
       <AppStack.Screen name="EventList" component={EventList} options={{ headerShown: false }}/>
@@ -124,7 +136,8 @@ function App() {
         <Stack.Screen
           options={({ route }) => ({
             title: getHeaderTitle(route),
-            headerShown: shouldHeaderBeShown(route)
+            headerShown:false
+            // headerShown: shouldHeaderBeShown(route)
           })}
           name="Home"
           component={HomeTabNavigator}
