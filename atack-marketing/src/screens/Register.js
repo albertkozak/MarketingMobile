@@ -7,13 +7,9 @@ import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import ErrorMessage from '../components/ErrorMessage';
 import { AsyncStorage } from 'react-native';
-//import firebase from '../firebase';
+import firebase from '../firebase';
 
 const validationSchema = Yup.object().shape({
-	name: Yup.string()
-		.label('Name')
-		.required()
-		.min(2, 'must have at least 2 characters'),
 	email: Yup.string()
 		.label('Email')
 		.email('Enter a valid email')
@@ -29,18 +25,16 @@ const validationSchema = Yup.object().shape({
 
 export default function Register({ navigation }) {
 	const goToLogin = () => navigation.navigate('Login');
+	const API_CREATE_URL =
+		'https://atackmarketingapi.azurewebsites.net/api/User/create';
+
 	async function handleSubmit(values) {
 		return new Promise(async (resolve, reject) => {
-			if (
-				values.name.length > 0 &&
-				values.email.length > 0 &&
-				values.password.length > 0
-			) {
+			if (values.email.length > 0 && values.password.length > 0) {
 				await setTimeout(() => {
 					firebase
 						.auth()
 						.createUserWithEmailAndPassword(
-							values.name,
 							values.email,
 							values.password
 						)
@@ -56,14 +50,17 @@ export default function Register({ navigation }) {
 											Authorization: `Bearer ${tokenResponse.token}`,
 										},
 									}).then((response) => {
+										alert(response);
 										if (response.status == 201) {
 											resolve(response.status);
+										
 										} else {
 											reject(
 												'API ERROR: ' +
 													JSON.stringify(response)
 											);
 										}
+										
 									});
 								});
 						})
@@ -78,7 +75,6 @@ export default function Register({ navigation }) {
 		<SafeAreaView style={styles.container}>
 			<Formik
 				initialValues={{
-					name: '',
 					email: '',
 					password: '',
 					confirmPassword: '',
@@ -89,7 +85,7 @@ export default function Register({ navigation }) {
 
 						//Success
 						if (registerSuccess == 201) {
-							navigation.navigate('Details');
+							navigation.navigate('Home');
 						} else {
 							alert('Hmmm Something Went Wrong');
 						}
@@ -112,19 +108,6 @@ export default function Register({ navigation }) {
 					isSubmitting,
 				}) => (
 					<Fragment>
-						<FormInput
-							name="name"
-							value={values.name}
-							onChangeText={handleChange('name')}
-							placeholder="Enter your full name"
-							iconName="md-person"
-							iconColor="#2C384A"
-							onBlur={handleBlur('name')}
-							autoFocus
-						/>
-						<ErrorMessage
-							errorValue={touched.name && errors.name}
-						/>
 						<FormInput
 							name="email"
 							value={values.email}

@@ -9,6 +9,7 @@ const FormInput = ({
 	returnKeyType,
 	keyboardType,
 	name,
+	color,
 	placeholder,
 	value,
 	...rest
@@ -22,7 +23,7 @@ const FormInput = ({
 			name={name}
 			value={value}
 			placeholder={placeholder}
-			style={styles.input}
+			inputStyle={styles.input}
 		/>
 	</View>
 );
@@ -33,6 +34,9 @@ const styles = StyleSheet.create({
 	},
 	iconStyle: {
 		marginRight: 10,
+	},
+	input: {
+		color: '#fff',
 	},
 });
 
