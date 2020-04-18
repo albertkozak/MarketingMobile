@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/screens/Login";
 import Register from "./src/screens/Register";
+import { AsyncStorage } from 'react-native';
 import HomeScreen from "./src/screens/Home";
 import SearchScreen from "./src/screens/Search";
 import QRScannerScreen from "./src/screens/QRScan";
@@ -46,9 +47,6 @@ const HomeTabNavigator = ({navigation, route}) => (
     <Tab.Screen name="Search" component={SearchStackNavigator} />
     <Tab.Screen name="QRScan" component={QRScannerScreen} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
-    {/* Login + Register will be removed from tab bar upon SWITCH Navigation implementation */}
-    <Tab.Screen name="Login" component={Login} />
-    <Tab.Screen name="Register" component={Register} />
   </Tab.Navigator>
 );
 
@@ -127,12 +125,72 @@ const HomeStackNavigator = ({navigation, routes, route}) => {
 
   }
 
-function App() {
+function App({navigation}) {
+  const [state, dispatch] = React.useReducer(
+    (prevState, action) => {
+      switch (action.tpe) {
+        case 'RESTORE_TOKEN':
+          return {
+            ...prevState,
+            userToken: action.token,
+            isLoading: false,
+          };
+        case 'LOG_IN':
+          return {
+            ...prevState,
+            isSignout: false,
+            userToken: action.token
+          };
+        case 'LOG_OUT':
+          return {
+            ...prevState,
+            isSignout: true,
+            userToken: null
+          };
+      }
+    },
+    {
+      isLoading: true,
+      isSignout: false,
+      userToken: null,
+    }
+  );
+
+  React.useEffect(() => {
+    // Fetch the token from storage then navigate to our appropriate place
+    const appAsync = async () => {
+      let userToken;
+      try {
+        userToken = await AsyncStorage.getItem('token');
+      } catch (e) {
+        // Restoring token failed
+      }
+      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+    };
+    appAsync();
+  }, []);
+
+  const authContext = React.useMemo(
+    () => ({
+      signIn: async data => {
+
+      }
+    })
+  )
+
   return (
     <NavigationContainer>
       <Stack.Navigator 
-      initialRouteName="Home"
+      initialRouteName="Login"
       >
+        <Stack.Screen 
+          name="Login"
+          component={Login}
+          options={{headerShown:false}}/>
+          <Stack.Screen 
+          name="Register"
+          component={Register}
+          options={{headerShown:false}}/>
         <Stack.Screen
           options={({ route }) => ({
             title: getHeaderTitle(route),
