@@ -14,6 +14,7 @@ import EventList from "./src/components/events/EventList";
 import Event from "./src/components/events/Event";
 import VendorList from "./src/components/vendors/VendorList";
 import Vendor from "./src/components//vendors/Vendor";
+import Colors from './src/constants/Color'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,6 +25,7 @@ const SearchStack = createStackNavigator();
 const HomeTabNavigator = ({ navigation, route }) => (
   <Tab.Navigator
     tabBarOptions={{
+      activeTintColor: Colors.ORANGE,
       style: {
         backgroundColor: "transparent",
         borderTopWidth: 0,
