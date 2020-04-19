@@ -22,6 +22,8 @@ const validationSchema = Yup.object().shape({
 
 export default function Login({ navigation }) {
 	const goToSignup = () => navigation.navigate('Register');
+	const API_CREATE_URL =
+		'https://atackmarketingapi.azurewebsites.net/api/User/create';
 
 	async function _storeData(token) {
 		try {
@@ -35,14 +37,39 @@ export default function Login({ navigation }) {
 			if (values.email.length > 0 && values.password.length > 0) {
 				firebase
 					.auth()
+
 					.signInWithEmailAndPassword(values.email, values.password)
-					.then((reponse) => {
+					.then((response) => {
+						if (
+							firebase.auth().currentUser.emailVerified === false
+						) {
+							alert(
+								'please check your email inbox for a verification email'
+							);
+						}
 						firebase
 							.auth()
 							.currentUser.getIdTokenResult()
 							.then((tokenResponse) => {
 								_storeData(tokenResponse.token);
 								console.log('token =  ' + tokenResponse.token);
+								fetch(API_CREATE_URL, {
+									method: 'POST',
+									headers: {
+										Authorization: `Bearer ${tokenResponse.token}`,
+									},
+								}).then((response) => {
+									//	alert(response);
+									if (response.status == 201) {
+										resolve(response.status);
+									} else {
+										reject(
+											'API ERROR: ' +
+												JSON.stringify(response)
+										);
+									}
+								});
+
 								resolve();
 							})
 							.catch((error) => reject('Firebase ' + error));
@@ -55,14 +82,14 @@ export default function Login({ navigation }) {
 		<SafeAreaView style={styles.container}>
 			<Formik
 				initialValues={{ email: '', password: '' }}
-				onSubmit={async (values) => {
+				onSubmit={async (values, { resetForm }) => {
 					try {
 						await handleSubmit(values);
 						navigation.navigate('Home');
 					} catch (error) {
 						//Fail
 						alert(error);
-						values.password = '';
+						resetForm();
 					}
 				}}
 				validationSchema={validationSchema}
@@ -82,7 +109,7 @@ export default function Login({ navigation }) {
 							name="email"
 							value={values.email}
 							onChangeText={handleChange('email')}
-							placeholder="Enter email"
+							placeholder="Enter verified email"
 							autoCapitalize="none"
 							iconName="ios-mail"
 							iconColor="#2C384A"
