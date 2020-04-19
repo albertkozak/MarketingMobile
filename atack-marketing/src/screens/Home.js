@@ -4,15 +4,15 @@ import Container from "../components/Container";
 
 function HomeScreen({ navigation }) {
   return (
-    // <Container>
-    <View style={styles.wrapper}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Events"
-        onPress={() => navigation.navigate("EventList")}
-      />
-    </View>
-    // </Container>
+    <Container>
+      <View style={styles.wrapper}>
+        <Text>Home Screen</Text>
+        <Button
+          title="Go to Events"
+          onPress={() => navigation.navigate("EventList")}
+        />
+      </View>
+    </Container>
   );
 }
 
