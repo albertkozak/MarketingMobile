@@ -1,5 +1,4 @@
 import React from "react";
-// import LinearGradient from "react-native-linear-gradient";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
