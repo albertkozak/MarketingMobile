@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import ErrorMessage from '../components/ErrorMessage';
-import { AsyncStorage } from 'react-native';
+
 import firebase from '../firebase';
 
 const validationSchema = Yup.object().shape({
@@ -25,8 +25,6 @@ const validationSchema = Yup.object().shape({
 
 export default function Register({ navigation }) {
 	const goToLogin = () => navigation.navigate('Login');
-	//const API_CREATE_URL =
-	//	'https://atackmarketingapi.azurewebsites.net/api/User/create';
 
 	async function handleSubmit(values) {
 		return new Promise(async (resolve, reject) => {
@@ -45,26 +43,7 @@ export default function Register({ navigation }) {
 									' Please check verification email'
 							);
 							firebase.auth().currentUser.sendEmailVerification();
-							navigation.navigate('Login');
-							//.currentUser.getIdTokenResult()
-							//	.then((tokenResponse) => {
-							//		fetch(API_CREATE_URL, {
-							//			method: 'POST',
-							//			headers: {
-							//				Authorization: `Bearer ${tokenResponse.token}`,
-							//			},
-							//		}).then((response) => {
-							//			alert(response);
-							//			if (response.status == 201) {
-							//				resolve(response.status);
-							//			} else {
-							//				reject(
-							//					'API ERROR: ' +
-							//						JSON.stringify(response)
-							//				);
-							//			}
-							//		});
-							//	});
+							resolve(response);
 						})
 						.catch((error) => {
 							reject('Firebase ' + error);
@@ -83,14 +62,9 @@ export default function Register({ navigation }) {
 				}}
 				onSubmit={async (values, { resetForm, setSubmitting }) => {
 					try {
-		//	let registerSuccess = await handleSubmit(values);
 						await handleSubmit(values);
 						//Success
-					//	if (registerSuccess == 201) {
-					//		navigation.navigate('Home');
-					//	} else {
-					//		alert('Hmmm Something Went Wrong');
-					//	}
+						navigation.navigate('Login');
 					} catch (error) {
 						//Fail
 						alert(error);
