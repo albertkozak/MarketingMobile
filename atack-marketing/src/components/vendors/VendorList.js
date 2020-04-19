@@ -1,8 +1,10 @@
 import * as React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
-import Vendor from "./Vendor";
+import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import Vendor from './Vendor'
 import { TouchableOpacity } from "react-native-gesture-handler";
-import VendorItem from "./VendorItem";
+import VendorItem from './VendorItem'
+import Container from '../Container'
+import Colors from '../../constants/Color'
 
 const VendorList = ({ navigation, route }) => {
   const { eventTitle } = route.params;
@@ -19,7 +21,8 @@ const VendorList = ({ navigation, route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <Container>
+    <SafeAreaView style={styles.wrapper}>
       <Text style={styles.title}>Vendors</Text>
       <FlatList
         keyExtractor={(vendor) => vendor.vendorName}
@@ -31,17 +34,26 @@ const VendorList = ({ navigation, route }) => {
             </TouchableOpacity>
           );
         }}
-      ></FlatList>
-    </View>
+      >
+      </FlatList>
+
+    </SafeAreaView>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
+  wrapper: {
+    flex: 1, 
+    alignItems: "center", 
     justifyContent: "center",
   },
-});
+  title: {
+    color: Colors.WHITE,
+    fontSize: 22,
+    textTransform: 'uppercase',
+    marginBottom: 25
+  }
+})
 
 export default VendorList;
