@@ -98,7 +98,7 @@ function shouldHeaderBeShown(route) {
 
 const HomeStackNavigator = ({ navigation, routes, route }) => {
   return (
-    <HomeStack.Navigator screenOptions={{ headerTransparent: true }}>
+    <HomeStack.Navigator>
       <HomeStack.Screen
         name="Home"
         component={HomeScreen}
