@@ -6,5 +6,6 @@
     GREY: '#b8b8b8',
     BLACK: '#000',
     WHITE: '#fff'
+ }
 
 export default Colors;
