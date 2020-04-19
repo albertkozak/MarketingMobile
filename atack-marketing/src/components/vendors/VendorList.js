@@ -6,26 +6,33 @@ import VendorItem from './VendorItem'
 import Container from '../Container'
 import Colors from '../../constants/Color'
 
-const VendorList = ({ navigation }) => {
+const VendorList = ({ navigation, route }) => {
+  const { eventTitle } = route.params;
   const dummyData = [
-    {eventTitle: "Vancouver Tech Conferencee 2020", vendorName: "Amazon", marketMaterials: ['Coffee Mugs', 'Mouse Pads', 'Keychains']}
-  ]
+    {
+      eventTitle: "Vancouver Tech Conferencee 2020",
+      vendorName: "Amazon",
+      marketMaterials: ["Coffee Mugs", "Mouse Pads", "Keychains"],
+    },
+  ];
 
   const showVendorDetail = (vendor) => {
-    navigation.navigate('Vendor', vendor)
-  }
+    navigation.navigate("Vendor", vendor);
+  };
 
   return (
     <Container>
     <SafeAreaView style={styles.wrapper}>
       <Text style={styles.title}>Vendors</Text>
-      <FlatList 
-        keyExtractor={vendor => vendor.vendorName}
+      <FlatList
+        keyExtractor={(vendor) => vendor.vendorName}
         data={dummyData}
-        renderItem={({item}) => {
-          return <TouchableOpacity onPress={() => showVendorDetail(item)}>
-            <VendorItem vendor={item} />
-          </TouchableOpacity>
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity onPress={() => showVendorDetail(item)}>
+              <VendorItem vendor={item} />
+            </TouchableOpacity>
+          );
         }}
       >
       </FlatList>
@@ -33,7 +40,7 @@ const VendorList = ({ navigation }) => {
     </SafeAreaView>
     </Container>
   );
-}
+};
 
 const styles = StyleSheet.create({
   wrapper: {

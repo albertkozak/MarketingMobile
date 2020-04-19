@@ -14,7 +14,7 @@ import EventList from "./src/components/events/EventList";
 import Event from "./src/components/events/Event";
 import VendorList from "./src/components/vendors/VendorList";
 import Vendor from "./src/components//vendors/Vendor";
-import Colors from './src/constants/Color'
+import Colors from "./src/constants/Color";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -115,7 +115,7 @@ const HomeStackNavigator = ({ navigation, routes, route }) => {
   );
 };
 
-const SearchStackNavigator = ({ navigation, routes }) => {
+const SearchStackNavigator = ({ navigation, routes, route }) => {
   return (
     <SearchStack.Navigator>
       <SearchStack.Screen
@@ -151,54 +151,6 @@ const AppStackNavigator = ({ navigation, routes, route }) => {
 };
 
 function App({ navigation }) {
-  const [state, dispatch] = React.useReducer(
-    (prevState, action) => {
-      switch (action.tpe) {
-        case "RESTORE_TOKEN":
-          return {
-            ...prevState,
-            userToken: action.token,
-            isLoading: false,
-          };
-        case "LOG_IN":
-          return {
-            ...prevState,
-            isSignout: false,
-            userToken: action.token,
-          };
-        case "LOG_OUT":
-          return {
-            ...prevState,
-            isSignout: true,
-            userToken: null,
-          };
-      }
-    },
-    {
-      isLoading: true,
-      isSignout: false,
-      userToken: null,
-    }
-  );
-
-  React.useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
-    const appAsync = async () => {
-      let userToken;
-      try {
-        userToken = await AsyncStorage.getItem("token");
-      } catch (e) {
-        // Restoring token failed
-      }
-      dispatch({ type: "RESTORE_TOKEN", token: userToken });
-    };
-    appAsync();
-  }, []);
-
-  const authContext = React.useMemo(() => ({
-    signIn: async (data) => {},
-  }));
-
   return (
     <NavigationContainer>
       {/* Change initialRouteName from "Home" to "Login" to access Login / Registration Screen */}
