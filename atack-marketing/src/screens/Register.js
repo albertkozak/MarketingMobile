@@ -43,7 +43,7 @@ export default function Register({ navigation }) {
 									' Please check verification email'
 							);
 							firebase.auth().currentUser.sendEmailVerification();
-							resolve(response);
+							resolve();
 						})
 						.catch((error) => {
 							reject('Firebase ' + error);

@@ -22,51 +22,39 @@ const validationSchema = Yup.object().shape({
 
 export default function Login({ navigation }) {
 	const goToSignup = () => navigation.navigate('Register');
+	const goToForgotPassword = () => navigation.navigate('ForgotPassword');
 	const API_CREATE_URL =
 		'https://atackmarketingapi.azurewebsites.net/api/User/create';
 
-	async function _storeData(token) {
-		try {
-			await AsyncStorage.setItem('JWT_TOKEN', token);
-		} catch (error) {
-			console.error(error);
-		}
-	}
 	async function handleSubmit(values) {
 		return new Promise(async (resolve, reject) => {
 			if (values.email.length > 0 && values.password.length > 0) {
 				firebase
 					.auth()
-
 					.signInWithEmailAndPassword(values.email, values.password)
-					.then((response) => {
+					.then(() => {
 						if (
 							firebase.auth().currentUser.emailVerified === false
 						) {
-							alert(
-								'please check your email inbox for a verification email'
+							reject(
+								'please verify your email address from the verification email sent to your inbox'
 							);
 						}
 						firebase
 							.auth()
 							.currentUser.getIdTokenResult()
 							.then((tokenResponse) => {
-								_storeData(tokenResponse.token);
-								console.log('token =  ' + tokenResponse.token);
 								fetch(API_CREATE_URL, {
 									method: 'POST',
 									headers: {
 										Authorization: `Bearer ${tokenResponse.token}`,
 									},
 								}).then((response) => {
-									//	alert(response);
 									if (response.status == 201) {
 										resolve(response.status);
 									} else {
-										reject(
-											'API ERROR: ' +
-												JSON.stringify(response)
-										);
+										'API ERROR: ' +
+											JSON.stringify(response);
 									}
 								});
 
@@ -149,6 +137,14 @@ export default function Login({ navigation }) {
 			<Button
 				title="Don't have an account? Please Register"
 				onPress={goToSignup}
+				titleStyle={{
+					color: '#fd972a',
+				}}
+				type="clear"
+			/>
+			<Button
+				title="Forgot Password?"
+				onPress={goToForgotPassword}
 				titleStyle={{
 					color: '#fd972a',
 				}}
