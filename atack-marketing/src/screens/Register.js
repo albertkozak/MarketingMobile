@@ -6,7 +6,8 @@ import * as Yup from 'yup';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import ErrorMessage from '../components/ErrorMessage';
-import { AsyncStorage } from 'react-native';
+import Colors from '../constants/Color';
+
 import firebase from '../firebase';
 
 const validationSchema = Yup.object().shape({
@@ -25,8 +26,6 @@ const validationSchema = Yup.object().shape({
 
 export default function Register({ navigation }) {
 	const goToLogin = () => navigation.navigate('Login');
-	const API_CREATE_URL =
-		'https://atackmarketingapi.azurewebsites.net/api/User/create';
 
 	async function handleSubmit(values) {
 		return new Promise(async (resolve, reject) => {
@@ -39,30 +38,13 @@ export default function Register({ navigation }) {
 							values.password
 						)
 						.then((response) => {
-							alert('User Registered - ' + response.user.email);
-							firebase
-								.auth()
-								.currentUser.getIdTokenResult()
-								.then((tokenResponse) => {
-									fetch(API_CREATE_URL, {
-										method: 'POST',
-										headers: {
-											Authorization: `Bearer ${tokenResponse.token}`,
-										},
-									}).then((response) => {
-										alert(response);
-										if (response.status == 201) {
-											resolve(response.status);
-										
-										} else {
-											reject(
-												'API ERROR: ' +
-													JSON.stringify(response)
-											);
-										}
-										
-									});
-								});
+							alert(
+								' - ' +
+									response.user.email +
+									' Please check verification email'
+							);
+							firebase.auth().currentUser.sendEmailVerification();
+							resolve();
 						})
 						.catch((error) => {
 							reject('Firebase ' + error);
@@ -81,14 +63,9 @@ export default function Register({ navigation }) {
 				}}
 				onSubmit={async (values, { resetForm, setSubmitting }) => {
 					try {
-						let registerSuccess = await handleSubmit(values);
-
+						await handleSubmit(values);
 						//Success
-						if (registerSuccess == 201) {
-							navigation.navigate('Home');
-						} else {
-							alert('Hmmm Something Went Wrong');
-						}
+						navigation.navigate('Login');
 					} catch (error) {
 						//Fail
 						alert(error);
@@ -156,7 +133,7 @@ export default function Register({ navigation }) {
 								buttonType="outline"
 								onPress={handleSubmit}
 								title="SIGNUP"
-								buttonColor="#fd972a"
+								buttonColor={Colors.ORANGE}
 								titleColor="#fff"
 								disabled={!isValid || isSubmitting}
 								loading={isSubmitting}

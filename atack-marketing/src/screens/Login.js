@@ -6,8 +6,8 @@ import * as Yup from 'yup';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton.js';
 import ErrorMessage from '../components/ErrorMessage';
-import { AsyncStorage } from 'react-native';
 import firebase from '../firebase';
+import Colors from '../constants/Color';
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string()
@@ -22,27 +22,42 @@ const validationSchema = Yup.object().shape({
 
 export default function Login({ navigation }) {
 	const goToSignup = () => navigation.navigate('Register');
+	const goToForgotPassword = () => navigation.navigate('ForgotPassword');
+	const API_CREATE_URL =
+		'https://atackmarketingapi.azurewebsites.net/api/User/create';
 
-	async function _storeData(token) {
-		try {
-			await AsyncStorage.setItem('JWT_TOKEN', token);
-		} catch (error) {
-			console.error(error);
-		}
-	}
 	async function handleSubmit(values) {
 		return new Promise(async (resolve, reject) => {
 			if (values.email.length > 0 && values.password.length > 0) {
 				firebase
 					.auth()
 					.signInWithEmailAndPassword(values.email, values.password)
-					.then((reponse) => {
+					.then(() => {
+						if (
+							firebase.auth().currentUser.emailVerified === false
+						) {
+							reject(
+								'please verify your email address from the verification email sent to your inbox'
+							);
+						}
 						firebase
 							.auth()
 							.currentUser.getIdTokenResult()
 							.then((tokenResponse) => {
-								_storeData(tokenResponse.token);
-								console.log('token =  ' + tokenResponse.token);
+								fetch(API_CREATE_URL, {
+									method: 'POST',
+									headers: {
+										Authorization: `Bearer ${tokenResponse.token}`,
+									},
+								}).then((response) => {
+									if (response.status == 201) {
+										resolve(response.status);
+									} else {
+										'API ERROR: ' +
+											JSON.stringify(response);
+									}
+								});
+
 								resolve();
 							})
 							.catch((error) => reject('Firebase ' + error));
@@ -55,7 +70,7 @@ export default function Login({ navigation }) {
 		<SafeAreaView style={styles.container}>
 			<Formik
 				initialValues={{ email: '', password: '' }}
-				onSubmit={async (values) => {
+				onSubmit={async (values, { resetForm }) => {
 					try {
 						await handleSubmit(values);
 						navigation.navigate('Home');
@@ -82,7 +97,7 @@ export default function Login({ navigation }) {
 							name="email"
 							value={values.email}
 							onChangeText={handleChange('email')}
-							placeholder="Enter email"
+							placeholder="Enter verified email"
 							autoCapitalize="none"
 							iconName="ios-mail"
 							iconColor="#2C384A"
@@ -110,7 +125,7 @@ export default function Login({ navigation }) {
 								buttonType="outline"
 								onPress={handleSubmit}
 								title="LOGIN"
-								buttonColor="#fd972a"
+								buttonColor={Colors.ORANGE}
 								titleColor="#fff"
 								disabled={!isValid || isSubmitting}
 								loading={isSubmitting}
@@ -122,6 +137,14 @@ export default function Login({ navigation }) {
 			<Button
 				title="Don't have an account? Please Register"
 				onPress={goToSignup}
+				titleStyle={{
+					color: '#fd972a',
+				}}
+				type="clear"
+			/>
+			<Button
+				title="Forgot Password?"
+				onPress={goToForgotPassword}
 				titleStyle={{
 					color: '#fd972a',
 				}}
