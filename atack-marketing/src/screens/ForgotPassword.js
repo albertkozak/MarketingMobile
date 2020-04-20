@@ -1,12 +1,14 @@
 import React, { Fragment, navigation } from 'react';
 import { StyleSheet, SafeAreaView, View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, colors } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton.js';
 import ErrorMessage from '../components/ErrorMessage';
 import firebase from '../firebase';
+import Colors from '../constants/Color';
+
 const validationSchema = Yup.object().shape({
 	email: Yup.string()
 		.label('Email')
@@ -34,7 +36,7 @@ export default function ForgotPassword({ navigation }) {
 						.catch((error) => {
 							reject('firebase ' + error);
 						});
-				}, 1000);
+				}, 3000);
 			}
 		});
 	}
@@ -84,7 +86,7 @@ export default function ForgotPassword({ navigation }) {
 								buttonType="outline"
 								onPress={handleSubmit}
 								title="Send Email"
-								buttonColor="#039BE5"
+								buttonColor={Colors.ORANGE}
 								disabled={!isValid || isSubmitting}
 							/>
 						</View>

@@ -6,8 +6,8 @@ import * as Yup from 'yup';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton.js';
 import ErrorMessage from '../components/ErrorMessage';
-import { AsyncStorage } from 'react-native';
 import firebase from '../firebase';
+import Colors from '../constants/Color';
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string()
@@ -77,7 +77,7 @@ export default function Login({ navigation }) {
 					} catch (error) {
 						//Fail
 						alert(error);
-						resetForm();
+						values.password = '';
 					}
 				}}
 				validationSchema={validationSchema}
@@ -125,7 +125,7 @@ export default function Login({ navigation }) {
 								buttonType="outline"
 								onPress={handleSubmit}
 								title="LOGIN"
-								buttonColor="#fd972a"
+								buttonColor={Colors.ORANGE}
 								titleColor="#fff"
 								disabled={!isValid || isSubmitting}
 								loading={isSubmitting}

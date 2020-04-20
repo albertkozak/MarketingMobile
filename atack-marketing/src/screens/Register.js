@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import ErrorMessage from '../components/ErrorMessage';
+import Colors from '../constants/Color';
 
 import firebase from '../firebase';
 
@@ -132,7 +133,7 @@ export default function Register({ navigation }) {
 								buttonType="outline"
 								onPress={handleSubmit}
 								title="SIGNUP"
-								buttonColor="#fd972a"
+								buttonColor={Colors.ORANGE}
 								titleColor="#fff"
 								disabled={!isValid || isSubmitting}
 								loading={isSubmitting}
