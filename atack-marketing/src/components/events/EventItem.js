@@ -19,7 +19,7 @@ const EventItem = ({ event }) => {
   );
 };
 
-// Border Bottom does NOT work in iOS at this time. Pending further research...
+// Border Bottom does NOT work in iOS at this time. Pending further review...
 const styles = StyleSheet.create({
   wrapper: {},
   text: {

@@ -4,7 +4,7 @@ import Container from "../Container";
 import Colors from "../../constants/Color";
 
 const Event = ({ route, navigation }) => {
-  const { eventTitle } = route.params;
+  const { eventTitle, eventDescription, eventStart } = route.params;
 
   const showVendorList = (vendorList) => {
     navigation.navigate("VendorList", vendorList);
@@ -15,6 +15,8 @@ const Event = ({ route, navigation }) => {
       <SafeAreaView style={styles.wrapper}>
         {/* Update with dynamic info */}
         <Text style={styles.eventTitle}>{eventTitle}</Text>
+        <Text style={styles.eventDescription}>{eventDescription}</Text>
+        <Text style={styles.eventStart}>{eventStart}</Text>
         <View style={styles.buttonContainer}>
           <Button
             title="Join"
@@ -42,6 +44,16 @@ const styles = StyleSheet.create({
     color: Colors.WHITE,
     fontSize: 24,
     marginBottom: 25,
+  },
+  eventDescription: {
+    color: Colors.GREY,
+    marginBottom: 25,
+    fontSize: 15,
+  },
+  eventStart: {
+    color: Colors.WHITE,
+    marginBottom: 25,
+    fontSize: 15,
   },
   buttonContainer: {
     flexDirection: "row",
