@@ -12,6 +12,7 @@ const VendorList = ({ navigation, route }) => {
     {
       eventTitle: "Vancouver Tech Conferencee 2020",
       vendorName: "Amazon",
+      vendorDescription: "Cloud computing E-commerce Artificial intelligence Consumer electronics Digital distribution Grocery stores",
       marketMaterials: ["Coffee Mugs", "Mouse Pads", "Keychains"],
     },
   ];
