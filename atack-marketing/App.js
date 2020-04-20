@@ -203,7 +203,7 @@ function App({ navigation }) {
 	return (
 		<NavigationContainer>
 			{/* Change initialRouteName from "Home" to "Login" to access Login / Registration Screen */}
-			<Stack.Navigator initialRouteName="Login">
+			<Stack.Navigator initialRouteName="Home">
 				<Stack.Screen
 					name="Login"
 					component={Login}
