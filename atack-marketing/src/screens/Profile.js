@@ -48,20 +48,16 @@ function ProfileScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-	wrapper: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	title: {
-		color: Colors.WHITE,
-		fontSize: 22,
-		marginBottom: 25,
-	},
-	loggedStat: {
-		color: Colors.WHITE,
-		marginBottom: 25,
-	},
+  wrapper: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  title: {
+    color: Colors.WHITE,
+    fontSize: 22,
+    marginBottom: 25,
+  },
 });
 
 export default ProfileScreen;
