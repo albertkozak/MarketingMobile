@@ -14,7 +14,7 @@ const EventItem = ({ event }) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       {/* Update with dynamic info */}
-      <Text style={styles.text}>{event.eventTitle}</Text>
+      <Text style={styles.text}>{event.eventName}</Text>
     </SafeAreaView>
   );
 };

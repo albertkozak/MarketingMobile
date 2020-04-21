@@ -4,7 +4,7 @@ import Container from "../Container";
 import Colors from "../../constants/Color";
 
 const Event = ({ route, navigation }) => {
-  const { eventTitle, eventDescription, eventStart } = route.params;
+  const { eventName, eventStartDateTime, numOfVendors, venue } = route.params;
 
   const showVendorList = (vendorList) => {
     navigation.navigate("VendorList", vendorList);
@@ -14,9 +14,10 @@ const Event = ({ route, navigation }) => {
     <Container>
       <SafeAreaView style={styles.wrapper}>
         {/* Update with dynamic info */}
-        <Text style={styles.eventTitle}>{eventTitle}</Text>
-        <Text style={styles.eventDescription}>{eventDescription}</Text>
-        <Text style={styles.eventStart}>{eventStart}</Text>
+        <Text style={styles.eventTitle}>{eventName}</Text>
+        <Text style={styles.eventDescription}>{venue.venueName}</Text>
+        <Text style={styles.eventStart}>{eventStartDateTime}</Text>
+        <Text style={styles.eventDescription}>{numOfVendors}</Text>
         <View style={styles.buttonContainer}>
           <Button
             title="Join"
@@ -26,7 +27,7 @@ const Event = ({ route, navigation }) => {
           <Button
             title="Vendors"
             color={Colors.ORANGE}
-            onPress={() => showVendorList(eventTitle)}
+            onPress={() => showVendorList(eventName)}
           />
         </View>
       </SafeAreaView>
