@@ -14,7 +14,7 @@ const EventItem = ({ event }) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       {/* Update with dynamic info */}
-      <Text style={styles.text}>{event.eventTitle}</Text>
+      <Text style={styles.text}>{event.eventName}</Text>
     </SafeAreaView>
   );
 };
@@ -25,9 +25,10 @@ const styles = StyleSheet.create({
   text: {
     color: Colors.WHITE,
     fontSize: 16,
-    // borderBottomColor: Colors.GREY,
-    // borderWidth: 1,
-    // paddingBottom: 10,
+    borderColor: 'transparent',
+    borderBottomColor: Colors.GREY,
+    borderWidth: 1,
+    paddingVertical: 15
     // width: Dimensions.get("window").width,
   },
 });
