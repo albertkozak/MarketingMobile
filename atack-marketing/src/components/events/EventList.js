@@ -34,7 +34,7 @@ const EventList = ({ navigation }) => {
           })
           .then((responseJson) => {
             console.log(responseJson);
-            console.log(tokenResponse.token);
+            // console.log(tokenResponse.token);
           });
       });
   });
