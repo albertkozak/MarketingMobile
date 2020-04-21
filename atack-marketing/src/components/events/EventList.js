@@ -5,8 +5,10 @@ import EventItem from "./EventItem";
 import Event from "./Event";
 import Container from "../Container";
 import Colors from "../../constants/Color";
+import firebase from "../../firebase";
 
 const EventList = ({ navigation }) => {
+  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
   const dummyData = [
     {
       eventTitle: "Vancouver Tech Conferencee 2020",
@@ -15,6 +17,27 @@ const EventList = ({ navigation }) => {
       eventStart: "August 1, 2020 at 1pm",
     },
   ];
+
+  React.useEffect(() => {
+    firebase
+      .auth()
+      .currentUser.getIdTokenResult()
+      .then((tokenResponse) => {
+        fetch(BASE_URL, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${tokenResponse.token}`,
+          },
+        }).then((response) => {
+          if (response.status == 201) {
+            resolve(response.status);
+          } else {
+            "API ERROR: " + JSON.stringify(response);
+          }
+          console.log(response);
+        });
+      });
+  });
 
   const showEventDetail = (event) => {
     navigation.navigate("Event", event);

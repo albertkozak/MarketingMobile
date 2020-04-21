@@ -48,6 +48,7 @@ export default function Login({ navigation }) {
                     Authorization: `Bearer ${tokenResponse.token}`,
                   },
                 }).then((response) => {
+                  console.log(tokenResponse.token);
                   if (response.status == 201) {
                     resolve(response.status);
                   } else {
