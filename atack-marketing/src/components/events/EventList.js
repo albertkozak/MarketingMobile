@@ -9,7 +9,8 @@ import firebase from "../../firebase";
 
 const EventList = ({ navigation }) => {
   const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
-  const [event, setEvent] = useState([]);
+  const [fetchedData, setFetchedData] = useState([]);
+  const [hasError, setErrors] = useState(false);
 
   // const dummyData = [
   //   {
@@ -20,7 +21,7 @@ const EventList = ({ navigation }) => {
   //   },
   // ];
 
-  useEffect(() => {
+  const fetchData = () => {
     firebase
       .auth()
       .currentUser.getIdTokenResult()
@@ -34,10 +35,16 @@ const EventList = ({ navigation }) => {
         })
           .then((response) => response.json())
           .then((responseData) => {
-            console.log(responseData)
-          });
+            setFetchedData(responseData);
+            console.log(fetchedData);
+          })
+          .catch((err) => setErrors(err));
       });
-  });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   // const showEventDetail = (event) => {
   //   navigation.navigate("Event", event);
@@ -47,24 +54,6 @@ const EventList = ({ navigation }) => {
     <Container>
       <SafeAreaView style={styles.wrapper}>
         <Text style={styles.title}>Events</Text>
-        {/* <FlatList
-          keyExtractor={(event) => event.eventTitle}
-          data={dummyData}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity onPress={() => showEventDetail(item)}>
-                <EventItem event={item} />
-              </TouchableOpacity>
-            );
-          }}
-        /> */}
-
-        <FlatList
-          data={event}
-          renderItem={({ item }) => {
-            console.log(item);
-          }}
-        />
       </SafeAreaView>
     </Container>
   );
