@@ -17,10 +17,15 @@ const Logout = (props) => {
 			});
 	}
 
-	return(
-
-	<Button color= {Colors.ORANGE} title="Logout" onPress={() => signOutUser()} />
-    );
+	return (
+		<Button
+			buttonStyle={{
+				backgroundColor: Colors.ORANGE,
+			}}
+			title="Logout"
+			onPress={() => signOutUser()}
+		/>
+	);
 };
 
 export default Logout;
