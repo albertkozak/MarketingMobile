@@ -56,103 +56,103 @@ export default function Register({ navigation }) {
 	}
 	return (
 		<Container>
-		<SafeAreaView style={styles.container}>
-			<Formik
-				initialValues={{
-					email: '',
-					password: '',
-					confirmPassword: '',
-				}}
-				onSubmit={async (values, { resetForm, setSubmitting }) => {
-					try {
-						await handleSubmit(values);
-						//Success
-						navigation.navigate('Login');
-					} catch (error) {
-						//Fail
-						alert(error);
-						resetForm();
-					}
-				}}
-				validationSchema={validationSchema}
-			>
-				{({
-					handleChange,
-					values,
-					handleSubmit,
-					errors,
-					isValid,
-					touched,
-					handleBlur,
-					isSubmitting,
-				}) => (
-					<Fragment>
-						<FormInput
-							name="email"
-							value={values.email}
-							onChangeText={handleChange('email')}
-							placeholder="Enter email"
-							autoCapitalize="none"
-							iconName="ios-mail"
-							iconColor="#2C384A"
-							onBlur={handleBlur('email')}
-							autoFocus
-						/>
-						<ErrorMessage
-							errorValue={touched.email && errors.email}
-						/>
-						<FormInput
-							name="password"
-							value={values.password}
-							onChangeText={handleChange('password')}
-							placeholder="Enter password"
-							secureTextEntry
-							iconName="ios-lock"
-							iconColor="#2C384A"
-							onBlur={handleBlur('password')}
-						/>
-						<ErrorMessage
-							errorValue={touched.password && errors.password}
-						/>
-						<FormInput
-							name="password"
-							value={values.confirmPassword}
-							onChangeText={handleChange('confirmPassword')}
-							placeholder="Confirm password"
-							secureTextEntry
-							iconName="ios-lock"
-							iconColor="#2C384A"
-							onBlur={handleBlur('confirmPassword')}
-						/>
-						<ErrorMessage
-							errorValue={
-								touched.confirmPassword &&
-								errors.confirmPassword
-							}
-						/>
-						<View style={styles.buttonContainer}>
-							<FormButton
-								buttonType="outline"
-								onPress={handleSubmit}
-								title="SIGNUP"
-								buttonColor={Colors.ORANGE}
-								titleColor="#fff"
-								disabled={!isValid || isSubmitting}
-								loading={isSubmitting}
+			<SafeAreaView style={styles.container}>
+				<Formik
+					initialValues={{
+						email: '',
+						password: '',
+						confirmPassword: '',
+					}}
+					onSubmit={async (values, { resetForm, setSubmitting }) => {
+						try {
+							await handleSubmit(values);
+							//Success
+							navigation.navigate('Login', values.email);
+						} catch (error) {
+							//Fail
+							alert(error);
+							resetForm();
+						}
+					}}
+					validationSchema={validationSchema}
+				>
+					{({
+						handleChange,
+						values,
+						handleSubmit,
+						errors,
+						isValid,
+						touched,
+						handleBlur,
+						isSubmitting,
+					}) => (
+						<Fragment>
+							<FormInput
+								name="email"
+								value={values.email}
+								onChangeText={handleChange('email')}
+								placeholder="Enter email"
+								autoCapitalize="none"
+								iconName="ios-mail"
+								iconColor="#2C384A"
+								onBlur={handleBlur('email')}
+								autoFocus
 							/>
-						</View>
-					</Fragment>
-				)}
-			</Formik>
-			<Button
-				title="Already registered?  Login"
-				onPress={goToLogin}
-				titleStyle={{
-					color: '#fd972a',
-				}}
-				type="clear"
-			/>
-		</SafeAreaView>
+							<ErrorMessage
+								errorValue={touched.email && errors.email}
+							/>
+							<FormInput
+								name="password"
+								value={values.password}
+								onChangeText={handleChange('password')}
+								placeholder="Enter password"
+								secureTextEntry
+								iconName="ios-lock"
+								iconColor="#2C384A"
+								onBlur={handleBlur('password')}
+							/>
+							<ErrorMessage
+								errorValue={touched.password && errors.password}
+							/>
+							<FormInput
+								name="password"
+								value={values.confirmPassword}
+								onChangeText={handleChange('confirmPassword')}
+								placeholder="Confirm password"
+								secureTextEntry
+								iconName="ios-lock"
+								iconColor="#2C384A"
+								onBlur={handleBlur('confirmPassword')}
+							/>
+							<ErrorMessage
+								errorValue={
+									touched.confirmPassword &&
+									errors.confirmPassword
+								}
+							/>
+							<View style={styles.buttonContainer}>
+								<FormButton
+									buttonType="outline"
+									onPress={handleSubmit}
+									title="SIGNUP"
+									buttonColor={Colors.ORANGE}
+									titleColor="#fff"
+									disabled={!isValid || isSubmitting}
+									loading={isSubmitting}
+								/>
+							</View>
+						</Fragment>
+					)}
+				</Formik>
+				<Button
+					title="Already registered?  Login"
+					onPress={goToLogin}
+					titleStyle={{
+						color: '#fd972a',
+					}}
+					type="clear"
+				/>
+			</SafeAreaView>
 		</Container>
 	);
 }
