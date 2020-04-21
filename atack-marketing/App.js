@@ -14,7 +14,7 @@ import Event from "./src/components/events/Event";
 import VendorList from "./src/components/vendors/VendorList";
 import Vendor from "./src/components//vendors/Vendor";
 import Colors from "./src/constants/Color";
-import ForgotPassword from './src/screens/ForgotPassword'
+import ForgotPassword from "./src/screens/ForgotPassword";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
