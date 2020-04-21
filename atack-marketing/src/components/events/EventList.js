@@ -10,7 +10,6 @@ import firebase from "../../firebase";
 const EventList = ({ navigation }) => {
   const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
   const [fetchedData, setFetchedData] = useState([]);
-  const [hasError, setErrors] = useState(false);
 
   // const dummyData = [
   //   {
@@ -37,8 +36,7 @@ const EventList = ({ navigation }) => {
           .then((responseData) => {
             setFetchedData(responseData);
             console.log(fetchedData);
-          })
-          .catch((err) => setErrors(err));
+          });
       });
   };
 
@@ -54,6 +52,15 @@ const EventList = ({ navigation }) => {
     <Container>
       <SafeAreaView style={styles.wrapper}>
         <Text style={styles.title}>Events</Text>
+        <Text style={styles.title}>{fetchedData.events[0].eventName}</Text>
+        <Text style={styles.title}>
+          {fetchedData.events[0].venue.venueName}
+        </Text>
+        <Text style={styles.title}>{fetchedData.events[0].eventId}</Text>
+        <Text style={styles.title}>
+          {fetchedData.events[0].eventStartDateTime}
+        </Text>
+ 
       </SafeAreaView>
     </Container>
   );
