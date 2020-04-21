@@ -7,15 +7,19 @@ import Logout from '../components/Logout';
 
 function ProfileScreen({ navigation }) {
 	const [loggedIn, setLoggedIn] = useState(false);
+	const [currentUser, setCurrentUser] = useState(false);
 
 	const getCurrentUser = async () => {
 		try {
 			let currentUser = await firebase.auth().currentUser;
+		//	console.log(currentUser);
 
 			if (currentUser != null) {
+				setCurrentUser(currentUser);
 				setLoggedIn(true);
 			} else {
 				setLoggedIn(false);
+				setCurrentUser(currentUser);
 			}
 		} catch (error) {
 			console.log('Error Checking Logged In User' + error);
@@ -30,7 +34,11 @@ function ProfileScreen({ navigation }) {
 		<Container>
 			<SafeAreaView style={styles.wrapper}>
 				<Text style={styles.title}>Profile Screen</Text>
-				<View>{loggedIn && <Logout style={styles.logoff}getLoggedIn={getLoggedIn} />}</View>
+
+				{loggedIn && (
+					<Text style={styles.logstat}>Currently logged in as: {currentUser.email}</Text>
+				)}
+				<View>{loggedIn && <Logout getLoggedIn={getLoggedIn} />}</View>
 			</SafeAreaView>
 		</Container>
 	);
@@ -46,8 +54,11 @@ const styles = StyleSheet.create({
 		color: Colors.WHITE,
 		fontSize: 22,
 		marginBottom: 25,
-  },
-
+	},
+	logstat: {
+		color: Colors.WHITE,
+		marginBottom: 25,
+	},
 });
 
 export default ProfileScreen;

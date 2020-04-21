@@ -1,8 +1,6 @@
 import React from 'react';
 import firebase from '../firebase';
-
 import { Button } from 'react-native-elements';
-import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Color';
 const Logout = (props) => {
 	async function signOutUser() {
