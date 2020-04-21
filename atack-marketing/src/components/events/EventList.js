@@ -8,7 +8,7 @@ import Colors from "../../constants/Color";
 import firebase from "../../firebase";
 
 const EventList = ({ navigation }) => {
-  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
+  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Example";
   const dummyData = [
     {
       eventTitle: "Vancouver Tech Conferencee 2020",
@@ -19,23 +19,15 @@ const EventList = ({ navigation }) => {
   ];
 
   React.useEffect(() => {
-    firebase
-      .auth()
-      .currentUser.getIdTokenResult()
-      .then((tokenResponse) => {
-        fetch(BASE_URL, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${tokenResponse.token}`,
-          },
-        }).then((response) => {
-          if (response.status == 201) {
-            resolve(response.status);
-          } else {
-            "API ERROR: " + JSON.stringify(response);
-          }
-          console.log(response);
-        });
+    fetch(BASE_URL, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   });
 
