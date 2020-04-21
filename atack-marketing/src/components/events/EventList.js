@@ -26,15 +26,13 @@ const EventList = ({ navigation }) => {
         fetch(BASE_URL, {
           method: "GET",
           headers: {
+            Accept: "application/json",
             Authorization: `Bearer ${tokenResponse.token}`,
           },
         })
-          .then((response) => {
-            response.json();
-          })
-          .then((responseJson) => {
-            console.log(responseJson);
-            // console.log(tokenResponse.token);
+          .then((response) => response.json())
+          .then((responseData) => {
+            console.log(responseData);
           });
       });
   });
