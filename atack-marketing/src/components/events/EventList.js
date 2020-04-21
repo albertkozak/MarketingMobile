@@ -1,4 +1,4 @@
-import React, { useEffect }  from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import EventItem from "./EventItem";
@@ -8,7 +8,7 @@ import Colors from "../../constants/Color";
 import firebase from "../../firebase";
 
 const EventList = ({ navigation }) => {
-  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Example";
+  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
   const dummyData = [
     {
       eventTitle: "Vancouver Tech Conferencee 2020",
@@ -19,15 +19,23 @@ const EventList = ({ navigation }) => {
   ];
 
   useEffect(() => {
-    fetch(BASE_URL, {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
-      })
-      .catch((error) => {
-        console.error(error);
+    firebase
+      .auth()
+      .currentUser.getIdTokenResult()
+      .then((tokenResponse) => {
+        fetch(BASE_URL, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${tokenResponse.token}`,
+          },
+        })
+          .then((response) => {
+            response.json();
+          })
+          .then((responseJson) => {
+            console.log(responseJson);
+            console.log(tokenResponse.token);
+          });
       });
   });
 
