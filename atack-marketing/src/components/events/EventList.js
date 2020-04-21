@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import EventItem from "./EventItem";
@@ -9,14 +9,16 @@ import firebase from "../../firebase";
 
 const EventList = ({ navigation }) => {
   const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
-  const dummyData = [
-    {
-      eventTitle: "Vancouver Tech Conferencee 2020",
-      eventDescription:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      eventStart: "August 1, 2020 at 1pm",
-    },
-  ];
+  const [event, setEvent] = useState([]);
+
+  // const dummyData = [
+  //   {
+  //     eventTitle: "Vancouver Tech Conferencee 2020",
+  //     eventDescription:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  //     eventStart: "August 1, 2020 at 1pm",
+  //   },
+  // ];
 
   useEffect(() => {
     firebase
@@ -32,20 +34,20 @@ const EventList = ({ navigation }) => {
         })
           .then((response) => response.json())
           .then((responseData) => {
-            console.log(responseData);
+            console.log(responseData)
           });
       });
   });
 
-  const showEventDetail = (event) => {
-    navigation.navigate("Event", event);
-  };
+  // const showEventDetail = (event) => {
+  //   navigation.navigate("Event", event);
+  // };
 
   return (
     <Container>
       <SafeAreaView style={styles.wrapper}>
         <Text style={styles.title}>Events</Text>
-        <FlatList
+        {/* <FlatList
           keyExtractor={(event) => event.eventTitle}
           data={dummyData}
           renderItem={({ item }) => {
@@ -55,7 +57,14 @@ const EventList = ({ navigation }) => {
               </TouchableOpacity>
             );
           }}
-        ></FlatList>
+        /> */}
+
+        <FlatList
+          data={event}
+          renderItem={({ item }) => {
+            console.log(item);
+          }}
+        />
       </SafeAreaView>
     </Container>
   );
