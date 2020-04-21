@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect }  from "react";
 import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import EventItem from "./EventItem";
@@ -18,7 +18,7 @@ const EventList = ({ navigation }) => {
     },
   ];
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch(BASE_URL, {
       method: "GET",
     })
