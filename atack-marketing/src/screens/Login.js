@@ -8,6 +8,7 @@ import FormButton from '../components/FormButton.js';
 import ErrorMessage from '../components/ErrorMessage';
 import firebase from '../firebase';
 import Colors from '../constants/Color';
+import Container from '../components/Container';
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string()
@@ -67,98 +68,100 @@ export default function Login({ navigation }) {
 		});
 	}
 	return (
-		<SafeAreaView style={styles.container}>
-			<Formik
-				initialValues={{ email: '', password: '' }}
-				onSubmit={async (values, { resetForm }) => {
-					try {
-						await handleSubmit(values);
-						navigation.navigate('Home');
-					} catch (error) {
-						//Fail
-						alert(error);
-						values.password = '';
-					}
-				}}
-				validationSchema={validationSchema}
-			>
-				{({
-					handleChange,
-					values,
-					handleSubmit,
-					errors,
-					isValid,
-					touched,
-					handleBlur,
-					isSubmitting,
-				}) => (
-					<Fragment>
-						<FormInput
-							name="email"
-							value={values.email}
-							onChangeText={handleChange('email')}
-							placeholder="Enter verified email"
-							autoCapitalize="none"
-							iconName="ios-mail"
-							iconColor="#2C384A"
-							onBlur={handleBlur('email')}
-							autoFocus
-						/>
-						<ErrorMessage
-							errorValue={touched.email && errors.email}
-						/>
-						<FormInput
-							name="password"
-							value={values.password}
-							onChangeText={handleChange('password')}
-							placeholder="Enter password"
-							secureTextEntry
-							iconName="ios-lock"
-							iconColor="#2C384A"
-							onBlur={handleBlur('password')}
-						/>
-						<ErrorMessage
-							errorValue={touched.password && errors.password}
-						/>
-						<View style={styles.buttonContainer}>
-							<FormButton
-								buttonType="outline"
-								onPress={handleSubmit}
-								title="LOGIN"
-								buttonColor={Colors.ORANGE}
-								titleColor="#fff"
-								disabled={!isValid || isSubmitting}
-								loading={isSubmitting}
+		<Container>
+			<SafeAreaView style={styles.container}>
+				<Formik
+					initialValues={{ email: '', password: '' }}
+					onSubmit={async (values, { resetForm }) => {
+						try {
+							await handleSubmit(values);
+							navigation.navigate('Home');
+						} catch (error) {
+							//Fail
+							alert(error);
+							values.password = '';
+						}
+					}}
+					validationSchema={validationSchema}
+				>
+					{({
+						handleChange,
+						values,
+						handleSubmit,
+						errors,
+						isValid,
+						touched,
+						handleBlur,
+						isSubmitting,
+					}) => (
+						<Fragment>
+							<FormInput
+								name="email"
+								value={values.email}
+								onChangeText={handleChange('email')}
+								placeholder="Enter verified email"
+								autoCapitalize="none"
+								iconName="ios-mail"
+								iconColor="#2C384A"
+								onBlur={handleBlur('email')}
+								autoFocus
 							/>
-						</View>
-					</Fragment>
-				)}
-			</Formik>
-			<Button
-				title="Don't have an account? Please Register"
-				onPress={goToSignup}
-				titleStyle={{
-					color: '#fd972a',
-				}}
-				type="clear"
-			/>
-			<Button
-				title="Forgot Password?"
-				onPress={goToForgotPassword}
-				titleStyle={{
-					color: '#fd972a',
-				}}
-				type="clear"
-			/>
-		</SafeAreaView>
+							<ErrorMessage
+								errorValue={touched.email && errors.email}
+							/>
+							<FormInput
+								name="password"
+								value={values.password}
+								onChangeText={handleChange('password')}
+								placeholder="Enter password"
+								secureTextEntry
+								iconName="ios-lock"
+								iconColor="#2C384A"
+								onBlur={handleBlur('password')}
+							/>
+							<ErrorMessage
+								errorValue={touched.password && errors.password}
+							/>
+							<View style={styles.buttonContainer}>
+								<FormButton
+									buttonType="outline"
+									onPress={handleSubmit}
+									title="LOGIN"
+									buttonColor={Colors.ORANGE}
+									titleColor="#fff"
+									disabled={!isValid || isSubmitting}
+									loading={isSubmitting}
+								/>
+							</View>
+						</Fragment>
+					)}
+				</Formik>
+				<Button
+					title="Don't have an account? Please Register"
+					onPress={goToSignup}
+					titleStyle={{
+						color: '#fd972a',
+					}}
+					type="clear"
+				/>
+				<Button
+					title="Forgot Password?"
+					onPress={goToForgotPassword}
+					titleStyle={{
+						color: '#fd972a',
+					}}
+					type="clear"
+				/>
+			</SafeAreaView>
+		</Container>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#000f',
-	},
+	// container: {
+	// 	flex: 1,
+	// 	backgroundColor: '#000f',
+	// },
 	buttonContainer: {
 		margin: 25,
 	},

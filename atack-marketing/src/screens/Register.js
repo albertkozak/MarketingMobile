@@ -7,6 +7,7 @@ import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import ErrorMessage from '../components/ErrorMessage';
 import Colors from '../constants/Color';
+import Container from '../components/Container';
 
 import firebase from '../firebase';
 
@@ -54,6 +55,7 @@ export default function Register({ navigation }) {
 		});
 	}
 	return (
+		<Container>
 		<SafeAreaView style={styles.container}>
 			<Formik
 				initialValues={{
@@ -151,14 +153,15 @@ export default function Register({ navigation }) {
 				type="clear"
 			/>
 		</SafeAreaView>
+		</Container>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#000f',
-	},
+	//container: {
+	//	flex: 1,
+	//	backgroundColor: '#000f',
+	//},
 	buttonContainer: {
 		margin: 25,
 	},
