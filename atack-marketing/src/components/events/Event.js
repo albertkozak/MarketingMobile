@@ -15,9 +15,9 @@ const Event = ({ route, navigation }) => {
       <SafeAreaView style={styles.wrapper}>
         {/* Update with dynamic info */}
         <Text style={styles.eventTitle}>{eventName}</Text>
-        <Text style={styles.eventDescription}>{venue.venueName}</Text>
+        <Text style={styles.eventVenue}>{venue.venueName}</Text>
         <Text style={styles.eventStart}>{eventStartDateTime}</Text>
-        <Text style={styles.eventDescription}>{numOfVendors}</Text>
+        <Text style={styles.eventVendors}>Vendors: {numOfVendors}</Text>
         <View style={styles.buttonContainer}>
           <Button
             title="Join"
@@ -46,7 +46,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 25,
   },
-  eventDescription: {
+  eventVenue: {
+    color: Colors.WHITE,
+    marginBottom: 25,
+    fontSize: 18,
+  },
+  eventVendors: {
     color: Colors.GREY,
     marginBottom: 25,
     fontSize: 15,
@@ -57,8 +62,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   buttonContainer: {
+    alignSelf: 'center',
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-around",
+    width: '60%',
+    marginTop: 20,
   },
 });
 

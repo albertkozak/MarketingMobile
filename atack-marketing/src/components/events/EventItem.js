@@ -25,9 +25,10 @@ const styles = StyleSheet.create({
   text: {
     color: Colors.WHITE,
     fontSize: 16,
-    // borderBottomColor: Colors.GREY,
-    // borderWidth: 1,
-    // paddingBottom: 10,
+    borderColor: 'transparent',
+    borderBottomColor: Colors.GREY,
+    borderWidth: 1,
+    paddingVertical: 15
     // width: Dimensions.get("window").width,
   },
 });
