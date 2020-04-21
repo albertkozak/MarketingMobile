@@ -12,7 +12,7 @@ function ProfileScreen({ navigation }) {
 	const getCurrentUser = async () => {
 		try {
 			let currentUser = await firebase.auth().currentUser;
-		//	console.log(currentUser);
+			//	console.log(currentUser);
 
 			if (currentUser != null) {
 				setCurrentUser(currentUser);
@@ -36,7 +36,9 @@ function ProfileScreen({ navigation }) {
 				<Text style={styles.title}>Profile Screen</Text>
 
 				{loggedIn && (
-					<Text style={styles.logstat}>Currently logged in as: {currentUser.email}</Text>
+					<Text style={styles.loggedStat}>
+						Currently logged in as: {currentUser.email}
+					</Text>
 				)}
 				<View>{loggedIn && <Logout getLoggedIn={getLoggedIn} />}</View>
 			</SafeAreaView>
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
 		fontSize: 22,
 		marginBottom: 25,
 	},
-	logstat: {
+	loggedStat: {
 		color: Colors.WHITE,
 		marginBottom: 25,
 	},
