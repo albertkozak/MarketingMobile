@@ -19,7 +19,8 @@ function ProfileScreen({ navigation }) {
 				setLoggedIn(true);
 			} else {
 				setLoggedIn(false);
-				setCurrentUser(currentUser);
+
+				navigation.navigate('Login', '');
 			}
 		} catch (error) {
 			console.log('Error Checking Logged In User' + error);

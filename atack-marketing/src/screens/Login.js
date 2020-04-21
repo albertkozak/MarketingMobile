@@ -22,7 +22,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function Login({ navigation }) {
- 
+    console.log()
 	const goToSignup = () => navigation.navigate('Register');
 	const goToForgotPassword = () => navigation.navigate('ForgotPassword');
 	const API_CREATE_URL =

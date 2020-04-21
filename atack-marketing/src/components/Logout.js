@@ -10,6 +10,7 @@ const Logout = (props) => {
 			.then(() => {
 				props.getLoggedIn(false);
 			})
+
 			.catch(function (error) {
 				// An error happened.
 			});
