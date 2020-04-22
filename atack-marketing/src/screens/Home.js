@@ -72,18 +72,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#9DD6EB",
   },
   slide2: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#97CAE5",
   },
   text: {
+    textShadowColor: "rgba(0, 0, 0, 1)",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
     position: "absolute",
     color: "#fff",
-    fontSize: 30,
+    fontSize: 50,
     fontWeight: "bold",
   },
 });
