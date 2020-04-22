@@ -38,24 +38,24 @@ const EventList = ({ navigation }) => {
     navigation.navigate("Event", event);
   };
 
-return (
-  <Container>
-    <SafeAreaView style={styles.wrapper}>
-      <Text style={styles.title}>Events</Text>
-      <FlatList
-        keyExtractor={(event) => event.eventId.toString()}
-        data={fetchedData}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity onPress={() => showEventDetail(item)}>
-              <EventItem event={item} />
-            </TouchableOpacity>
-          );
-        }}
-      ></FlatList>
-    </SafeAreaView>
-  </Container>
-);
+  return (
+    <Container>
+      <SafeAreaView style={styles.wrapper}>
+        <Text style={styles.title}>Events</Text>
+        <FlatList
+          keyExtractor={(event) => event.eventId.toString()}
+          data={fetchedData}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity onPress={() => showEventDetail(item)}>
+                <EventItem event={item} />
+              </TouchableOpacity>
+            );
+          }}
+        ></FlatList>
+      </SafeAreaView>
+    </Container>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -73,4 +73,3 @@ const styles = StyleSheet.create({
 });
 
 export default EventList;
-
