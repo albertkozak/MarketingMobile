@@ -150,6 +150,8 @@ const AppStackNavigator = ({ navigation, routes, route }) => {
   );
 };
 
+
+
 function App({ navigation }) {
   return (
     <NavigationContainer>

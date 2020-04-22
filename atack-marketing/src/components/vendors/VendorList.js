@@ -1,21 +1,56 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
-import Vendor from './Vendor'
 import { TouchableOpacity } from "react-native-gesture-handler";
 import VendorItem from './VendorItem'
 import Container from '../Container'
 import Colors from '../../constants/Color'
+import firebase from "../../firebase";
 
 const VendorList = ({ navigation, route }) => {
-  const { eventTitle } = route.params;
-  const dummyData = [
-    {
-      eventTitle: "Vancouver Tech Conferencee 2020",
-      vendorName: "Amazon",
-      vendorDescription: "Cloud computing E-commerce Artificial intelligence Consumer electronics Digital distribution Grocery stores",
-      marketMaterials: ["Coffee Mugs", "Mouse Pads", "Keychains"],
-    },
-  ];
+  const { eventId, eventName } = route.params;
+
+  const EVENT_PATH = eventId + "/Vendors"
+
+  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events/" + EVENT_PATH
+
+  const [fetchedVendors, setFetchedVendors] = useState([])
+
+  const fetchData = () => {
+    firebase
+      .auth()
+      .currentUser.getIdTokenResult()
+      .then((tokenResponse) => {
+        fetch(BASE_URL, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${tokenResponse.token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((responseData) => {
+            setFetchedVendors(responseData.vendors);
+            console.log(BASE_URL)
+            console.log("fetched data")
+            console.log(responseData.vendors)
+            console.log("fetched vendors")
+            console.log(fetchedVendors);
+          });
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // const dummyData = [
+  //   {
+  //     eventTitle: {eventName},
+  //     vendorName: "Amazon",
+  //     vendorDescription: "Cloud computing E-commerce Artificial intelligence Consumer electronics Digital distribution Grocery stores",
+  //     marketMaterials: ["Coffee Mugs", "Mouse Pads", "Keychains"],
+  //   },
+  // ];
 
   const showVendorDetail = (vendor) => {
     navigation.navigate("Vendor", vendor);
@@ -25,9 +60,10 @@ const VendorList = ({ navigation, route }) => {
     <Container>
     <SafeAreaView style={styles.wrapper}>
       <Text style={styles.title}>Vendors</Text>
+      {/* <Text style={styles.eventTitle}>{eventName}</Text> */}
       <FlatList
-        keyExtractor={(vendor) => vendor.vendorName}
-        data={dummyData}
+        keyExtractor={(vendor) => vendor.eventVendorId.toString()}
+        data={fetchedVendors}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity onPress={() => showVendorDetail(item)}>
