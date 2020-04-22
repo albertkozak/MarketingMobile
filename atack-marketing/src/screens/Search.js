@@ -49,6 +49,7 @@ const SearchScreen = ({ navigation }) => {
           onTermSubmit={() => searchAPI()}
         />
         <FlatList
+          style={styles.list}
           keyExtractor={(event) => event.eventId.toString()}
           data={events}
           renderItem={({ item }) => {
@@ -69,11 +70,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 30,
   },
   title: {
     color: Colors.WHITE,
     fontSize: 22,
     marginBottom: 25,
+  },
+  list: {
+    marginTop: 50,
   },
 });
 

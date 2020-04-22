@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
   return (
     <View style={styles.background}>
-      <Ionicons name="ios-search" size={15} color={Colors.GREY} />
+      <Ionicons name="ios-search" size={18} color={Colors.GREY} />
       <TextInput
         placeholder="Search Events"
         placeholderTextColor={Colors.GREY}
