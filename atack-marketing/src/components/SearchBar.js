@@ -1,11 +1,12 @@
 import * as React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import Colors from "../constants/Color";
-import { colors } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
 
 const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
   return (
     <View style={styles.background}>
+      <Ionicons name="ios-search" size={15} color={Colors.GREY} />
       <TextInput
         placeholder="Search Events"
         placeholderTextColor={Colors.GREY}
@@ -32,11 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color: Colors.WHITE,
     fontSize: 15,
-  },
-  icon: {
-    fontSize: 35,
-    alignSelf: "center",
-    marginHorizontal: 15,
+    marginLeft: 10,
   },
 });
 
