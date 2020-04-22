@@ -124,7 +124,7 @@ const SearchStackNavigator = ({ navigation, routes, route }) => {
         options={{ headerShown: false }}
       />
       <SearchStack.Screen
-        name="EventList"
+        name="Event"
         component={AppStackNavigator}
         options={({ route }) => ({
           headerShown: shouldHeaderBeShown(route),
