@@ -15,28 +15,6 @@ import Colors from "../constants/Color";
 import firebase from "../firebase";
 
 const Home = ({ navigation }) => {
-  var styles = {
-    wrapper: {},
-    slide1: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "#9DD6EB",
-    },
-    slide2: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "#97CAE5",
-    },
-    text: {
-      position: "absolute",
-      color: "#fff",
-      fontSize: 30,
-      fontWeight: "bold",
-    },
-  };
-
   const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
   const [fetchedData, setFetchedData] = useState([]);
 
@@ -87,5 +65,27 @@ const Home = ({ navigation }) => {
     </Swiper>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: {},
+  slide1: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#9DD6EB",
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#97CAE5",
+  },
+  text: {
+    position: "absolute",
+    color: "#fff",
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+});
 
 export default Home;
