@@ -1,34 +1,58 @@
-import * as React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
-import Container from "../components/Container";
-import Colors from "../constants/Color";
+import React from "react";
+import { Text, View, Image } from "react-native";
+import Swiper from "react-native-swiper";
 
-function HomeScreen({ navigation }) {
+const Home = () => {
+  var styles = {
+    wrapper: {},
+    slide1: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#9DD6EB",
+    },
+    slide2: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#97CAE5",
+    },
+    slide3: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#92BBD9",
+    },
+    text: {
+      position: "absolute",
+      color: "#fff",
+      fontSize: 30,
+      fontWeight: "bold",
+    },
+  };
+
   return (
-    <Container>
-      <View style={styles.wrapper}>
-        <Text style={styles.title}>Home Screen</Text>
-        <Button
-          title="Go to Events"
-          color={Colors.ORANGE}
-          onPress={() => navigation.navigate("EventList")}
-        />
+    <Swiper
+      showsPagination={false}
+      style={styles.wrapper}
+      showsButtons
+      loop={true}
+      autoplay={true}
+    >
+      <View testID="Hello" style={styles.slide1}>
+        <Image source={require("../../assets/img/1.jpg")} />
+        <Text style={styles.text}>BCIT Convention</Text>
       </View>
-    </Container>
+      <View testID="Beautiful" style={styles.slide2}>
+        <Image source={require("../../assets/img/2.jpg")} />
+        <Text style={styles.text}>Microsoft</Text>
+      </View>
+      <View testID="Simple" style={styles.slide3}>
+        <Image source={require("../../assets/img/1.jpg")} />
+        <Text style={styles.text}>Telus</Text>
+      </View>
+    </Swiper>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    color: Colors.WHITE,
-    fontSize: 22,
-    marginBottom: 25,
-  },
-});
-
-export default HomeScreen;
+export default Home;
