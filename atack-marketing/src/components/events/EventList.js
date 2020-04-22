@@ -52,7 +52,7 @@ const EventList = ({ navigation }) => {
               </TouchableOpacity>
             );
           }}
-        ></FlatList>
+        />
       </SafeAreaView>
     </Container>
   );
