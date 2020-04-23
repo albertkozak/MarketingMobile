@@ -65,6 +65,7 @@ const Vendor = ({ route, navigation }) => {
       <Button 
         title="Subscribe"
         color={Colors.ORANGE}
+        style={styles.button}
       />
     </SafeAreaView>
     </Container>
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
   description: {
     color: Colors.GREY,
     fontSize: 15,
-    marginVertical: 7,
+    marginBottom: 15
   },
   website: {
     display: 'flex',
@@ -101,12 +102,14 @@ const styles = StyleSheet.create({
   websiteText:{
     color: Colors.GREY,
     fontSize: 15,
-    marginLeft: 10
+    marginLeft: 10,
+    marginBottom: 15
   },
   emailText:{
     color: Colors.GREY,
     fontSize: 15,
-    marginLeft: 10
+    marginLeft: 10,
+    marginBottom: 25
   },
   email: {
     display: 'flex',
@@ -117,8 +120,11 @@ const styles = StyleSheet.create({
   },
   listItem:{
     color: Colors.WHITE,
-    textAlign: 'center',
-    paddingBottom: 10
+    textAlign: 'left',
+    paddingBottom: 10,
+    marginLeft: 25
+  },
+  button: {
   }
 })
 
