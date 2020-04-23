@@ -14,6 +14,8 @@ const VendorList = ({ navigation, route }) => {
   const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events/" + EVENT_PATH
 
   const [fetchedVendors, setFetchedVendors] = useState([])
+  const [passId, setPassId] = useState(0)
+
 
   const fetchData = () => {
     firebase
@@ -30,10 +32,10 @@ const VendorList = ({ navigation, route }) => {
           .then((response) => response.json())
           .then((responseData) => {
             setFetchedVendors(responseData.vendors);
-            console.log(BASE_URL)
-            console.log("fetched data")
-            console.log(responseData.vendors)
-            console.log("fetched vendors")
+            console.log("this is response data")
+            console.log(responseData.eventId)
+            setPassId(responseData.eventId)
+            console.log("this is fetch data")
             console.log(fetchedVendors);
           });
       });
@@ -43,17 +45,9 @@ const VendorList = ({ navigation, route }) => {
     fetchData();
   }, []);
 
-  // const dummyData = [
-  //   {
-  //     eventTitle: {eventName},
-  //     vendorName: "Amazon",
-  //     vendorDescription: "Cloud computing E-commerce Artificial intelligence Consumer electronics Digital distribution Grocery stores",
-  //     marketMaterials: ["Coffee Mugs", "Mouse Pads", "Keychains"],
-  //   },
-  // ];
-
   const showVendorDetail = (vendor) => {
-    navigation.navigate("Vendor", vendor);
+    navigation.navigate("Vendor", vendor, {passId});
+    console.log("passed id " + passId)
   };
 
   return (
@@ -66,7 +60,13 @@ const VendorList = ({ navigation, route }) => {
         data={fetchedVendors}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={() => showVendorDetail(item)}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Vendor", {
+                vendor: (item),
+                eventId: passId
+              
+              })}
+            >
               <VendorItem vendor={item} />
             </TouchableOpacity>
           );
