@@ -45,10 +45,9 @@ const VendorList = ({ navigation, route }) => {
     fetchData();
   }, []);
 
-  const showVendorDetail = (vendor) => {
-    navigation.navigate("Vendor", vendor, {passId});
-    console.log("passed id " + passId)
-  };
+  // const showVendorDetail = (vendor) => {
+  //   navigation.navigate("Vendor", vendor, {passId});
+  // };
 
   return (
     <Container>

@@ -12,17 +12,16 @@ const VendorItem = ({ vendor }) => {
 }
 
 const styles = StyleSheet.create({
-    wrapper: {
-    },
-    text: {
-      color: Colors.WHITE,
-      fontSize: 16,
-      borderBottomColor: Colors.GREY,
-      borderBottomWidth: 1,
-      paddingBottom: 10,
-      // width: Dimensions.get('window').width,
-      // textAlign: 'center'
-    }
+  wrapper: {},
+  text: {
+    color: Colors.WHITE,
+    fontSize: 16,
+    borderColor: 'transparent',
+    borderBottomColor: Colors.GREY,
+    borderWidth: 1,
+    paddingVertical: 15
+    // width: Dimensions.get("window").width,
+  },
   })
 
 export default VendorItem;
