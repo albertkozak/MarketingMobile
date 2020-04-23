@@ -1,36 +1,72 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
-import Vendor from './Vendor'
 import { TouchableOpacity } from "react-native-gesture-handler";
 import VendorItem from './VendorItem'
 import Container from '../Container'
 import Colors from '../../constants/Color'
+import firebase from "../../firebase";
 
 const VendorList = ({ navigation, route }) => {
-  const { eventTitle } = route.params;
-  const dummyData = [
-    {
-      eventTitle: "Vancouver Tech Conferencee 2020",
-      vendorName: "Amazon",
-      vendorDescription: "Cloud computing E-commerce Artificial intelligence Consumer electronics Digital distribution Grocery stores",
-      marketMaterials: ["Coffee Mugs", "Mouse Pads", "Keychains"],
-    },
-  ];
+  const { eventId, eventName } = route.params;
+
+  const EVENT_PATH = eventId + "/Vendors"
+
+  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events/" + EVENT_PATH
+
+  const [fetchedVendors, setFetchedVendors] = useState([])
+  const [passId, setPassId] = useState(0)
+
+
+  const fetchData = () => {
+    firebase
+      .auth()
+      .currentUser.getIdTokenResult()
+      .then((tokenResponse) => {
+        fetch(BASE_URL, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${tokenResponse.token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((responseData) => {
+            setFetchedVendors(responseData.vendors);
+            console.log("this is response data")
+            console.log(responseData.eventId)
+            setPassId(responseData.eventId)
+            console.log("this is fetch data")
+            console.log(fetchedVendors);
+          });
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const showVendorDetail = (vendor) => {
-    navigation.navigate("Vendor", vendor);
+    navigation.navigate("Vendor", vendor, {passId});
+    console.log("passed id " + passId)
   };
 
   return (
     <Container>
     <SafeAreaView style={styles.wrapper}>
       <Text style={styles.title}>Vendors</Text>
+      {/* <Text style={styles.eventTitle}>{eventName}</Text> */}
       <FlatList
-        keyExtractor={(vendor) => vendor.vendorName}
-        data={dummyData}
+        keyExtractor={(vendor) => vendor.eventVendorId.toString()}
+        data={fetchedVendors}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={() => showVendorDetail(item)}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Vendor", {
+                vendor: (item),
+                eventId: passId
+              
+              })}
+            >
               <VendorItem vendor={item} />
             </TouchableOpacity>
           );
