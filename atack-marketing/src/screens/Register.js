@@ -1,6 +1,6 @@
 import React, { Fragment, navigation } from 'react';
 import { StyleSheet, SafeAreaView, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from '../components/FormInput';
@@ -8,6 +8,7 @@ import FormButton from '../components/FormButton';
 import ErrorMessage from '../components/ErrorMessage';
 import Colors from '../constants/Color';
 import Container from '../components/Container';
+import LogoSize from '../components/LogoSize';
 
 import firebase from '../firebase';
 
@@ -45,6 +46,7 @@ export default function Register({ navigation }) {
 									' Please check verification email'
 							);
 							firebase.auth().currentUser.sendEmailVerification();
+
 							resolve();
 						})
 						.catch((error) => {
@@ -56,7 +58,13 @@ export default function Register({ navigation }) {
 	}
 	return (
 		<Container>
+			<View style={styles.logo}>
+				<LogoSize
+					imageSrc={require('../../assets/ATACK-Marketing-Logo.png')}
+				/>
+			</View>
 			<SafeAreaView style={styles.container}>
+				<Text style={styles.title}>Register</Text>
 				<Formik
 					initialValues={{
 						email: '',
@@ -67,12 +75,12 @@ export default function Register({ navigation }) {
 						try {
 							await handleSubmit(values);
 							//Success
+							navigation.navigate('Login', values.email);
 						} catch (error) {
 							//Fail
 							alert(error);
 							resetForm();
 						}
-						navigation.navigate('Login', { values });
 					}}
 					validationSchema={validationSchema}
 				>
@@ -94,7 +102,7 @@ export default function Register({ navigation }) {
 								placeholder="Enter email"
 								autoCapitalize="none"
 								iconName="ios-mail"
-								iconColor="#2C384A"
+								iconColor={Colors.ORANGE}
 								onBlur={handleBlur('email')}
 								autoFocus
 							/>
@@ -108,7 +116,7 @@ export default function Register({ navigation }) {
 								placeholder="Enter password"
 								secureTextEntry
 								iconName="ios-lock"
-								iconColor="#2C384A"
+								iconColor={Colors.ORANGE}
 								onBlur={handleBlur('password')}
 							/>
 							<ErrorMessage
@@ -121,7 +129,7 @@ export default function Register({ navigation }) {
 								placeholder="Confirm password"
 								secureTextEntry
 								iconName="ios-lock"
-								iconColor="#2C384A"
+								iconColor={Colors.ORANGE}
 								onBlur={handleBlur('confirmPassword')}
 							/>
 							<ErrorMessage
@@ -158,8 +166,19 @@ export default function Register({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+	logo: {
+		alignItems: 'center',
+		marginBottom: 20,
+	},
 	container: {
 		flex: 1,
+		margin: 25,
+	},
+	title: {
+		color: Colors.WHITE,
+		alignSelf: 'center',
+		marginTop: 25,
+		marginRight: 25,
 	},
 	buttonContainer: {
 		margin: 25,
