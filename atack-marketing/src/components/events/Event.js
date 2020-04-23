@@ -5,11 +5,8 @@ import Colors from "../../constants/Color";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const Event = ({ route, navigation }) => {
-  const { eventName, eventStartDateTime, numOfVendors, venue } = route.params;
+  const { eventId, eventName, eventStartDateTime, numOfVendors, venue } = route.params;
 
-  const showVendorList = (vendorList) => {
-    navigation.navigate("VendorList", vendorList);
-  };
 
   return (
     <Container>
@@ -34,7 +31,7 @@ const Event = ({ route, navigation }) => {
           <Button
             title="Vendors"
             color={Colors.ORANGE}
-            onPress={() => showVendorList(eventName)}
+            onPress={() => navigation.navigate("VendorList", {eventId}, {eventName})}
           />
         </View>
       </SafeAreaView>
