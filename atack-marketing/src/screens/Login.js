@@ -1,6 +1,6 @@
 import React, { Fragment, navigation } from 'react';
 import { StyleSheet, SafeAreaView, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from '../components/FormInput';
@@ -9,12 +9,13 @@ import ErrorMessage from '../components/ErrorMessage';
 import firebase from '../firebase';
 import Colors from '../constants/Color';
 import Container from '../components/Container';
+import LogoSize from '../components/LogoSize';
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string()
 		.label('Email')
 		.email('Enter a valid email')
-		.required('Please enter a registered email'),
+		.required('Please enter a verified email'),
 	password: Yup.string()
 		.label('Password')
 		.required()
@@ -46,7 +47,9 @@ export default function Login({ route, navigation }) {
 						firebase
 							.auth()
 							.currentUser.getIdTokenResult()
+
 							.then((tokenResponse) => {
+								console.log(tokenResponse);
 								fetch(API_CREATE_URL, {
 									method: 'POST',
 									headers: {
@@ -72,7 +75,13 @@ export default function Login({ route, navigation }) {
 	}
 	return (
 		<Container>
+			<View style={styles.logo}>
+				<LogoSize
+					imageSrc={require('../../assets/ATACK-Marketing-Logo.png')}
+				/>
+			</View>
 			<SafeAreaView style={styles.container}>
+				<Text style={styles.title}>Login</Text>
 				<Formik
 					initialValues={{ email: '', password: '' }}
 					onSubmit={async (values, { resetForm }) => {
@@ -106,7 +115,7 @@ export default function Login({ route, navigation }) {
 								placeholder="Enter verified email"
 								autoCapitalize="none"
 								iconName="ios-mail"
-								iconColor="#2C384A"
+								iconColor={Colors.ORANGE}
 								onBlur={handleBlur('email')}
 								autoFocus
 							/>
@@ -120,7 +129,7 @@ export default function Login({ route, navigation }) {
 								placeholder="Enter password"
 								secureTextEntry
 								iconName="ios-lock"
-								iconColor="#2C384A"
+								iconColor={Colors.ORANGE}
 								onBlur={handleBlur('password')}
 							/>
 							<ErrorMessage
@@ -132,7 +141,7 @@ export default function Login({ route, navigation }) {
 									onPress={handleSubmit}
 									title="LOGIN"
 									buttonColor={Colors.ORANGE}
-									titleColor="#fff"
+									titleColor={Colors.WHITE}
 									disabled={!isValid || isSubmitting}
 									loading={isSubmitting}
 								/>
@@ -144,7 +153,7 @@ export default function Login({ route, navigation }) {
 					title="Don't have an account? Please Register"
 					onPress={goToSignup}
 					titleStyle={{
-						color: '#fd972a',
+						color: Colors.ORANGE,
 					}}
 					type="clear"
 				/>
@@ -152,7 +161,7 @@ export default function Login({ route, navigation }) {
 					title="Forgot Password?"
 					onPress={goToForgotPassword}
 					titleStyle={{
-						color: '#fd972a',
+						color: Colors.ORANGE,
 					}}
 					type="clear"
 				/>
@@ -162,8 +171,19 @@ export default function Login({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+	logo: {
+		alignItems: 'center',
+		marginBottom: 20,
+	},
 	container: {
 		flex: 1,
+		margin: 25,
+	},
+	title: {
+		color: Colors.WHITE,
+		alignSelf: 'center',
+		marginTop: 25,
+		marginRight: 25,
 	},
 	buttonContainer: {
 		margin: 25,

@@ -4,6 +4,7 @@ import Container from '../components/Container';
 import Colors from '../constants/Color';
 import firebase from '../firebase';
 import Logout from '../components/Logout';
+import LogoSize from '../components/LogoSize';
 
 function ProfileScreen({ navigation }) {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -33,6 +34,11 @@ function ProfileScreen({ navigation }) {
 	}
 	return (
 		<Container>
+			<View style={styles.logo}>
+				<LogoSize
+					imageSrc={require('../../assets/ATACK-Marketing-Logo.png')}
+				/>
+			</View>
 			<SafeAreaView style={styles.wrapper}>
 				<Text style={styles.title}>Profile Screen</Text>
 
@@ -48,6 +54,10 @@ function ProfileScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+	logo: {
+		alignItems: 'center',
+		marginBottom: 20,
+	},
 	wrapper: {
 		flex: 1,
 		alignItems: 'center',
