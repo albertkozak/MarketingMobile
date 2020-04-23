@@ -25,7 +25,6 @@ const EventList = ({ navigation }) => {
           .then((response) => response.json())
           .then((responseData) => {
             setFetchedData(responseData.events);
-            console.log(fetchedData);
           });
       });
   };

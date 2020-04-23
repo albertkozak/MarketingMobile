@@ -10,8 +10,8 @@ const LogoSize = props =>{
 };
 const styles = StyleSheet.create({
     image:{
-        height:175,
-    width:300
+        height:150,
+        width:150
     }
 });
 export default LogoSize;
