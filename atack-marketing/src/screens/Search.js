@@ -43,11 +43,6 @@ const SearchScreen = ({ navigation }) => {
 
 	return (
 		<Container>
-			<View style={styles.logo}>
-				<LogoSize
-					imageSrc={require('../../assets/ATACK-Marketing-Logo.png')}
-				/>
-			</View>
 			<View style={styles.wrapper}>
 				<SearchBar
 					term={term}
@@ -74,10 +69,6 @@ const SearchScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-	logo: {
-		alignItems: 'center',
-		marginBottom: 20,
-	},
 	wrapper: {
 		flex: 1,
 		alignItems: 'center',
