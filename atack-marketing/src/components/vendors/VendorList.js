@@ -32,11 +32,7 @@ const VendorList = ({ navigation, route }) => {
           .then((response) => response.json())
           .then((responseData) => {
             setFetchedVendors(responseData.vendors);
-            console.log("this is response data")
-            console.log(responseData.eventId)
             setPassId(responseData.eventId)
-            console.log("this is fetch data")
-            console.log(fetchedVendors);
           });
       });
   };
