@@ -77,7 +77,7 @@ export default function Login({ route, navigation }) {
 		<Container>
 			<View style={styles.logo}>
 				<LogoSize
-					imageSrc={require('../../assets/ATACK-Marketing-Logo.png')}
+					imageSrc={require('../../assets/Logo-Atack.png')}
 				/>
 			</View>
 			<SafeAreaView style={styles.container}>

@@ -32,11 +32,7 @@ const VendorList = ({ navigation, route }) => {
           .then((response) => response.json())
           .then((responseData) => {
             setFetchedVendors(responseData.vendors);
-            console.log("this is response data")
-            console.log(responseData.eventId)
             setPassId(responseData.eventId)
-            console.log("this is fetch data")
-            console.log(fetchedVendors);
           });
       });
   };
@@ -45,10 +41,9 @@ const VendorList = ({ navigation, route }) => {
     fetchData();
   }, []);
 
-  const showVendorDetail = (vendor) => {
-    navigation.navigate("Vendor", vendor, {passId});
-    console.log("passed id " + passId)
-  };
+  // const showVendorDetail = (vendor) => {
+  //   navigation.navigate("Vendor", vendor, {passId});
+  // };
 
   return (
     <Container>

@@ -34,11 +34,6 @@ function ProfileScreen({ navigation }) {
 	}
 	return (
 		<Container>
-			<View style={styles.logo}>
-				<LogoSize
-					imageSrc={require('../../assets/ATACK-Marketing-Logo.png')}
-				/>
-			</View>
 			<SafeAreaView style={styles.wrapper}>
 				<Text style={styles.title}>Profile Screen</Text>
 
@@ -54,10 +49,6 @@ function ProfileScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-	logo: {
-		alignItems: 'center',
-		marginBottom: 20,
-	},
 	wrapper: {
 		flex: 1,
 		alignItems: 'center',
