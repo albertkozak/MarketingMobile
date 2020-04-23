@@ -3,6 +3,7 @@ import { View, Text, Button, FlatList, StyleSheet, SafeAreaView} from "react-nat
 import Container from '../Container'
 import Colors from '../../constants/Color'
 import firebase from "../../firebase";
+import { Ionicons} from "@expo/vector-icons";
 
 const Vendor = ({ route, navigation }) => {
   const { eventId } = route.params;
@@ -45,9 +46,16 @@ const Vendor = ({ route, navigation }) => {
       {/* <Text style={styles.title}>{eventName}</Text> */}
       <Text style={styles.vendor}>{vendorName}</Text>
       <Text style={styles.description}>{fetchedDetails.description}</Text>
-      <Text style={styles.description}>{fetchedDetails.website}</Text>
-      <Text style={styles.description}>{fetchedDetails.email}</Text>
+      <View style={styles.website}>
+      <Ionicons name="ios-globe" size={18} color={Colors.GREY} />
+      <Text style={styles.websiteText}>{fetchedDetails.website}</Text>
+      </View>
+      <View style={styles.email}>
+      <Ionicons name="ios-mail" size={18} color={Colors.GREY} />
+      <Text style={styles.emailText}>{fetchedDetails.email}</Text>
+      </View>
       <FlatList
+          style={styles.list}
           data={fetchedDetails.products}
           keyExtractor={product => product.productId}
           renderItem={({item}) => {
@@ -84,12 +92,33 @@ const styles = StyleSheet.create({
   description: {
     color: Colors.GREY,
     fontSize: 15,
-    marginBottom: 25
+    marginVertical: 7,
+  },
+  website: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  websiteText:{
+    color: Colors.GREY,
+    fontSize: 15,
+    marginLeft: 10
+  },
+  emailText:{
+    color: Colors.GREY,
+    fontSize: 15,
+    marginLeft: 10
+  },
+  email: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  list: {
+   marginVertical: 10 
   },
   listItem:{
     color: Colors.WHITE,
     textAlign: 'center',
-    paddingBottom: 7
+    paddingBottom: 10
   }
 })
 
