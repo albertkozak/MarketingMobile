@@ -33,10 +33,9 @@ const SearchScreen = ({ navigation }) => {
           });
         setSearchedEvents(
           events.filter((event) => {
-            return event.eventName.toLowerCase().match(term.toLowerCase());
+            return event.eventName.toLowerCase().includes(term.toLowerCase());
           })
         );
-        console.log(searchedEvents);
       });
   };
 
@@ -47,6 +46,13 @@ const SearchScreen = ({ navigation }) => {
   const showEventDetail = (event) => {
     navigation.navigate("Event", event);
   };
+
+  let eventData;
+  if (term.length === 0) {
+    eventData = events;
+  } else {
+    eventData = searchedEvents;
+  }
 
   return (
     <Container>
@@ -59,7 +65,7 @@ const SearchScreen = ({ navigation }) => {
         <FlatList
           style={styles.list}
           keyExtractor={(event) => event.eventId.toString()}
-          data={searchedEvents}
+          data={eventData}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity onPress={() => showEventDetail(item)}>
