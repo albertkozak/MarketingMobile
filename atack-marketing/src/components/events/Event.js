@@ -7,6 +7,8 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const Event = ({ route, navigation }) => {
   const { event } = route.params;
+  const eventId = event.eventId
+  const eventName = event.eventName
 
   const showdetails = () => {
     console.log(route)
