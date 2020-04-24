@@ -47,22 +47,7 @@ const Home = ({ navigation }) => {
   };
 
   return (
-    <Swiper
-      showsPagination={false}
-      style={styles.wrapper}
-      showsButtons
-      loop={true}
-      autoplay={true}
-    >
-      <View testID="Microsoft" style={styles.slide1}>
-        <Image source={require("../../assets/img/1.jpg")} />
-        <Text style={styles.text}>Microsoft</Text>
-      </View>
-      <View testID="BCIT" style={styles.slide2}>
-        <Image source={require("../../assets/img/2.jpg")} />
-        <Text style={styles.text}>BCIT</Text>
-      </View>
-    </Swiper>
+
   );
 };
 
@@ -90,3 +75,21 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
+
+  //Swiper Code for potential use:
+    // <Swiper
+    //   showsPagination={false}
+    //   style={styles.wrapper}
+    //   showsButtons
+    //   loop={true}
+    //   autoplay={true}
+    // >
+    //   <View testID="Microsoft" style={styles.slide1}>
+    //     <Image source={require("../../assets/img/1.jpg")} />
+    //     <Text style={styles.text}>Microsoft</Text>
+    //   </View>
+    //   <View testID="BCIT" style={styles.slide2}>
+    //     <Image source={require("../../assets/img/2.jpg")} />
+    //     <Text style={styles.text}>BCIT</Text>
+    //   </View>
+    // </Swiper>
