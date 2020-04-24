@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   list: {
-    marginTop: 50,
+    marginTop: 100,
   },
 });
 
