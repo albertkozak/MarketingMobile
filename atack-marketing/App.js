@@ -103,10 +103,11 @@ const HomeStackNavigator = ({ navigation, routes, route }) => {
         options={{ headerShown: false }}
       />
       <HomeStack.Screen
-        name="EventList"
+        name="Event"
         component={AppStackNavigator}
         options={({ route }) => ({
           headerShown: shouldHeaderBeShown(route),
+          headerTitle: ""
         })}
       />
     </HomeStack.Navigator>
@@ -136,13 +137,13 @@ const SearchStackNavigator = ({ navigation, routes, route }) => {
 const AppStackNavigator = ({ navigation, routes, route }) => {
   return (
     <AppStack.Navigator>
-      <AppStack.Screen 
-        name="Event" 
-        component={Event} 
+      <AppStack.Screen
+        name="Event"
+        component={Event}
         options={{ headerShown: false }} />
-      <AppStack.Screen name="QRScan" component={QRScannerScreen} options={{headerTitle: ""}} />
-      <AppStack.Screen name="VendorList" component={VendorList} options={{headerTitle: ""}} />
-      <AppStack.Screen name="Vendor" component={Vendor} options={{headerTitle: ""}} />
+      <AppStack.Screen name="QRScan" component={QRScannerScreen} options={{ headerTitle: "" }} />
+      <AppStack.Screen name="VendorList" component={VendorList} options={{ headerTitle: "" }} />
+      <AppStack.Screen name="Vendor" component={Vendor} options={{ headerTitle: "" }} />
     </AppStack.Navigator>
   );
 };

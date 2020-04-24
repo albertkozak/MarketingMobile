@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, FlatList, Text } from "react-native";
+import { StyleSheet, FlatList, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 // import Swiper from "react-native-swiper";
 import EventItem from "../components/events/EventItem";
 import Container from "../components/Container";
-// import Colors from "../constants/Color";
+import Colors from "../constants/Color";
 import firebase from "../firebase";
+import EventList from "../components/events/EventList";
 
 const Home = ({ navigation }) => {
   const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
@@ -35,49 +36,38 @@ const Home = ({ navigation }) => {
     fetchData();
   }, []);
 
-  const showEventDetail = (event) => {
-    navigation.navigate("Event", event);
-  };
-
   return (
     <Container>
-      <Text style={styles.text}>Upcoming Events</Text>
-      <FlatList
-        keyExtractor={(event) => event.eventId.toString()}
-        data={fetchedData}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity onPress={() => showEventDetail(item)}>
-              <EventItem event={item} />
-            </TouchableOpacity>
-          );
-        }}
-      />
+      <View style={styles.wrapper}>
+        <Text style={styles.title}>Upcoming Events</Text>
+        <EventList results={fetchedData} navigation={navigation} />
+      </View>
     </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {},
-  slide1: {
+  wrapper: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-  },
-  slide2: {
-    flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    marginTop: 30,
   },
-  text: {
-    marginTop: 20,
-    marginBottom: 30,
-    textShadowColor: "rgba(0, 0, 0, 1)",
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10,
-    color: "#fff",
-    fontSize: 30,
-    fontWeight: "bold",
+  // slide1: {
+  //   flex: 1,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
+  // slide2: {
+  //   flex: 1,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
+  title: {
+    color: Colors.WHITE,
+    fontSize: 22,
+    textTransform: "uppercase",
+    marginBottom: 25,
   },
 });
 

@@ -6,7 +6,6 @@ import EventItem from "../components/events/EventItem";
 import Container from "../components/Container";
 import Colors from "../constants/Color";
 import firebase from "../firebase";
-import LogoSize from "../components/LogoSize";
 import EventList from "../components/events/EventList";
 
 const SearchScreen = ({ navigation }) => {
@@ -70,15 +69,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 30,
-  },
-  title: {
-    color: Colors.WHITE,
-    fontSize: 22,
-    marginBottom: 25,
-  },
-  list: {
-    marginTop: 100,
-  },
+  }
 });
 
 export default SearchScreen;
