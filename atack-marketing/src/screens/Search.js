@@ -7,6 +7,7 @@ import Container from "../components/Container";
 import Colors from "../constants/Color";
 import firebase from "../firebase";
 import LogoSize from "../components/LogoSize";
+import EventList from "../components/events/EventList";
 
 const SearchScreen = ({ navigation }) => {
   const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
@@ -29,7 +30,6 @@ const SearchScreen = ({ navigation }) => {
           .then((response) => response.json())
           .then((responseData) => {
             setEvents(responseData.events);
-            console.log(events);
           });
         setSearchedEvents(
           events.filter((event) => {
@@ -43,9 +43,9 @@ const SearchScreen = ({ navigation }) => {
     searchAPI();
   }, []);
 
-  const showEventDetail = (event) => {
-    navigation.navigate("Event", event);
-  };
+  // const showEventDetail = (event) => {
+  //   navigation.navigate("Event", event);
+  // };
 
   let eventData;
   if (term.length === 0) {
@@ -62,7 +62,8 @@ const SearchScreen = ({ navigation }) => {
           onTermChange={(newTerm) => setTerm(newTerm)}
           onTermSubmit={() => searchAPI()}
         />
-        <FlatList
+        <EventList results={eventData} navigation={navigation} />
+        {/* <FlatList
           style={styles.list}
           keyExtractor={(event) => event.eventId.toString()}
           data={eventData}
@@ -73,7 +74,7 @@ const SearchScreen = ({ navigation }) => {
               </TouchableOpacity>
             );
           }}
-        ></FlatList>
+        ></FlatList> */}
       </View>
     </Container>
   );

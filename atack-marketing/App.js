@@ -137,11 +137,11 @@ const SearchStackNavigator = ({ navigation, routes, route }) => {
 const AppStackNavigator = ({ navigation, routes, route }) => {
   return (
     <AppStack.Navigator>
-      <AppStack.Screen
+      {/* <AppStack.Screen
         name="EventList"
         component={EventList}
         options={{ headerShown: false }}
-      />
+      /> */}
       <AppStack.Screen name="Event" component={Event} />
       <AppStack.Screen name="QRScan" component={QRScannerScreen} />
       <AppStack.Screen name="VendorList" component={VendorList} />
