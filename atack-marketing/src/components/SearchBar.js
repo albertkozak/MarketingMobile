@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.GREY,
     borderWidth: 1,
     paddingHorizontal: 15,
+    marginBottom: 30
   },
   input: {
     flex: 1,

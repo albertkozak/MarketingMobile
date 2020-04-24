@@ -49,14 +49,12 @@ export default function Login({ route, navigation }) {
 							.currentUser.getIdTokenResult()
 
 							.then((tokenResponse) => {
-								console.log(tokenResponse);
 								fetch(API_CREATE_URL, {
 									method: 'POST',
 									headers: {
 										Authorization: `Bearer ${tokenResponse.token}`,
 									},
 								}).then((response) => {
-									// console.log(tokenResponse.token);
 									if (response.status == 201) {
 										resolve(response.status);
 									} else {
