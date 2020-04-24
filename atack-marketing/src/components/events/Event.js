@@ -1,5 +1,4 @@
-// import * as React from "react";
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { View, Text, Button, StyleSheet, SafeAreaView } from "react-native";
 import Container from "../Container";
 import Colors from "../../constants/Color";
@@ -10,14 +9,14 @@ const Event = ({ route, navigation }) => {
   const eventId = event.eventId
   const eventName = event.eventName
 
-  const showdetails = () => {
-    console.log(route)
-    console.log(route.params)
+  const today = new Date();
+  function isEventActive() {
+    if(today - event.eventStartDateTime > 0) {
+      return true
+    } else {
+      return false
+    }
   }
-
-  useEffect(() => {
-    showdetails();
-  }, []);
 
   return (
     <Container>
@@ -36,11 +35,14 @@ const Event = ({ route, navigation }) => {
         <View style={styles.buttonContainer}>
           <Button
             title="Join"
+            disabled = {isEventActive}
             color={Colors.ORANGE}
             onPress={() => navigation.navigate("QRScan")}
           />
           <Button
             title="Vendors"
+            // NEED TO UNCOMMENT 
+            //disabled = {isEventActive}
             color={Colors.ORANGE}
             onPress={() => navigation.navigate("VendorList", { eventId }, { eventName })}
           />

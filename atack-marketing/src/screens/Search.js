@@ -43,10 +43,6 @@ const SearchScreen = ({ navigation }) => {
     searchAPI();
   }, []);
 
-  // const showEventDetail = (event) => {
-  //   navigation.navigate("Event", event);
-  // };
-
   let eventData;
   if (term.length === 0) {
     eventData = events;
@@ -63,18 +59,6 @@ const SearchScreen = ({ navigation }) => {
           onTermSubmit={() => searchAPI()}
         />
         <EventList results={eventData} navigation={navigation} />
-        {/* <FlatList
-          style={styles.list}
-          keyExtractor={(event) => event.eventId.toString()}
-          data={eventData}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity onPress={() => showEventDetail(item)}>
-                <EventItem event={item} />
-              </TouchableOpacity>
-            );
-          }}
-        ></FlatList> */}
       </View>
     </Container>
   );
