@@ -1,27 +1,38 @@
-import * as React from "react";
+// import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet, SafeAreaView } from "react-native";
 import Container from "../Container";
 import Colors from "../../constants/Color";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const Event = ({ route, navigation }) => {
-  const { eventId, eventName, eventStartDateTime, numOfVendors, venue } = route.params;
+  const { event } = route.params;
+  const eventId = event.eventId
+  const eventName = event.eventName
 
+  const showdetails = () => {
+    console.log(route)
+    console.log(route.params)
+  }
+
+  useEffect(() => {
+    showdetails();
+  }, []);
 
   return (
     <Container>
       <SafeAreaView style={styles.wrapper}>
         {/* Update with dynamic info */}
-        <Text style={styles.eventTitle}>{eventName}</Text>
+        <Text style={styles.eventTitle}>{event.eventName}</Text>
         <View style={styles.location}>
-        <MaterialIcons name="location-on" size={18} color={Colors.GREY} />
-        <Text style={styles.eventVenue}>{venue.venueName}</Text>
+          <MaterialIcons name="location-on" size={18} color={Colors.GREY} />
+          <Text style={styles.eventVenue}>{event.venue.venueName}</Text>
         </View>
         <View style={styles.start}>
-        <Ionicons name="ios-time" size={18} color={Colors.GREY} />
-        <Text style={styles.eventStart}>{eventStartDateTime}</Text>
+          <Ionicons name="ios-time" size={18} color={Colors.GREY} />
+          <Text style={styles.eventStart}>{event.eventStartDateTime}</Text>
         </View>
-        <Text style={styles.eventVendors}>Vendors: {numOfVendors}</Text>
+        <Text style={styles.eventVendors}>Vendors: {event.numOfVendors}</Text>
         <View style={styles.buttonContainer}>
           <Button
             title="Join"
@@ -31,7 +42,7 @@ const Event = ({ route, navigation }) => {
           <Button
             title="Vendors"
             color={Colors.ORANGE}
-            onPress={() => navigation.navigate("VendorList", {eventId}, {eventName})}
+            onPress={() => navigation.navigate("VendorList", { eventId }, { eventName })}
           />
         </View>
       </SafeAreaView>
