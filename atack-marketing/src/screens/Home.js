@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  FlatList,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, FlatList, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Swiper from "react-native-swiper";
+// import Swiper from "react-native-swiper";
 import EventItem from "../components/events/EventItem";
 import Container from "../components/Container";
-import Colors from "../constants/Color";
+// import Colors from "../constants/Color";
 import firebase from "../firebase";
 
 const Home = ({ navigation }) => {
@@ -47,7 +40,20 @@ const Home = ({ navigation }) => {
   };
 
   return (
-
+    <Container>
+      <Text style={styles.text}>Upcoming Events</Text>
+      <FlatList
+        keyExtractor={(event) => event.eventId.toString()}
+        data={fetchedData}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity onPress={() => showEventDetail(item)}>
+              <EventItem event={item} />
+            </TouchableOpacity>
+          );
+        }}
+      />
+    </Container>
   );
 };
 
@@ -64,32 +70,33 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
+    marginTop: 20,
+    marginBottom: 30,
     textShadowColor: "rgba(0, 0, 0, 1)",
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
-    position: "absolute",
     color: "#fff",
-    fontSize: 50,
+    fontSize: 30,
     fontWeight: "bold",
   },
 });
 
 export default Home;
 
-  //Swiper Code for potential use:
-    // <Swiper
-    //   showsPagination={false}
-    //   style={styles.wrapper}
-    //   showsButtons
-    //   loop={true}
-    //   autoplay={true}
-    // >
-    //   <View testID="Microsoft" style={styles.slide1}>
-    //     <Image source={require("../../assets/img/1.jpg")} />
-    //     <Text style={styles.text}>Microsoft</Text>
-    //   </View>
-    //   <View testID="BCIT" style={styles.slide2}>
-    //     <Image source={require("../../assets/img/2.jpg")} />
-    //     <Text style={styles.text}>BCIT</Text>
-    //   </View>
-    // </Swiper>
+//Swiper Code for potential use:
+// <Swiper
+//   showsPagination={false}
+//   style={styles.wrapper}
+//   showsButtons
+//   loop={true}
+//   autoplay={true}
+// >
+//   <View testID="Microsoft" style={styles.slide1}>
+//     <Image source={require("../../assets/img/1.jpg")} />
+//     <Text style={styles.text}>Microsoft</Text>
+//   </View>
+//   <View testID="BCIT" style={styles.slide2}>
+//     <Image source={require("../../assets/img/2.jpg")} />
+//     <Text style={styles.text}>BCIT</Text>
+//   </View>
+// </Swiper>
