@@ -81,12 +81,10 @@ function getHeaderTitle(route) {
 function shouldHeaderBeShown(route) {
   const routeName = route.state
     ? route.state.routes[route.state.index].name
-    : "EventList";
+    : "Event";
   switch (routeName) {
-    case "EventList":
-      return true;
     case "Event":
-      return false;
+      return true;
     case "VendorList":
       return false;
     case "Vendor":
@@ -137,12 +135,7 @@ const SearchStackNavigator = ({ navigation, routes, route }) => {
 const AppStackNavigator = ({ navigation, routes, route }) => {
   return (
     <AppStack.Navigator>
-      {/* <AppStack.Screen
-        name="EventList"
-        component={EventList}
-        options={{ headerShown: false }}
-      /> */}
-      <AppStack.Screen name="Event" component={Event} />
+      <AppStack.Screen name="Event" component={Event} options={{ headerShown: false }} />
       <AppStack.Screen name="QRScan" component={QRScannerScreen} />
       <AppStack.Screen name="VendorList" component={VendorList} />
       <AppStack.Screen name="Vendor" component={Vendor} />
