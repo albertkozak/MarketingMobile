@@ -3,15 +3,26 @@ import { View, Text, Button, StyleSheet, SafeAreaView } from "react-native";
 import Container from "../Container";
 import Colors from "../../constants/Color";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import moment from 'moment';
 
 const Event = ({ route, navigation }) => {
   const { event } = route.params;
   const eventId = event.eventId
   const eventName = event.eventName
-
+  const eventDate = moment(event.eventStartDateTime).format('MMM DD, YYYY');
   const today = new Date();
+  const todayFormatted = moment(today).format('MMM DD, YYYY');
+  
   function isEventActive() {
-    if(today - event.eventStartDateTime > 0) {
+    if(todayFormatted - eventDate > 0) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  function isEventToday() {
+    if(todayFormatted == eventDate) {
       return true
     } else {
       return false
@@ -29,13 +40,13 @@ const Event = ({ route, navigation }) => {
         </View>
         <View style={styles.start}>
           <Ionicons name="ios-time" size={18} color={Colors.GREY} />
-          <Text style={styles.eventStart}>{event.eventStartDateTime}</Text>
+          <Text style={styles.eventStart}>{eventDate}</Text>
         </View>
         <Text style={styles.eventVendors}>Vendors: {event.numOfVendors}</Text>
         <View style={styles.buttonContainer}>
           <Button
             title="Join"
-            disabled = {isEventActive}
+            disabled = {isEventToday}
             color={Colors.ORANGE}
             onPress={() => navigation.navigate("QRScan")}
           />
