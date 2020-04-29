@@ -1,7 +1,5 @@
 import * as React from "react";
-import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
-import { NavigationContainer, DefaultTheme,
-  DarkTheme, } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/screens/Login";
@@ -187,7 +185,6 @@ const AppStackNavigator = ({ navigation, routes, route }) => {
 };
 
 function App({ navigation }) {
-  const schemee = useColorScheme();
 
   return (
     <NavigationContainer>
