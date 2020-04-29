@@ -8,6 +8,7 @@ import FormButton from "../components/FormButton.js";
 import ErrorMessage from "../components/ErrorMessage";
 import firebase from "../firebase";
 import Colors from "../constants/Color";
+import Container from '../components/Container'
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -41,6 +42,7 @@ export default function ForgotPassword({ navigation }) {
     });
   }
   return (
+    <Container>
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Forgot Password?</Text>
       <Formik
@@ -75,16 +77,18 @@ export default function ForgotPassword({ navigation }) {
               placeholder="Enter email"
               autoCapitalize="none"
               iconName="ios-mail"
-              iconColor="#2C384A"
+              iconColor={Colors.ORANGE}
               onBlur={handleBlur("email")}
+              autoFocus
             />
             <ErrorMessage errorValue={touched.email && errors.email} />
             <View style={styles.buttonContainer}>
               <FormButton
                 buttonType="outline"
                 onPress={handleSubmit}
-                title="Send Email"
+                title="RESET PASSWORD"
                 buttonColor={Colors.ORANGE}
+                titleColor={Colors.WHITE}
                 disabled={!isValid || isSubmitting}
               />
             </View>
@@ -93,14 +97,22 @@ export default function ForgotPassword({ navigation }) {
         )}
       </Formik>
     </SafeAreaView>
+    </Container>
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000f",
+    justifyContent: 'center'
+  },
+  text: {
+    color: Colors.WHITE,
+    marginBottom: 30,
+    fontSize: 20,
+    marginLeft: 10,
   },
   buttonContainer: {
-    margin: 25,
+    marginVertical: 25,
+    marginHorizontal: 30,
   },
 });

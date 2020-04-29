@@ -1,5 +1,7 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
+import { NavigationContainer, DefaultTheme,
+  DarkTheme, } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/screens/Login";
@@ -141,16 +143,52 @@ const AppStackNavigator = ({ navigation, routes, route }) => {
         name="Event"
         component={Event}
         options={{ headerShown: false }} />
-      <AppStack.Screen name="QRScan" component={QRScannerScreen} options={{ headerTitle: "" }} />
-      <AppStack.Screen name="VendorList" component={VendorList} options={{ headerTitle: "" }} />
-      <AppStack.Screen name="Vendor" component={Vendor} options={{ headerTitle: "" }} />
+      <AppStack.Screen name="QRScan" component={QRScannerScreen} options={{ 
+            title: 'QR Scanner',
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: Colors.NAVY
+            },
+            headerTintColor: Colors.LIGHTGREY,
+            headerTintStyle: {
+              fontSize: 10,
+              fontWeight: 100,
+             }
+            
+          }} />
+      <AppStack.Screen name="VendorList" component={VendorList} options={{ 
+            title: 'Vendor List',
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: Colors.NAVY
+            },
+            headerTintColor: Colors.LIGHTGREY,
+            headerTintStyle: {
+              fontSize: 10,
+              fontWeight: 100,
+             }
+            
+          }} />
+      <AppStack.Screen name="Vendor" component={Vendor} options={{ 
+            title: 'Vendor Details',
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: Colors.NAVY
+            },
+            headerTintColor: Colors.LIGHTGREY,
+            headerTintStyle: {
+              fontSize: 10,
+              fontWeight: 100,
+             }
+            
+          }} />
     </AppStack.Navigator>
   );
 };
 
-
-
 function App({ navigation }) {
+  const schemee = useColorScheme();
+
   return (
     <NavigationContainer>
       {/* Change initialRouteName from "Home" to "Login" to access Login / Registration Screen */}
@@ -168,7 +206,19 @@ function App({ navigation }) {
         <Stack.Screen
           name="ForgotPassword"
           component={ForgotPassword}
-          options={{ headerShown: true }}
+          options={{ 
+            title: 'Forgot Password',
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: Colors.NAVY
+            },
+            headerTintColor: Colors.LIGHTGREY,
+            headerTintStyle: {
+              fontSize: 10,
+              fontWeight: 100,
+             }
+            
+          }}
         />
         <Stack.Screen
           options={({ route }) => ({
