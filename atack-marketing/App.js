@@ -107,7 +107,15 @@ const HomeStackNavigator = ({ navigation, routes, route }) => {
         component={AppStackNavigator}
         options={({ route }) => ({
           headerShown: shouldHeaderBeShown(route),
-          headerTitle: ""
+          headerTitle: "",
+          headerStyle: {
+            backgroundColor: Colors.NAVY
+          },
+          headerTintColor: Colors.LIGHTGREY,
+          headerTintStyle: {
+            fontSize: 10,
+            fontWeight: 100,
+           }
         })}
       />
     </HomeStack.Navigator>
@@ -127,7 +135,15 @@ const SearchStackNavigator = ({ navigation, routes, route }) => {
         component={AppStackNavigator}
         options={({ route }) => ({
           headerShown: shouldHeaderBeShown(route),
-          headerTitle: ""
+          headerTitle: "",
+          headerStyle: {
+            backgroundColor: Colors.NAVY,
+          },
+          headerTintColor: Colors.LIGHTGREY,
+          headerTintStyle: {
+            fontSize: 10,
+            fontWeight: 100,
+           }
         })}
       />
     </SearchStack.Navigator>

@@ -8,6 +8,7 @@ import FormButton from '../components/FormButton.js';
 import ErrorMessage from '../components/ErrorMessage';
 import firebase from '../firebase';
 import Colors from '../constants/Color';
+import Fonts from '../constants/Fonts';
 import Container from '../components/Container';
 import LogoSize from '../components/LogoSize';
 
@@ -164,7 +165,7 @@ export default function Login({ route, navigation }) {
 					onPress={goToForgotPassword}
 					titleStyle={{
 						color: Colors.GREY,
-						fontSize: 14
+						fontSize: 14,
 					}}
 					type="clear"
 				/>
