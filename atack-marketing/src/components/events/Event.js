@@ -17,32 +17,29 @@ const Event = ({ route, navigation }) => {
   const todayFormatted = moment(today).format('MMM DD, YYYY, h:mm a');
   const [joinActive, setJoinActive] = useState(true)
   const [vendorsActive, setVendorsActive] = useState(true)
+
+  function isEventAvailable() {
+    let joinValue;
+    let vendorValue;
+
+    let fromToday = (today.getTime() - date.getTime())
+    if (fromToday > 0 ){
+      joinValue = true;
+      vendorValue = false;
+    } else if (fromToday < 0 && fromToday > -1 ) {
+      joinValue = false;
+      vendorValue = false;
+    }
+    else {
+      joinValue = true;
+      vendorValue = true
+    }
+    setJoinActive(joinValue)
+    setVendorsActive(vendorValue)
+  }
   
-  function isEventActive() {
-    let value;
-    if(today.getTime() - date.getTime() > 0) {
-      value = false
-    } else {
-      value = true
-    }
-    setVendorsActive(value)
-    console.log(value)
-  }
-
-  function isEventToday() {
-    let isToday = ((today.getTime() - date.getTime()) / 1000 / 60 / 60 / 24);
-    let value;
-    if(isToday > 0 && isToday < 1) {
-      value = false
-    } else {
-      value= true
-    }
-    setJoinActive(value)
-    console.log(value)
-  }
-
   useEffect(() => {
-    isEventToday(), isEventActive();
+    isEventAvailable();
   }, []);
 
   return (
