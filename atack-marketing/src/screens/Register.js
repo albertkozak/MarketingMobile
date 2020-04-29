@@ -20,9 +20,9 @@ const validationSchema = Yup.object().shape({
 	password: Yup.string()
 		.label('Password')
 		.required()
-		.min(6, 'Password must have more than 6 characters '),
+		.min(6, 'Password must have more than 6 characters.'),
 	confirmPassword: Yup.string()
-		.oneOf([Yup.ref('password')], 'Confirm Password must matched Password')
+		.oneOf([Yup.ref('password')], 'Passwords must match.')
 		.required('Confirm Password is required'),
 });
 
@@ -43,7 +43,7 @@ export default function Register({ navigation }) {
 							alert(
 								' - ' +
 									response.user.email +
-									' Please check verification email'
+									' Please check verification email.'
 							);
 							firebase.auth().currentUser.sendEmailVerification();
 
@@ -58,13 +58,14 @@ export default function Register({ navigation }) {
 	}
 	return (
 		<Container>
+			<View style={styles.wrapper}>
 			<View style={styles.logo}>
 				<LogoSize
 					imageSrc={require('../../assets/Logo-Atack.png')}
 				/>
 			</View>
 			<SafeAreaView style={styles.container}>
-				<Text style={styles.title}>Register</Text>
+				{/* <Text style={styles.title}>Register</Text> */}
 				<Formik
 					initialValues={{
 						email: '',
@@ -99,7 +100,7 @@ export default function Register({ navigation }) {
 								name="email"
 								value={values.email}
 								onChangeText={handleChange('email')}
-								placeholder="Enter email"
+								placeholder="Email"
 								autoCapitalize="none"
 								iconName="ios-mail"
 								iconColor={Colors.ORANGE}
@@ -113,7 +114,9 @@ export default function Register({ navigation }) {
 								name="password"
 								value={values.password}
 								onChangeText={handleChange('password')}
-								placeholder="Enter password"
+								placeholder="Password"
+								style={styles.input}
+								autoCapitalize="none"
 								secureTextEntry
 								iconName="ios-lock"
 								iconColor={Colors.ORANGE}
@@ -126,7 +129,8 @@ export default function Register({ navigation }) {
 								name="password"
 								value={values.confirmPassword}
 								onChangeText={handleChange('confirmPassword')}
-								placeholder="Confirm password"
+								placeholder="Confirm Password"
+								autoCapitalize="none"
 								secureTextEntry
 								iconName="ios-lock"
 								iconColor={Colors.ORANGE}
@@ -156,23 +160,28 @@ export default function Register({ navigation }) {
 					title="Already registered?  Login"
 					onPress={goToLogin}
 					titleStyle={{
-						color: '#fd972a',
+						color: Colors.LIGHTGREY,
 					}}
 					type="clear"
 				/>
 			</SafeAreaView>
+			</View>
 		</Container>
 	);
 }
 
 const styles = StyleSheet.create({
+	wrapper: {
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "center",
+	},
 	logo: {
 		alignItems: 'center',
-		marginBottom: 20,
+		margin: 0,
 	},
 	container: {
-		flex: 1,
-		margin: 25,
+		width: 250,
 	},
 	title: {
 		color: Colors.WHITE,
@@ -181,6 +190,8 @@ const styles = StyleSheet.create({
 		marginRight: 25,
 	},
 	buttonContainer: {
-		margin: 25,
+		marginVertical: 10,
+		marginHorizontal: 23,
+
 	},
 });
