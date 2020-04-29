@@ -207,10 +207,10 @@ function App({ navigation }) {
           name="ForgotPassword"
           component={ForgotPassword}
           options={{ 
-            title: 'Forgot Password',
+            title: '',
             headerShown: true,
             headerStyle: {
-              backgroundColor: Colors.NAVY
+              backgroundColor: Colors.NAVY,
             },
             headerTintColor: Colors.LIGHTGREY,
             headerTintStyle: {

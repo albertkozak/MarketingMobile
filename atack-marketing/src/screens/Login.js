@@ -155,6 +155,7 @@ export default function Login({ route, navigation }) {
 					onPress={goToSignup}
 					titleStyle={{
 						color: Colors.LIGHTGREY,
+						fontSize: 14
 					}}
 					type="clear"
 				/>
@@ -163,6 +164,7 @@ export default function Login({ route, navigation }) {
 					onPress={goToForgotPassword}
 					titleStyle={{
 						color: Colors.GREY,
+						fontSize: 14
 					}}
 					type="clear"
 				/>

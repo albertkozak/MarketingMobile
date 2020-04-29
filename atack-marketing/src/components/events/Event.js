@@ -1,5 +1,6 @@
 import * as React from "react";
-import { View, Text, Button, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import { Button } from 'react-native-elements'
 import Container from "../Container";
 import Colors from "../../constants/Color";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
@@ -48,6 +49,9 @@ const Event = ({ route, navigation }) => {
             title="Join"
             disabled = {isEventToday}
             color={Colors.ORANGE}
+            buttonStyle={{
+              backgroundColor: Colors.ORANGE,
+            }}
             onPress={() => navigation.navigate("QRScan")}
           />
           <Button
@@ -55,6 +59,9 @@ const Event = ({ route, navigation }) => {
             // NEED TO UNCOMMENT 
             //disabled = {isEventActive}
             color={Colors.ORANGE}
+            buttonStyle={{
+              backgroundColor: Colors.ORANGE,
+            }}
             onPress={() => navigation.navigate("VendorList", { eventId }, { eventName })}
           />
         </View>

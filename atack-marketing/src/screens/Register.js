@@ -161,6 +161,7 @@ export default function Register({ navigation }) {
 					onPress={goToLogin}
 					titleStyle={{
 						color: Colors.LIGHTGREY,
+						fontSize: 14
 					}}
 					type="clear"
 				/>
