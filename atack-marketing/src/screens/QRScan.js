@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import Container from "../components/Container";
+import { Button } from 'react-native-elements'
+import Colors from '../constants/Color';
 
 const QRScan = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -34,7 +36,9 @@ const QRScan = ({ navigation }) => {
       />
 
       {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
+        <Button title={"Tap to Scan Again"} 
+          buttonColor={Colors.ORANGE}
+          onPress={() => setScanned(false)} />
       )}
     </Container>
   );

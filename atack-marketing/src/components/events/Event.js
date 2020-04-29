@@ -1,5 +1,6 @@
 import * as React from "react";
-import { View, Text, Button, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import { Button } from 'react-native-elements'
 import Container from "../Container";
 import Colors from "../../constants/Color";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
@@ -9,7 +10,8 @@ const Event = ({ route, navigation }) => {
   const { event } = route.params;
   const eventId = event.eventId
   const eventName = event.eventName
-  const eventDate = moment(event.eventStartDateTime).format('MMM DD, YYYY');
+  const eventDate = moment(event.eventStartDateTime).format('MMM DD, YYYY, h:mm a');
+  // update to local time after video demo
   const today = new Date();
   const todayFormatted = moment(today).format('MMM DD, YYYY');
   
@@ -46,15 +48,21 @@ const Event = ({ route, navigation }) => {
         <View style={styles.buttonContainer}>
           <Button
             title="Join"
-            disabled = {isEventToday}
+            disabled= {isEventToday}
             color={Colors.ORANGE}
+            buttonStyle={{
+              backgroundColor: Colors.ORANGE,
+            }}
             onPress={() => navigation.navigate("QRScan")}
           />
           <Button
             title="Vendors"
             // NEED TO UNCOMMENT 
-            //disabled = {isEventActive}
+            disabled= {isEventActive}
             color={Colors.ORANGE}
+            buttonStyle={{
+              backgroundColor: Colors.ORANGE,
+            }}
             onPress={() => navigation.navigate("VendorList", { eventId }, { eventName })}
           />
         </View>

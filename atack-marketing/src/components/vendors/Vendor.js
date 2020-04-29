@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, FlatList, StyleSheet, SafeAreaView} from "react-native";
+import { View, Text, FlatList, StyleSheet, SafeAreaView} from "react-native";
+import { Button } from 'react-native-elements'
 import Container from '../Container'
 import Colors from '../../constants/Color'
 import firebase from "../../firebase";
@@ -64,7 +65,9 @@ const Vendor = ({ route, navigation }) => {
       />
       <Button 
         title="Subscribe"
-        color={Colors.ORANGE}
+        buttonStyle={{
+          backgroundColor: Colors.ORANGE,
+        }}
         style={styles.button}
       />
     </SafeAreaView>

@@ -20,7 +20,7 @@ function ProfileScreen({ navigation }) {
 				setLoggedIn(true);
 			} else {
 				setLoggedIn(false);
-
+s
 				navigation.navigate('Login');
 			}
 		} catch (error) {

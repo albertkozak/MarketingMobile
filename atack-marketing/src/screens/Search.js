@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+import { Button } from 'react-native-elements'
 import { TouchableOpacity } from "react-native-gesture-handler";
 import SearchBar from "../components/SearchBar";
 import EventItem from "../components/events/EventItem";
