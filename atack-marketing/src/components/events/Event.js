@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState, useEffect}from "react";
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import { Button } from 'react-native-elements'
 import Container from "../Container";
@@ -10,30 +10,40 @@ const Event = ({ route, navigation }) => {
   const { event } = route.params;
   const eventId = event.eventId
   const eventName = event.eventName
+  const date = new Date(event.eventStartDateTime)
   const eventDate = moment(event.eventStartDateTime).format('MMM DD, YYYY, h:mm a');
   // update to local time after video demo
   const today = new Date();
   const todayFormatted = moment(today).format('MMM DD, YYYY, h:mm a');
+  const [joinActive, setJoinActive] = useState(true)
+  const [vendorsActive, setVendorsActive] = useState(true)
   
   function isEventActive() {
     let value;
-    if(todayFormatted - eventDate > 0) {
-      value =false
+    if(today.getTime() - date.getTime() > 0) {
+      value = false
     } else {
-      value= true
+      value = true
     }
-    return value
+    setVendorsActive(value)
+    console.log(value)
   }
 
   function isEventToday() {
+    let isToday = ((today.getTime() - date.getTime()) / 1000 / 60 / 60 / 24);
     let value;
-    if(todayFormatted == eventDate) {
-      value = true
+    if(isToday > 0 && isToday < 1) {
+      value = false
     } else {
-      value= false
+      value= true
     }
-    return value
+    setJoinActive(value)
+    console.log(value)
   }
+
+  useEffect(() => {
+    isEventToday(), isEventActive();
+  }, []);
 
   return (
     <Container>
@@ -52,7 +62,7 @@ const Event = ({ route, navigation }) => {
         <View style={styles.buttonContainer}>
           <Button
             title="Join"
-            disabled={isEventToday}
+            disabled={joinActive}
             color={Colors.ORANGE}
             buttonStyle={{
               backgroundColor: Colors.ORANGE,
@@ -62,7 +72,7 @@ const Event = ({ route, navigation }) => {
           <Button
             title="Vendors"
             // NEED TO UNCOMMENT 
-            //disabled={isEventActive}
+            disabled={vendorsActive}
             color={Colors.ORANGE}
             buttonStyle={{
               backgroundColor: Colors.ORANGE,
