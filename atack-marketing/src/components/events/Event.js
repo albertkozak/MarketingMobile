@@ -13,22 +13,26 @@ const Event = ({ route, navigation }) => {
   const eventDate = moment(event.eventStartDateTime).format('MMM DD, YYYY, h:mm a');
   // update to local time after video demo
   const today = new Date();
-  const todayFormatted = moment(today).format('MMM DD, YYYY');
+  const todayFormatted = moment(today).format('MMM DD, YYYY, h:mm a');
   
   function isEventActive() {
+    let value;
     if(todayFormatted - eventDate > 0) {
-      return true
+      value =false
     } else {
-      return false
+      value= true
     }
+    return value
   }
 
   function isEventToday() {
+    let value;
     if(todayFormatted == eventDate) {
-      return true
+      value = true
     } else {
-      return false
+      value= false
     }
+    return value
   }
 
   return (
@@ -48,7 +52,7 @@ const Event = ({ route, navigation }) => {
         <View style={styles.buttonContainer}>
           <Button
             title="Join"
-            disabled= {isEventToday}
+            disabled={isEventToday}
             color={Colors.ORANGE}
             buttonStyle={{
               backgroundColor: Colors.ORANGE,
@@ -58,7 +62,7 @@ const Event = ({ route, navigation }) => {
           <Button
             title="Vendors"
             // NEED TO UNCOMMENT 
-            disabled= {isEventActive}
+            //disabled={isEventActive}
             color={Colors.ORANGE}
             buttonStyle={{
               backgroundColor: Colors.ORANGE,
