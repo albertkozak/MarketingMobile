@@ -21,16 +21,15 @@ const Event = ({ route, navigation }) => {
   function isEventAvailable() {
     let joinValue;
     let vendorValue;
-
-    let fromToday = (today.getTime() - date.getTime())
+    let fromToday = Math.floor((today.getTime() - date.getTime()) / 1000 / 60 / 60 / 24);
+    
     if (fromToday > 0 ){
       joinValue = true;
       vendorValue = false;
-    } else if (fromToday < 0 && fromToday > -1 ) {
+    } else if (fromToday == 0 ) {
       joinValue = false;
       vendorValue = false;
-    }
-    else {
+    } else {
       joinValue = true;
       vendorValue = true
     }
@@ -63,6 +62,8 @@ const Event = ({ route, navigation }) => {
             color={Colors.ORANGE}
             buttonStyle={{
               backgroundColor: Colors.ORANGE,
+              width: 90,
+              marginRight: 50,
             }}
             onPress={() => navigation.navigate("QRScan")}
           />
@@ -73,6 +74,7 @@ const Event = ({ route, navigation }) => {
             color={Colors.ORANGE}
             buttonStyle={{
               backgroundColor: Colors.ORANGE,
+              width: 90,
             }}
             onPress={() => navigation.navigate("VendorList", { eventId }, { eventName })}
           />

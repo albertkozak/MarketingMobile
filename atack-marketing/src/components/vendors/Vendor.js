@@ -67,6 +67,8 @@ const Vendor = ({ route, navigation }) => {
         title="Subscribe"
         buttonStyle={{
           backgroundColor: Colors.ORANGE,
+          width: 100,
+          alignSelf: 'center'
         }}
         style={styles.button}
       />
