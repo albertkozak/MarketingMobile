@@ -10,7 +10,8 @@ const Event = ({ route, navigation }) => {
   const { event } = route.params;
   const eventId = event.eventId
   const eventName = event.eventName
-  const eventDate = moment(event.eventStartDateTime).format('MMM DD, YYYY');
+  const eventDate = moment(event.eventStartDateTime).format('MMM DD, YYYY, h:mm a');
+  // update to local time after video demo
   const today = new Date();
   const todayFormatted = moment(today).format('MMM DD, YYYY');
   
@@ -47,7 +48,7 @@ const Event = ({ route, navigation }) => {
         <View style={styles.buttonContainer}>
           <Button
             title="Join"
-            disabled = {isEventToday}
+            disabled= {isEventToday}
             color={Colors.ORANGE}
             buttonStyle={{
               backgroundColor: Colors.ORANGE,
@@ -57,7 +58,7 @@ const Event = ({ route, navigation }) => {
           <Button
             title="Vendors"
             // NEED TO UNCOMMENT 
-            //disabled = {isEventActive}
+            disabled= {isEventActive}
             color={Colors.ORANGE}
             buttonStyle={{
               backgroundColor: Colors.ORANGE,
