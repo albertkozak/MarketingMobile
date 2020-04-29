@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     borderBottomColor: Colors.GREY,
     borderWidth: 1,
-    paddingVertical: 15
-    // width: Dimensions.get("window").width,
+    paddingVertical: 15,
+    width: (Dimensions.get("window").width * .75),
   },
   })
 
