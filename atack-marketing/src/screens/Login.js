@@ -41,7 +41,7 @@ export default function Login({ route, navigation }) {
 							firebase.auth().currentUser.emailVerified === false
 						) {
 							reject(
-								'please verify your email address from the verification email sent to your inbox'
+								'Please verify your email address.'
 							);
 						}
 						firebase
@@ -73,13 +73,14 @@ export default function Login({ route, navigation }) {
 	}
 	return (
 		<Container>
+			<View style={styles.wrapper}>
 			<View style={styles.logo}>
 				<LogoSize
 					imageSrc={require('../../assets/Logo-Atack.png')}
 				/>
 			</View>
 			<SafeAreaView style={styles.container}>
-				<Text style={styles.title}>Login</Text>
+				{/* <Text style={styles.title}>Login</Text> */}
 				<Formik
 					initialValues={{ email: '', password: '' }}
 					onSubmit={async (values, { resetForm }) => {
@@ -110,7 +111,7 @@ export default function Login({ route, navigation }) {
 								name="email"
 								value={values.email}
 								onChangeText={handleChange('email')}
-								placeholder="Enter verified email"
+								placeholder="Email"
 								autoCapitalize="none"
 								iconName="ios-mail"
 								iconColor={Colors.ORANGE}
@@ -124,8 +125,9 @@ export default function Login({ route, navigation }) {
 								name="password"
 								value={values.password}
 								onChangeText={handleChange('password')}
-								placeholder="Enter password"
+								placeholder="Password"
 								secureTextEntry
+								autoCapitalize="none"
 								iconName="ios-lock"
 								iconColor={Colors.ORANGE}
 								onBlur={handleBlur('password')}
@@ -136,6 +138,7 @@ export default function Login({ route, navigation }) {
 							<View style={styles.buttonContainer}>
 								<FormButton
 									buttonType="outline"
+									borderColor="none"
 									onPress={handleSubmit}
 									title="LOGIN"
 									buttonColor={Colors.ORANGE}
@@ -148,10 +151,10 @@ export default function Login({ route, navigation }) {
 					)}
 				</Formik>
 				<Button
-					title="Don't have an account? Please Register"
+					title="Don't have an account? Register"
 					onPress={goToSignup}
 					titleStyle={{
-						color: Colors.ORANGE,
+						color: Colors.LIGHTGREY,
 					}}
 					type="clear"
 				/>
@@ -159,23 +162,29 @@ export default function Login({ route, navigation }) {
 					title="Forgot Password?"
 					onPress={goToForgotPassword}
 					titleStyle={{
-						color: Colors.ORANGE,
+						color: Colors.GREY,
 					}}
 					type="clear"
 				/>
 			</SafeAreaView>
+			</View>
 		</Container>
 	);
 }
 
 const styles = StyleSheet.create({
+	wrapper: {
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "center",
+	},
 	logo: {
 		alignItems: 'center',
-		marginBottom: 20,
+		margin: 0,
 	},
 	container: {
-		flex: 1,
-		margin: 25,
+		// flex: 1,
+		// margin: 10,
 	},
 	title: {
 		color: Colors.WHITE,
@@ -184,6 +193,8 @@ const styles = StyleSheet.create({
 		marginRight: 25,
 	},
 	buttonContainer: {
-		margin: 25,
+		marginVertical: 10,
+		marginHorizontal: 23,
+
 	},
 });
