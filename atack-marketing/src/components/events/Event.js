@@ -23,10 +23,7 @@ const Event = ({ route, navigation }) => {
     let vendorValue;
     let fromToday = Math.floor((today.getTime() - date.getTime()) / 1000 / 60 / 60 / 24);
     
-    if (fromToday > 0 ){
-      joinValue = true;
-      vendorValue = false;
-    } else if (fromToday == 0 ) {
+    if (fromToday >= 0 ){
       joinValue = false;
       vendorValue = false;
     } else {
