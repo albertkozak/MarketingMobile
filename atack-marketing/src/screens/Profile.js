@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   banner: {
     width: Dimensions.get("window").width,
-    height: 175,
+    height: 250,
     marginBottom: 25,
   },
   logout: {

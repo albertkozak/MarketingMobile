@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   banner: {
     width: Dimensions.get("window").width,
-    height: 175,
+    height: 225,
     marginBottom: 25,
   },
 });
