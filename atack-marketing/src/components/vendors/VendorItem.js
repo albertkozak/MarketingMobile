@@ -1,27 +1,35 @@
 import * as React from "react";
-import { View, Text, Button, FlatList, StyleSheet, SafeAreaView, Dimensions} from "react-native";
-import Colors from '../../constants/Color'
+import {
+  View,
+  Text,
+  Button,
+  FlatList,
+  StyleSheet,
+  SafeAreaView,
+  Dimensions,
+} from "react-native";
+import Colors from "../../constants/Color";
 
 const VendorItem = ({ vendor }) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       {/* Update with dynamic info */}
-  <Text style={styles.text}>{vendor.vendorName}</Text>
+      <Text style={styles.text}>{vendor.vendorName}</Text>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   wrapper: {},
   text: {
     color: Colors.WHITE,
     fontSize: 16,
-    borderColor: 'transparent',
+    borderColor: "transparent",
     borderBottomColor: Colors.GREY,
     borderWidth: 1,
     paddingVertical: 15,
-    width: (Dimensions.get("window").width * .75),
+    width: Dimensions.get("window").width * 0.75,
   },
-  })
+});
 
 export default VendorItem;
