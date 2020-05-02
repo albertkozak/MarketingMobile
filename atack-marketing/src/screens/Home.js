@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, FlatList, Text, View } from "react-native";
+import {
+  StyleSheet,
+  FlatList,
+  Text,
+  View,
+  Image,
+  Dimensions,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 // import Swiper from "react-native-swiper";
 import EventItem from "../components/events/EventItem";
@@ -39,7 +46,11 @@ const Home = ({ navigation }) => {
   return (
     <Container>
       <View style={styles.wrapper}>
-        <Text style={styles.title}>Upcoming Events</Text>
+        {/* <Text style={styles.title}>Upcoming Events</Text> */}
+        <Image
+          style={styles.banner}
+          source={require("../../assets/events-banner.png")}
+        />
         <EventList results={fetchedData} navigation={navigation} />
       </View>
     </Container>
@@ -67,6 +78,11 @@ const styles = StyleSheet.create({
     color: Colors.WHITE,
     fontSize: 22,
     textTransform: "uppercase",
+    marginBottom: 25,
+  },
+  banner: {
+    width: Dimensions.get("window").width,
+    height: 175,
     marginBottom: 25,
   },
 });
