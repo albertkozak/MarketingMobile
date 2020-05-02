@@ -77,13 +77,11 @@ const styles = StyleSheet.create({
   },
   banner: {
     width: Dimensions.get("window").width,
-    height: 190,
-    // marginBottom: 90,
+    height: 175,
+    marginBottom: 25,
   },
   logout: {
-    flex: 1,
-    justifyContent: "center",
-    marginBottom: 30,
+    marginTop: 100,
   },
 });
 

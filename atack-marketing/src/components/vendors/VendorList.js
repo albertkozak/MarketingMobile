@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
+  Image,
+  Dimensions,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import VendorItem from "./VendorItem";
 import Container from "../Container";
@@ -48,7 +56,11 @@ const VendorList = ({ navigation, route }) => {
   return (
     <Container>
       <SafeAreaView style={styles.wrapper}>
-        <Text style={styles.title}>Vendors</Text>
+        {/* <Text style={styles.title}>Vendors</Text> */}
+        <Image
+          style={styles.banner}
+          source={require("../../../assets/vendor-banner.png")}
+        />
         {/* <Text style={styles.eventTitle}>{eventName}</Text> */}
         <FlatList
           keyExtractor={(vendor) => vendor.eventVendorId.toString()}
@@ -58,7 +70,7 @@ const VendorList = ({ navigation, route }) => {
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("Vendor", {
-                    vendor: (item),
+                    vendor: item,
                     eventId: passId,
                   })
                 }
@@ -83,6 +95,11 @@ const styles = StyleSheet.create({
     color: Colors.WHITE,
     fontSize: 22,
     textTransform: "uppercase",
+    marginBottom: 25,
+  },
+  banner: {
+    width: Dimensions.get("window").width,
+    height: 175,
     marginBottom: 25,
   },
 });
