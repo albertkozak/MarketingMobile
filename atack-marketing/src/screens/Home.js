@@ -8,7 +8,6 @@ import {
   Dimensions,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-// import Swiper from "react-native-swiper";
 import EventItem from "../components/events/EventItem";
 import Container from "../components/Container";
 import Colors from "../constants/Color";
@@ -64,16 +63,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 30,
   },
-  // slide1: {
-  //   flex: 1,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  // },
-  // slide2: {
-  //   flex: 1,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  // },
   title: {
     color: Colors.WHITE,
     fontSize: 22,
@@ -88,21 +77,3 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
-
-//Swiper Code for potential use:
-// <Swiper
-//   showsPagination={false}
-//   style={styles.wrapper}
-//   showsButtons
-//   loop={true}
-//   autoplay={true}
-// >
-//   <View testID="Microsoft" style={styles.slide1}>
-//     <Image source={require("../../assets/img/1.jpg")} />
-//     <Text style={styles.text}>Microsoft</Text>
-//   </View>
-//   <View testID="BCIT" style={styles.slide2}>
-//     <Image source={require("../../assets/img/2.jpg")} />
-//     <Text style={styles.text}>BCIT</Text>
-//   </View>
-// </Swiper>
