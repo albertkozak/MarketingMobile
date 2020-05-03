@@ -10,15 +10,18 @@ import {
 } from "react-native";
 import Colors from "../../constants/Color";
 
-const VendorItem = ({ vendor }) => {
+const SubscriptionItem = ({ subscription }) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       {/* Update with dynamic info */}
-      <Text style={styles.text}>{vendor.vendorName}</Text>
+      <Text style={styles.text}>
+        {subscription.eventSubscription.vendorName}
+      </Text>
     </SafeAreaView>
   );
 };
 
+// Border Bottom does NOT work in iOS at this time. Pending further review...
 const styles = StyleSheet.create({
   wrapper: {},
   text: {
@@ -32,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VendorItem;
+export default SubscriptionItem;

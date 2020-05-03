@@ -12,10 +12,11 @@ import EventItem from "../components/events/EventItem";
 import Container from "../components/Container";
 import Colors from "../constants/Color";
 import firebase from "../firebase";
-import EventList from "../components/events/EventList";
+import SubscriptionList from "../components/subscriptions/SubscriptionList";
 
-const Home = ({ navigation }) => {
-  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
+const Subscriptions = ({ navigation }) => {
+  const BASE_URL =
+    "https://atackmarketingapi.azurewebsites.net/api/User/subscriptionlist";
   const [fetchedData, setFetchedData] = useState([]);
 
   const fetchData = () => {
@@ -32,7 +33,7 @@ const Home = ({ navigation }) => {
         })
           .then((response) => response.json())
           .then((responseData) => {
-            setFetchedData(responseData.events);
+            setFetchedData(responseData.subscriptions);
             console.log(fetchedData);
           });
       });
@@ -45,12 +46,12 @@ const Home = ({ navigation }) => {
   return (
     <Container>
       <View style={styles.wrapper}>
-        {/* <Text style={styles.title}>Upcoming Events</Text> */}
+        {/* <Text style={styles.title}>Subscriptions</Text> */}
         <Image
           style={styles.banner}
-          source={require("../../assets/events-banner.png")}
+          source={require("../../assets/subscriptions-banner.png")}
         />
-        <EventList results={fetchedData} navigation={navigation} />
+        <SubscriptionList results={fetchedData} navigation={navigation} />
       </View>
     </Container>
   );
@@ -76,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default Subscriptions;
