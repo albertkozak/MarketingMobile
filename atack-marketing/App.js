@@ -42,7 +42,7 @@ const HomeTabNavigator = ({ navigation, route }) => (
         } else if (route.name == "Search") {
           iconName = "ios-search";
         } else if (route.name == "Subscriptions") {
-          iconName = "ios-heart";
+          iconName = "ios-star";
         } else if (route.name == "Profile") {
           iconName = "ios-person";
         } else if (route.name == "Login") {

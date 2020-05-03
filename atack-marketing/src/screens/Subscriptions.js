@@ -46,10 +46,10 @@ const Subscriptions = ({ navigation }) => {
   return (
     <Container>
       <View style={styles.wrapper}>
-        {/* <Text style={styles.title}>Upcoming Events</Text> */}
+        {/* <Text style={styles.title}>Subscriptions</Text> */}
         <Image
           style={styles.banner}
-          source={require("../../assets/events-banner.png")}
+          source={require("../../assets/subscriptions-banner.png")}
         />
         <SubscriptionList results={fetchedData} navigation={navigation} />
       </View>
