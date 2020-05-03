@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
     borderBottomColor: Colors.GREY,
     borderWidth: 1,
+    textAlign: "center",
     paddingVertical: 15,
     width: Dimensions.get("window").width * 0.75,
   },

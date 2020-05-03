@@ -25,11 +25,12 @@ const styles = StyleSheet.create({
   text: {
     color: Colors.WHITE,
     fontSize: 16,
-    borderColor: 'transparent',
+    borderColor: "transparent",
     borderBottomColor: Colors.GREY,
     borderWidth: 1,
     paddingVertical: 15,
-    width: (Dimensions.get("window").width * .75),
+    textAlign: "center",
+    width: Dimensions.get("window").width * 0.75,
   },
 });
 
