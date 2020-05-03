@@ -67,9 +67,9 @@ const Vendor = ({ route, navigation }) => {
           renderItem={({ item }) => {
             return (
               <View style={styles.listItems}>
-                <Text style={styles.listItem}>
-                  {item.productName}
-                  {"  $" + format(item.productPrice)}
+                <Text style={styles.listItem}>{item.productName}</Text>
+                <Text style={styles.listItem2}>
+                  {" $" + format(item.productPrice)}
                 </Text>
               </View>
             );
@@ -134,12 +134,20 @@ const styles = StyleSheet.create({
   list: {
     marginVertical: 10,
   },
-  listItems: {},
+  listItems: {
+    marginHorizontal: 30,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   listItem: {
     color: Colors.WHITE,
     textAlign: "left",
-    paddingBottom: 10,
-    marginLeft: 25,
+    paddingBottom: 12,
+  },
+  listItem2: {
+    color: Colors.WHITE,
+    textAlign: "right",
   },
   button: {},
 });
