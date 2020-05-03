@@ -28,7 +28,7 @@ const HomeTabNavigator = ({ navigation, route }) => (
     tabBarOptions={{
       activeTintColor: Colors.ORANGE,
       style: {
-        backgroundColor: "transparent",
+        backgroundColor: "#121212",
         borderTopWidth: 0,
         position: "absolute",
       },
