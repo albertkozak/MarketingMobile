@@ -15,6 +15,7 @@ import VendorList from "./src/components/vendors/VendorList";
 import Vendor from "./src/components//vendors/Vendor";
 import Colors from "./src/constants/Color";
 import ForgotPassword from "./src/screens/ForgotPassword";
+import Subscriptions from "./src/screens/Subscriptions";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,8 +41,8 @@ const HomeTabNavigator = ({ navigation, route }) => (
           iconName = "ios-home";
         } else if (route.name == "Search") {
           iconName = "ios-search";
-        } else if (route.name == "QRScan") {
-          iconName = "ios-qr-scanner";
+        } else if (route.name == "Subscriptions") {
+          iconName = "ios-star";
         } else if (route.name == "Profile") {
           iconName = "ios-person";
         } else if (route.name == "Login") {
@@ -55,7 +56,7 @@ const HomeTabNavigator = ({ navigation, route }) => (
   >
     <Tab.Screen name="Home" component={HomeStackNavigator} />
     <Tab.Screen name="Search" component={SearchStackNavigator} />
-    <Tab.Screen name="QRScan" component={QRScannerScreen} />
+    <Tab.Screen name="Subscriptions" component={Subscriptions} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
   </Tab.Navigator>
 );
@@ -71,8 +72,8 @@ function getHeaderTitle(route) {
       return "Home";
     case "Search":
       return "Search";
-    case "QRScan":
-      return "QR Scanner";
+    case "Subscriptions":
+      return "Subscriptions";
     case "Profile":
       return "Profile";
   }
@@ -109,13 +110,13 @@ const HomeStackNavigator = ({ navigation, routes, route }) => {
           headerShown: shouldHeaderBeShown(route),
           headerTitle: "",
           headerStyle: {
-            backgroundColor: Colors.NAVY
+            backgroundColor: Colors.NAVY,
           },
           headerTintColor: Colors.LIGHTGREY,
           headerTintStyle: {
             fontSize: 10,
             fontWeight: 100,
-           }
+          },
         })}
       />
     </HomeStack.Navigator>
@@ -143,7 +144,7 @@ const SearchStackNavigator = ({ navigation, routes, route }) => {
           headerTintStyle: {
             fontSize: 10,
             fontWeight: 100,
-           }
+          },
         })}
       />
     </SearchStack.Navigator>
@@ -156,52 +157,61 @@ const AppStackNavigator = ({ navigation, routes, route }) => {
       <AppStack.Screen
         name="Event"
         component={Event}
-        options={{ headerShown: false }} />
-      <AppStack.Screen name="QRScan" component={QRScannerScreen} options={{ 
-            title: 'QR Scanner',
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: Colors.NAVY
-            },
-            headerTintColor: Colors.LIGHTGREY,
-            headerTintStyle: {
-              fontSize: 10,
-              fontWeight: 100,
-             }
-            
-          }} />
-      <AppStack.Screen name="VendorList" component={VendorList} options={{ 
-            title: 'Vendor List',
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: Colors.NAVY
-            },
-            headerTintColor: Colors.LIGHTGREY,
-            headerTintStyle: {
-              fontSize: 10,
-              fontWeight: 100,
-             }
-            
-          }} />
-      <AppStack.Screen name="Vendor" component={Vendor} options={{ 
-            title: 'Vendor Details',
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: Colors.NAVY
-            },
-            headerTintColor: Colors.LIGHTGREY,
-            headerTintStyle: {
-              fontSize: 10,
-              fontWeight: 100,
-             }
-            
-          }} />
+        options={{ headerShown: false }}
+      />
+      <AppStack.Screen
+        name="QRScan"
+        component={QRScannerScreen}
+        options={{
+          title: "QR Scanner",
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: Colors.NAVY,
+          },
+          headerTintColor: Colors.LIGHTGREY,
+          headerTintStyle: {
+            fontSize: 10,
+            fontWeight: 100,
+          },
+        }}
+      />
+      <AppStack.Screen
+        name="VendorList"
+        component={VendorList}
+        options={{
+          title: "Vendor List",
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: Colors.NAVY,
+          },
+          headerTintColor: Colors.LIGHTGREY,
+          headerTintStyle: {
+            fontSize: 10,
+            fontWeight: 100,
+          },
+        }}
+      />
+      <AppStack.Screen
+        name="Vendor"
+        component={Vendor}
+        options={{
+          title: "Vendor Details",
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: Colors.NAVY,
+          },
+          headerTintColor: Colors.LIGHTGREY,
+          headerTintStyle: {
+            fontSize: 10,
+            fontWeight: 100,
+          },
+        }}
+      />
     </AppStack.Navigator>
   );
 };
 
 function App({ navigation }) {
-
   return (
     <NavigationContainer>
       {/* Change initialRouteName from "Home" to "Login" to access Login / Registration Screen */}
@@ -219,8 +229,8 @@ function App({ navigation }) {
         <Stack.Screen
           name="ForgotPassword"
           component={ForgotPassword}
-          options={{ 
-            title: '',
+          options={{
+            title: "",
             headerShown: true,
             headerStyle: {
               backgroundColor: Colors.NAVY,
@@ -229,8 +239,7 @@ function App({ navigation }) {
             headerTintStyle: {
               fontSize: 10,
               fontWeight: 100,
-             }
-            
+            },
           }}
         />
         <Stack.Screen
