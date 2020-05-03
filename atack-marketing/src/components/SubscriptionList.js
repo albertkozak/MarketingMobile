@@ -1,6 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
-import Colors from "../../constants/Color";
+import Colors from "../constants/Color";
+import SubscriptionItem from "../components/subscriptions/SubscriptionItem";
 
 const SubscriptionList = ({ navigation, results }) => {
   const subscriptions = results;
@@ -12,7 +13,7 @@ const SubscriptionList = ({ navigation, results }) => {
       }
       data={subscriptions}
       renderItem={({ item }) => {
-        return <Text>{item.subscription.eventSubscriptions.vendorName}</Text>;
+        <SubscriptionItem subscription={item} />;
       }}
     />
   );

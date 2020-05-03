@@ -12,7 +12,7 @@ import EventItem from "../components/events/EventItem";
 import Container from "../components/Container";
 import Colors from "../constants/Color";
 import firebase from "../firebase";
-import EventList from "../components/events/EventList";
+import SubscriptionList from "../components/SubscriptionList";
 
 const Subscriptions = ({ navigation }) => {
   const BASE_URL =
