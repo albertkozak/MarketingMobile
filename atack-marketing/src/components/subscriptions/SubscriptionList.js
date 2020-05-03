@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
-import Colors from "../constants/Color";
-import SubscriptionItem from "../components/subscriptions/SubscriptionItem";
+import Colors from "../../constants/Color";
+import SubscriptionItem from "./SubscriptionItem";
 
 const SubscriptionList = ({ navigation, results }) => {
   const subscriptions = results;

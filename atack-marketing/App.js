@@ -15,6 +15,7 @@ import VendorList from "./src/components/vendors/VendorList";
 import Vendor from "./src/components//vendors/Vendor";
 import Colors from "./src/constants/Color";
 import ForgotPassword from "./src/screens/ForgotPassword";
+import Subscriptions from "./src/screens/Subscriptions";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,7 +41,7 @@ const HomeTabNavigator = ({ navigation, route }) => (
           iconName = "ios-home";
         } else if (route.name == "Search") {
           iconName = "ios-search";
-        } else if (route.name == "QRScan") {
+        } else if (route.name == "Subscriptions") {
           iconName = "ios-heart";
         } else if (route.name == "Profile") {
           iconName = "ios-person";
@@ -55,7 +56,7 @@ const HomeTabNavigator = ({ navigation, route }) => (
   >
     <Tab.Screen name="Home" component={HomeStackNavigator} />
     <Tab.Screen name="Search" component={SearchStackNavigator} />
-    <Tab.Screen name="QRScan" component={QRScannerScreen} />
+    <Tab.Screen name="Subscriptions" component={Subscriptions} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
   </Tab.Navigator>
 );
@@ -71,8 +72,8 @@ function getHeaderTitle(route) {
       return "Home";
     case "Search":
       return "Search";
-    case "QRScan":
-      return "QR Scanner";
+    case "Subscriptions":
+      return "Subscriptions";
     case "Profile":
       return "Profile";
   }
