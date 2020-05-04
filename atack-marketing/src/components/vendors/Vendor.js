@@ -72,6 +72,9 @@ const Vendor = ({ route, navigation }) => {
         } else {
           setStatus("Subscribe");
         }
+      } else if (result.status === 400) {
+        alert("You've already subscribed to this vendor.");
+        setStatus("Unsubscribe");
       } else {
         alert("An error occurred. Please try again.");
       }
@@ -120,7 +123,7 @@ const Vendor = ({ route, navigation }) => {
           title={status}
           buttonStyle={{
             backgroundColor: Colors.ORANGE,
-            width: 100,
+            width: 120,
             alignSelf: "center",
           }}
           style={styles.button}
