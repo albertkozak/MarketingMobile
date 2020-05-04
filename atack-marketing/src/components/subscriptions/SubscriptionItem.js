@@ -3,12 +3,12 @@ import { Text, StyleSheet, SafeAreaView, Dimensions } from "react-native";
 import Colors from "../../constants/Color";
 
 const SubscriptionItem = ({ subscription }) => {
+  console.log(subscription.vendorName);
+  console.log(subscription.eventSubscriptions.vendorName);
   return (
     <SafeAreaView style={styles.wrapper}>
       {/* Update with dynamic info */}
-      <Text style={styles.text}>
-        {subscription.eventSubscription.vendorName}
-      </Text>
+      <Text style={styles.text}>{eventSubscriptions.vendorName}</Text>
     </SafeAreaView>
   );
 };

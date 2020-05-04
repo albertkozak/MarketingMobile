@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, SafeAreaView, Image, Dimensions } from "react-native";
-import EventList from "../components/events/EventList";
+import EventListHome from "../components/events/EventListHome";
 import firebase from "../firebase";
 import Colors from "../constants/Color";
 import Container from "../components/Container";
@@ -40,7 +40,7 @@ const Home = ({ navigation }) => {
         source={require("../../assets/events-banner.png")}
       />
       <SafeAreaView style={styles.container}>
-        <EventList results={fetchedData} navigation={navigation} />
+        <EventListHome results={fetchedData} navigation={navigation} />
       </SafeAreaView>
     </Container>
   );
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   banner: {
     width: Dimensions.get("window").width,
     height: 225,
-    marginBottom: 25,
+    marginBottom: 30,
   },
   container: {
     flex: 1,

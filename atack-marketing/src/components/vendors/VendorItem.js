@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
   text: {
     color: Colors.WHITE,
     fontSize: 16,
-    borderColor: "transparent",
-    borderBottomColor: Colors.GREY,
-    borderWidth: 1,
+    // borderColor: "transparent",
+    // borderBottomColor: Colors.GREY,
+    // borderWidth: 1,
     textAlign: "center",
     paddingVertical: 15,
     width: Dimensions.get("window").width * 0.75,
