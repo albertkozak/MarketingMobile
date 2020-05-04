@@ -2,10 +2,10 @@
 import * as React from "react";
 import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import EventItem from "./EventItem";
+import EventItemHome from "./EventItemHome";
 import Colors from "../../constants/Color";
 
-const EventList = ({ navigation, results }) => {
+const EventListHome = ({ navigation, results }) => {
   const events = results;
 
   const showEventDetail = (event) => {
@@ -22,7 +22,7 @@ const EventList = ({ navigation, results }) => {
       renderItem={({ item }) => {
         return (
           <TouchableOpacity onPress={() => showEventDetail(item)}>
-            <EventItem event={item} />
+            <EventItemHome event={item} />
           </TouchableOpacity>
         );
       }}
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EventList;
+export default EventListHome;

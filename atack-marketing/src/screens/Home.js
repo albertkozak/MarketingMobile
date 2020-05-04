@@ -12,7 +12,7 @@ import EventItem from "../components/events/EventItem";
 import Container from "../components/Container";
 import Colors from "../constants/Color";
 import firebase from "../firebase";
-import EventList from "../components/events/EventList";
+import EventListHome from "../components/events/EventListHome";
 
 const Home = ({ navigation }) => {
   const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
@@ -50,7 +50,7 @@ const Home = ({ navigation }) => {
           style={styles.banner}
           source={require("../../assets/events-banner.png")}
         />
-        <EventList results={fetchedData} navigation={navigation} />
+        <EventListHome results={fetchedData} navigation={navigation} />
       </View>
     </Container>
   );
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   banner: {
     width: Dimensions.get("window").width,
     height: 225,
-    marginBottom: 25,
+    marginBottom: 30,
   },
 });
 

@@ -35,6 +35,7 @@ const Subscriptions = ({ navigation }) => {
           .then((responseData) => {
             setFetchedData(responseData.subscriptions);
             console.log(fetchedData);
+            console.log(responseData.subscriptions);
           });
       });
   };
