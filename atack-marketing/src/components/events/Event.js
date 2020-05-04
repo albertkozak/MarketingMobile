@@ -12,12 +12,8 @@ const Event = ({ route, navigation }) => {
   const eventId = event.eventId;
   const eventName = event.eventName;
   const date = new Date(event.eventStartDateTime);
-  const eventDate = moment(event.eventStartDateTime).format(
-    "MMM DD, YYYY, h:mm a"
-  );
-  // update to local time after video demo
+  const eventDate = moment(event.eventStartDateTime).format("LLLL");
   const today = new Date();
-  const todayFormatted = moment(today).format("MMM DD, YYYY, h:mm a");
   const [joinActive, setJoinActive] = useState(true);
   const [vendorsActive, setVendorsActive] = useState(true);
 
