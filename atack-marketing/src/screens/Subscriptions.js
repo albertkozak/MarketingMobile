@@ -48,10 +48,10 @@ const Subscriptions = ({ navigation }) => {
     <Container>
       <View style={styles.wrapper}>
         {/* <Text style={styles.title}>Subscriptions</Text> */}
-        {/* <Image
+        <Image
           style={styles.banner}
           source={require("../../assets/subscriptions-banner.png")}
-        /> */}
+        />
         <SubscriptionList results={fetchedData} navigation={navigation} />
       </View>
     </Container>
