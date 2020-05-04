@@ -6,7 +6,7 @@ import Colors from "../../constants/Color";
 import firebase from "../../firebase";
 import { Ionicons } from "@expo/vector-icons";
 
-const Vendor = ({ route, navigation }) => {
+const Vendor = ({ route }) => {
   const { eventId } = route.params;
   const eventVendorId = route.params.vendor.eventVendorId;
   const vendorName = route.params.vendor.vendorName;

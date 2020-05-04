@@ -1,16 +1,14 @@
-// import React, { useEffect, useState } from "react";
 import * as React from "react";
-import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import { FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import EventItem from "./EventItem";
-import Colors from "../../constants/Color";
 
 const EventList = ({ navigation, results }) => {
-  const events = results
+  const events = results;
 
   const showEventDetail = (event) => {
-    navigation.navigate('Event', {
-      screen: 'Event',
+    navigation.navigate("Event", {
+      screen: "Event",
       params: { event: event },
     });
   };
@@ -29,19 +27,5 @@ const EventList = ({ navigation, results }) => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    color: Colors.WHITE,
-    fontSize: 22,
-    textTransform: "uppercase",
-    marginBottom: 25,
-  },
-});
 
 export default EventList;

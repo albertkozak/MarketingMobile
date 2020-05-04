@@ -1,13 +1,5 @@
 import * as React from "react";
-import {
-  View,
-  Text,
-  Button,
-  FlatList,
-  StyleSheet,
-  SafeAreaView,
-  Dimensions,
-} from "react-native";
+import { Text, StyleSheet, SafeAreaView, Dimensions } from "react-native";
 import Colors from "../../constants/Color";
 
 const VendorItem = ({ vendor }) => {

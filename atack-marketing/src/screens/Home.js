@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, SafeAreaView, Image, Dimensions } from "react-native";
-import Constants from "expo-constants";
 import EventList from "../components/events/EventList";
 import firebase from "../firebase";
 import Colors from "../constants/Color";

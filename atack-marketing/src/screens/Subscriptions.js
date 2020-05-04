@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  FlatList,
-  Text,
-  View,
-  Image,
-  Dimensions,
-} from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import EventItem from "../components/events/EventItem";
+import { StyleSheet, View, Image, Dimensions } from "react-native";
+
 import Container from "../components/Container";
 import Colors from "../constants/Color";
 import firebase from "../firebase";

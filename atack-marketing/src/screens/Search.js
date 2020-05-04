@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, Text, StyleSheet, FlatList } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import SearchBar from "../components/SearchBar";
 import Container from "../components/Container";
 import firebase from "../firebase";

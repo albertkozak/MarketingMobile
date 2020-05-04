@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,7 +11,6 @@ import Container from "../components/Container";
 import Colors from "../constants/Color";
 import firebase from "../firebase";
 import Logout from "../components/Logout";
-import LogoSize from "../components/LogoSize";
 
 function ProfileScreen({ navigation }) {
   const [loggedIn, setLoggedIn] = useState(false);

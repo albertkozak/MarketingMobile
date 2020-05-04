@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import Colors from "../../constants/Color";
 import SubscriptionItem from "./SubscriptionItem";
 
