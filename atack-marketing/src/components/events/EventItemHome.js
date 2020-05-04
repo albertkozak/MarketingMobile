@@ -12,7 +12,7 @@ import Colors from "../../constants/Color";
 import moment from "moment";
 
 const EventItemHome = ({ event }) => {
-  const eventDate = moment(event.eventStartDateTime).format("MMMM D");
+  const eventDate = moment(event.eventStartDateTime).format("l");
   // update to local time after video demo
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -34,10 +34,10 @@ const styles = StyleSheet.create({
   event: {
     color: Colors.WHITE,
     fontSize: 15,
-    paddingBottom: 15,
     textAlign: "left",
     maxWidth: "60%",
     paddingBottom: 20,
+    paddingRight: 10,
     // borderColor: "transparent",
     // borderBottomColor: Colors.GREY,
     // borderWidth: 1,
