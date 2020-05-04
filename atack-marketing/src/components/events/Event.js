@@ -5,6 +5,7 @@ import Container from "../Container";
 import Colors from "../../constants/Color";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import moment from "moment";
+import firebase from "../../firebase";
 
 const Event = ({ route, navigation }) => {
   const { event } = route.params;
@@ -19,6 +20,10 @@ const Event = ({ route, navigation }) => {
   const todayFormatted = moment(today).format("MMM DD, YYYY, h:mm a");
   const [joinActive, setJoinActive] = useState(true);
   const [vendorsActive, setVendorsActive] = useState(true);
+
+  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events/";
+  const EVENT_URL = BASE_URL + eventId + "/";
+  const [status, setStatus] = useState("Join");
 
   function isEventAvailable() {
     let joinValue;
@@ -37,6 +42,46 @@ const Event = ({ route, navigation }) => {
     setJoinActive(joinValue);
     setVendorsActive(vendorValue);
   }
+
+  const handleButton = async (event) => {
+    event.preventDefault();
+    const eventId = eventId;
+
+    let statusValue;
+    if (status === "Join") {
+      statusValue = "join";
+    } else {
+      statusValue = "leave";
+    }
+
+    let JWToken = await firebase.auth().currentUser.getIdTokenResult();
+    if (JWToken !== null) {
+      const result = await fetch(EVENT_URL + statusValue, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${JWToken.token}`,
+        },
+        body: JSON.stringify({
+          eventId: eventId,
+        }),
+      });
+      console.log(EVENT_URL);
+      console.log(statusValue);
+      console.log(result.status);
+      if (result.status === 200) {
+        if (status === "Join") {
+          setStatus("Leave");
+          navigation.navigate("QRScan");
+        } else {
+          setStatus("Join");
+          navigation.navigate("Home");
+        }
+      } else {
+        alert("An error occurred. Please try again.");
+      }
+    }
+  };
 
   useEffect(() => {
     isEventAvailable();
@@ -58,7 +103,7 @@ const Event = ({ route, navigation }) => {
         <Text style={styles.eventVendors}>Vendors: {event.numOfVendors}</Text>
         <View style={styles.buttonContainer}>
           <Button
-            title="Join"
+            title={status}
             disabled={joinActive}
             color={Colors.ORANGE}
             buttonStyle={{
@@ -66,7 +111,7 @@ const Event = ({ route, navigation }) => {
               width: 90,
               marginRight: 50,
             }}
-            onPress={() => navigation.navigate("QRScan")}
+            onPress={handleButton}
           />
           <Button
             title="Vendors"
