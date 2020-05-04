@@ -5,17 +5,25 @@ import SubscriptionItem from "./SubscriptionItem";
 
 const SubscriptionList = ({ navigation, results }) => {
   const subscriptions = results;
+  const [eventSubscriptions, setEventSubscriptions] = React.useState([]);
 
   return (
-    <FlatList
-      keyExtractor={(subscription) =>
-        subscription.eventSubscriptions.eventVendorId.toString()
-      }
-      data={subscriptions}
-      renderItem={({ item }) => {
-        <SubscriptionItem subscription={item} />;
-      }}
-    />
+    <View>
+      {console.log(subscriptions)}
+      {/* {subscriptions.keys(Object.eventId.toString()).map((key) => (
+        <Text key={key}>{Object.eventId[key]}</Text>
+      ))} */}
+      {/* <FlatList
+        keyExtractor={(subscription) => subscription.eventId.toString()}
+        data={subscriptions}
+        renderItem={({ item }) => {
+          item
+            .keys(item.eventSubscriptions.eventVendorId)
+            .map((key) => <SubscriptionItem subscription={key} />);
+          // return <SubscriptionItem subscription={item} />;
+        }}
+      /> */}
+    </View>
   );
 };
 
