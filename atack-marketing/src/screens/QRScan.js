@@ -5,7 +5,7 @@ import Container from "../components/Container";
 import { Button } from "react-native-elements";
 import Colors from "../constants/Color";
 
-const QRScan = ({ navigation }) => {
+const QRScan = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
