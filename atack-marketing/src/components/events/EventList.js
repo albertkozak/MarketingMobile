@@ -6,11 +6,11 @@ import EventItem from "./EventItem";
 import Colors from "../../constants/Color";
 
 const EventList = ({ navigation, results }) => {
-  const events = results
+  const events = results;
 
   const showEventDetail = (event) => {
-    navigation.navigate('Event', {
-      screen: 'Event',
+    navigation.navigate("Event", {
+      screen: "Event",
       params: { event: event },
     });
   };
