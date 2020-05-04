@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
-import { Button } from 'react-native-elements'
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { SafeAreaView, Text, StyleSheet, FlatList } from "react-native";
 import SearchBar from "../components/SearchBar";
-import EventItem from "../components/events/EventItem";
 import Container from "../components/Container";
-import Colors from "../constants/Color";
 import firebase from "../firebase";
 import EventList from "../components/events/EventList";
 
@@ -52,14 +48,14 @@ const SearchScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <View style={styles.wrapper}>
-        <SearchBar
-          term={term}
-          onTermChange={(newTerm) => setTerm(newTerm)}
-          onTermSubmit={() => searchAPI()}
-        />
+      <SearchBar
+        term={term}
+        onTermChange={(newTerm) => setTerm(newTerm)}
+        onTermSubmit={() => searchAPI()}
+      />
+      <SafeAreaView style={styles.wrapper}>
         <EventList results={eventData} navigation={navigation} />
-      </View>
+      </SafeAreaView>
     </Container>
   );
 };
@@ -69,8 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
-  }
+  },
 });
 
 export default SearchScreen;

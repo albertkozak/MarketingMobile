@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  FlatList,
-  Text,
-  View,
-  Image,
-  Dimensions,
-} from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import EventItem from "../components/events/EventItem";
-import Container from "../components/Container";
-import Colors from "../constants/Color";
-import firebase from "../firebase";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, SafeAreaView, Image, Dimensions } from "react-native";
+import Constants from "expo-constants";
 import EventList from "../components/events/EventList";
+import firebase from "../firebase";
+import Colors from "../constants/Color";
+import Container from "../components/Container";
 
 const Home = ({ navigation }) => {
   const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events";
@@ -44,25 +36,18 @@ const Home = ({ navigation }) => {
 
   return (
     <Container>
-      <View style={styles.wrapper}>
-        {/* <Text style={styles.title}>Upcoming Events</Text> */}
-        <Image
-          style={styles.banner}
-          source={require("../../assets/events-banner.png")}
-        />
+      <Image
+        style={styles.banner}
+        source={require("../../assets/events-banner.png")}
+      />
+      <SafeAreaView style={styles.container}>
         <EventList results={fetchedData} navigation={navigation} />
-      </View>
+      </SafeAreaView>
     </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 30,
-  },
   title: {
     color: Colors.WHITE,
     fontSize: 22,
@@ -73,6 +58,11 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     height: 225,
     marginBottom: 25,
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
