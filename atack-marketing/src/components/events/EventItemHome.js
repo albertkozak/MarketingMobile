@@ -12,7 +12,7 @@ import Colors from "../../constants/Color";
 import moment from "moment";
 
 const EventItemHome = ({ event }) => {
-  const eventDate = moment(event.eventStartDateTime).format("LL");
+  const eventDate = moment(event.eventStartDateTime).format("MMMM D");
   // update to local time after video demo
   return (
     <SafeAreaView style={styles.wrapper}>
