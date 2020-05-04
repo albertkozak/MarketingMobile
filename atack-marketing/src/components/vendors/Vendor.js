@@ -17,6 +17,7 @@ const Vendor = ({ route, navigation }) => {
     "https://atackmarketingapi.azurewebsites.net/api/Events/" + EVENT_PATH;
 
   const [fetchedDetails, setVendorDetails] = useState([]);
+  const [status, setStatus] = useState("Subscribe");
 
   const fetchData = () => {
     firebase
@@ -35,6 +36,46 @@ const Vendor = ({ route, navigation }) => {
             setVendorDetails(responseData.vendor);
           });
       });
+  };
+
+  const handleButton = async (event) => {
+    event.preventDefault();
+    const eventId = eventId;
+    const eventVendorId = eventVendorId;
+
+    let statusValue;
+    if (status === "Subscribe") {
+      statusValue = "/subscribe";
+    } else {
+      statusValue = "/unsubscribe";
+    }
+
+    let JWToken = await await firebase.auth().currentUser.getIdTokenResult();
+    if (JWToken !== null) {
+      const result = await fetch(BASE_URL + statusValue, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${JWToken.token}`,
+        },
+        body: JSON.stringify({
+          eventId: eventId,
+          eventVendorId: eventVendorId,
+        }),
+      });
+      console.log(BASE_URL);
+      console.log(statusValue);
+      console.log(result.status);
+      if (result.status === 200) {
+        if (status === "Subscribe") {
+          setStatus("Unsubscribe");
+        } else {
+          setStatus("Subscribe");
+        }
+      } else {
+        alert("An error occurred. Please try again.");
+      }
+    }
   };
 
   useEffect(() => {
@@ -76,13 +117,14 @@ const Vendor = ({ route, navigation }) => {
           }}
         />
         <Button
-          title="Subscribe"
+          title={status}
           buttonStyle={{
             backgroundColor: Colors.ORANGE,
             width: 100,
             alignSelf: "center",
           }}
           style={styles.button}
+          onPress={handleButton}
         />
       </SafeAreaView>
     </Container>
