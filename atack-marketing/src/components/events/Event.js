@@ -77,6 +77,9 @@ const Event = ({ route, navigation }) => {
           setStatus("Join");
           navigation.navigate("Home");
         }
+      } else if (result.status === 400) {
+        alert("You've already joined this event.");
+        setStatus("Leave");
       } else {
         alert("An error occurred. Please try again.");
       }
