@@ -6,7 +6,7 @@ import Colors from "../../constants/Color";
 import firebase from "../../firebase";
 import { Ionicons } from "@expo/vector-icons";
 
-const Vendor = ({ route, navigation }) => {
+const Vendor = ({ route }) => {
   const { eventId } = route.params;
   const eventVendorId = route.params.vendor.eventVendorId;
   const vendorName = route.params.vendor.vendorName;
@@ -92,8 +92,7 @@ const Vendor = ({ route, navigation }) => {
   return (
     <Container>
       <SafeAreaView style={styles.wrapper}>
-        {/* Update with dynamic info */}
-        {/* <Text style={styles.title}>{eventName}</Text> */}
+        {/* <Text style={styles.title}>{eventName}</Text> -> Replaced with banner */}
         <Text style={styles.vendor}>{vendorName}</Text>
         <Text style={styles.description}>{fetchedDetails.description}</Text>
         <View style={styles.website}>

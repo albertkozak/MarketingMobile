@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  FlatList,
-  Text,
-  View,
-  Image,
-  Dimensions,
-} from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import EventItem from "../components/events/EventItem";
+import { StyleSheet, View, Image, Dimensions } from "react-native";
 import Container from "../components/Container";
 import Colors from "../constants/Color";
 import firebase from "../firebase";
@@ -47,7 +38,7 @@ const Subscriptions = ({ navigation }) => {
   return (
     <Container>
       <View style={styles.wrapper}>
-        {/* <Text style={styles.title}>Subscriptions</Text> */}
+        {/* <Text style={styles.title}>Subscriptions</Text> -> Replaced with banner */}
         <Image
           style={styles.banner}
           source={require("../../assets/subscriptions-banner.png")}

@@ -89,7 +89,6 @@ const Event = ({ route, navigation }) => {
   return (
     <Container>
       <SafeAreaView style={styles.wrapper}>
-        {/* Update with dynamic info */}
         <Text style={styles.eventTitle}>{event.eventName}</Text>
         <View style={styles.location}>
           <MaterialIcons name="location-on" size={18} color={Colors.GREY} />
@@ -135,7 +134,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     marginHorizontal: 25,
-    // justifyContent: "center",
     marginTop: 100,
   },
   eventTitle: {

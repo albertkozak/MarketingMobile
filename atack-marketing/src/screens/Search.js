@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
-import { Button } from 'react-native-elements'
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { View, StyleSheet } from "react-native";
 import SearchBar from "../components/SearchBar";
-import EventItem from "../components/events/EventItem";
 import Container from "../components/Container";
-import Colors from "../constants/Color";
 import firebase from "../firebase";
 import EventList from "../components/events/EventList";
 
@@ -70,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 30,
-  }
+  },
 });
 
 export default SearchScreen;

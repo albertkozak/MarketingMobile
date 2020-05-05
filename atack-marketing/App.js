@@ -9,7 +9,6 @@ import SearchScreen from "./src/screens/Search";
 import QRScannerScreen from "./src/screens/QRScan";
 import ProfileScreen from "./src/screens/Profile";
 import { Ionicons } from "@expo/vector-icons";
-import EventList from "./src/components/events/EventList";
 import Event from "./src/components/events/Event";
 import VendorList from "./src/components/vendors/VendorList";
 import Vendor from "./src/components//vendors/Vendor";
@@ -23,7 +22,7 @@ const AppStack = createStackNavigator();
 const HomeStack = createStackNavigator();
 const SearchStack = createStackNavigator();
 
-const HomeTabNavigator = ({ navigation, route }) => (
+const HomeTabNavigator = ({}) => (
   <Tab.Navigator
     tabBarOptions={{
       activeTintColor: Colors.ORANGE,
@@ -61,7 +60,6 @@ const HomeTabNavigator = ({ navigation, route }) => (
   </Tab.Navigator>
 );
 
-// CONFIRM WITH TEAM IF WE WANT TITLES FOR TAB SCREENS
 function getHeaderTitle(route) {
   const routeName = route.state
     ? route.state.routes[route.state.index].name
@@ -95,7 +93,7 @@ function shouldHeaderBeShown(route) {
   }
 }
 
-const HomeStackNavigator = ({ navigation, routes, route }) => {
+const HomeStackNavigator = ({}) => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
@@ -123,7 +121,7 @@ const HomeStackNavigator = ({ navigation, routes, route }) => {
   );
 };
 
-const SearchStackNavigator = ({ navigation, routes, route }) => {
+const SearchStackNavigator = ({}) => {
   return (
     <SearchStack.Navigator>
       <SearchStack.Screen
@@ -151,7 +149,7 @@ const SearchStackNavigator = ({ navigation, routes, route }) => {
   );
 };
 
-const AppStackNavigator = ({ navigation, routes, route }) => {
+const AppStackNavigator = ({}) => {
   return (
     <AppStack.Navigator>
       <AppStack.Screen
@@ -211,10 +209,9 @@ const AppStackNavigator = ({ navigation, routes, route }) => {
   );
 };
 
-function App({ navigation }) {
+function App({}) {
   return (
     <NavigationContainer>
-      {/* Change initialRouteName from "Home" to "Login" to access Login / Registration Screen */}
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Login"
@@ -246,7 +243,6 @@ function App({ navigation }) {
           options={({ route }) => ({
             title: getHeaderTitle(route),
             headerShown: false,
-            // headerShown: shouldHeaderBeShown(route)
           })}
           name="Home"
           component={HomeTabNavigator}

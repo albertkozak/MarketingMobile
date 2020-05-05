@@ -1,6 +1,5 @@
-// import React, { useEffect, useState } from "react";
 import * as React from "react";
-import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import EventItemHome from "./EventItemHome";
 import Colors from "../../constants/Color";
