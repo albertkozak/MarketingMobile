@@ -11,17 +11,16 @@ const Logout = (props) => {
         props.getLoggedIn(false);
       })
 
-      .catch(function (error) {
-        // An error happened.
-      });
+      .catch(function (error) {});
   }
 
   return (
     <Button
       buttonStyle={{
         backgroundColor: Colors.ORANGE,
+        marginHorizontal: 100,
       }}
-      title="Logout"
+      title="LOG OUT"
       onPress={() => signOutUser()}
     />
   );
