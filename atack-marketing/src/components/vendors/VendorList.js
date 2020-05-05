@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  View,
-  Text,
   StyleSheet,
   FlatList,
   SafeAreaView,
@@ -15,7 +13,7 @@ import Colors from "../../constants/Color";
 import firebase from "../../firebase";
 
 const VendorList = ({ navigation, route }) => {
-  const { eventId, eventName } = route.params;
+  const { eventId } = route.params;
 
   const EVENT_PATH = eventId + "/Vendors";
 
@@ -49,19 +47,14 @@ const VendorList = ({ navigation, route }) => {
     fetchData();
   }, []);
 
-  // const showVendorDetail = (vendor) => {
-  //   navigation.navigate("Vendor", vendor, {passId});
-  // };
-
   return (
     <Container>
       <SafeAreaView style={styles.wrapper}>
-        {/* <Text style={styles.title}>Vendors</Text> */}
+        {/* <Text style={styles.title}>Vendors</Text> -> Replaced with banner */}
         <Image
           style={styles.banner}
           source={require("../../../assets/vendor-banner.png")}
         />
-        {/* <Text style={styles.eventTitle}>{eventName}</Text> */}
         <FlatList
           keyExtractor={(vendor) => vendor.eventVendorId.toString()}
           data={fetchedVendors}

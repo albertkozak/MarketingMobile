@@ -10,6 +10,7 @@ const SubscriptionList = ({ navigation, results }) => {
   return (
     <View>
       {console.log(subscriptions)}
+      {/* PENDING CONNECTION UPDATE... */}
       {/* {subscriptions.keys(Object.eventId.toString()).map((key) => (
         <Text key={key}>{Object.eventId[key]}</Text>
       ))} */}

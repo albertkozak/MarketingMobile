@@ -1,29 +1,18 @@
 import * as React from "react";
-import {
-  View,
-  Text,
-  Button,
-  FlatList,
-  StyleSheet,
-  SafeAreaView,
-  Dimensions,
-} from "react-native";
+import { Text, StyleSheet, SafeAreaView } from "react-native";
 import Colors from "../../constants/Color";
 import moment from "moment";
 
 const EventItemHome = ({ event }) => {
   const eventDate = moment(event.eventStartDateTime).format("l");
-  // update to local time after video demo
   return (
     <SafeAreaView style={styles.wrapper}>
-      {/* Update with dynamic info */}
       <Text style={styles.event}>{event.eventName}</Text>
       <Text style={styles.date}>{eventDate}</Text>
     </SafeAreaView>
   );
 };
 
-// Border Bottom does NOT work in iOS at this time. Pending further review...
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
@@ -38,10 +27,6 @@ const styles = StyleSheet.create({
     maxWidth: "60%",
     paddingBottom: 20,
     paddingRight: 10,
-    // borderColor: "transparent",
-    // borderBottomColor: Colors.GREY,
-    // borderWidth: 1,
-    // width: Dimensions.get("window").width * 0.75,
   },
   date: {
     color: Colors.GREY,

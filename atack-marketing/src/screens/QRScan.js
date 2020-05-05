@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import Container from "../components/Container";
 import { Button } from "react-native-elements";
@@ -22,10 +22,10 @@ const QRScan = ({ navigation }) => {
   };
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return <Text>Requesting for camera permission.</Text>;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <Text>No access to camera.</Text>;
   }
 
   return (
@@ -38,7 +38,7 @@ const QRScan = ({ navigation }) => {
       {scanned && (
         <Button
           buttonStyle={{ backgroundColor: Colors.ORANGE, borderRadius: 20 }}
-          title={"Tap to Scan Again"}
+          title={"Tap to Scan Again."}
           onPress={() => setScanned(false)}
         />
       )}

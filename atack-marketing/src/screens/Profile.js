@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,7 +11,6 @@ import Container from "../components/Container";
 import Colors from "../constants/Color";
 import firebase from "../firebase";
 import Logout from "../components/Logout";
-import LogoSize from "../components/LogoSize";
 
 function ProfileScreen({ navigation }) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -20,7 +19,6 @@ function ProfileScreen({ navigation }) {
   const getCurrentUser = async () => {
     try {
       let currentUser = await firebase.auth().currentUser;
-      //	console.log(currentUser);
 
       if (currentUser != null) {
         setCurrentUser(currentUser);
@@ -41,7 +39,7 @@ function ProfileScreen({ navigation }) {
   return (
     <Container>
       <SafeAreaView style={styles.wrapper}>
-        {/* <Text style={styles.title}>Profile Screen</Text> */}
+        {/* <Text style={styles.title}>Profile Screen</Text> -> Replaced with banner */}
         <Image
           style={styles.banner}
           source={require("../../assets/account-banner.png")}
@@ -63,7 +61,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     alignItems: "center",
-    // justifyContent: "center",
     marginTop: 30,
   },
   title: {

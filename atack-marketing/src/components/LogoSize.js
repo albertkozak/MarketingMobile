@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 
 const LogoSize = (props) => {
   return (
@@ -10,8 +10,9 @@ const LogoSize = (props) => {
 };
 const styles = StyleSheet.create({
   image: {
-    height: 150,
-    width: 150,
+    height: 160,
+    width: 160,
+    marginBottom: 5,
   },
 });
 export default LogoSize;
