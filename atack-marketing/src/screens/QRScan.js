@@ -18,15 +18,28 @@ const QRScan = ({ navigation }) => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-  };
+    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
 
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission.</Text>;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera.</Text>;
-  }
+    //FYI: PROOF OF CONCEPT
+    //This Does *NOT* validate they joined the event
+
+    let qrData = JSON.parse(data);
+    console.log(qrData);
+
+    alert(
+      `Bar code with type ${type} and data ${JSON.stringify(
+        qrData
+      )} has been scanned!`
+    );
+
+    navigation.navigate("Vendor", {
+      vendor: {
+        eventVendorId: qrData.eventVendorId,
+        vendorName: qrData.vendorName
+      },
+      eventId: qrData.eventId
+    });
+  };
 
   return (
     <Container>
