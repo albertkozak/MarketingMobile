@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   Image,
   Dimensions,
+  Button,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import VendorItem from "./VendorItem";
@@ -49,12 +50,19 @@ const VendorList = ({ navigation, route }) => {
 
   return (
     <Container>
+      <Button
+        title="QR Scanner"
+        onPress={() => {
+          navigation.navigate("QRScan");
+        }}
+      ></Button>
       <SafeAreaView style={styles.wrapper}>
         {/* <Text style={styles.title}>Vendors</Text> -> Replaced with banner */}
         <Image
           style={styles.banner}
           source={require("../../../assets/vendor-banner.png")}
         />
+
         <FlatList
           keyExtractor={(vendor) => vendor.eventVendorId.toString()}
           data={fetchedVendors}
