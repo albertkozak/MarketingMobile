@@ -24,21 +24,20 @@ const QRScan = ({ navigation }) => {
     //This Does *NOT* validate they joined the event
 
     let qrData = JSON.parse(data);
-    let qrEventData = JSON.parse(qrData.event);
-    console.log(qrEventData);
+    console.log(qrData);
 
     alert(
       `Bar code with type ${type} and data ${JSON.stringify(
-        qrEventData
+        qrData
       )} has been scanned!`
     );
 
     navigation.navigate("Vendor", {
       vendor: {
-        eventVendorId: qrEventData.eventVendorId,
-        vendorName: qrEventData.vendorName
+        eventVendorId: qrData.eventVendorId,
+        vendorName: qrData.vendorName
       },
-      eventId: qrEventData.eventId
+      eventId: qrData.eventId
     });
   };
 
