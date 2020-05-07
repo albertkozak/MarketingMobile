@@ -5,13 +5,13 @@ import {
   SafeAreaView,
   Image,
   Dimensions,
-  Button,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import VendorItem from "./VendorItem";
 import Container from "../Container";
 import Colors from "../../constants/Color";
 import firebase from "../../firebase";
+import { Button } from "react-native-elements";
 
 const VendorList = ({ navigation, route }) => {
   const { eventId } = route.params;
@@ -50,19 +50,23 @@ const VendorList = ({ navigation, route }) => {
 
   return (
     <Container>
-      <Button
-        title="QR Scanner"
-        onPress={() => {
-          navigation.navigate("QRScan");
-        }}
-      ></Button>
       <SafeAreaView style={styles.wrapper}>
         {/* <Text style={styles.title}>Vendors</Text> -> Replaced with banner */}
         <Image
           style={styles.banner}
           source={require("../../../assets/vendor-banner.png")}
         />
-
+        <Button
+          style={styles.button}
+          buttonStyle={{
+            backgroundColor: Colors.ORANGE,
+            width: 150,
+          }}
+          title="QR Scanner"
+          onPress={() => {
+            navigation.navigate("QRScan");
+          }}
+        ></Button>
         <FlatList
           keyExtractor={(vendor) => vendor.eventVendorId.toString()}
           data={fetchedVendors}
@@ -101,6 +105,11 @@ const styles = StyleSheet.create({
   banner: {
     width: Dimensions.get("window").width,
     height: 225,
+    marginBottom: 25,
+  },
+  button: {
+    alignSelf: "center",
+    flexDirection: "row",
     marginBottom: 25,
   },
 });

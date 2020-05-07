@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   wrapper: {},
   text: {
     color: Colors.WHITE,
-    fontSize: 20,
+    fontSize: 18,
     paddingVertical: 15,
     textAlign: "center",
     width: Dimensions.get("window").width * 0.75,
