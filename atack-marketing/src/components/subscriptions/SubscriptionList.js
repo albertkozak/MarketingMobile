@@ -1,5 +1,11 @@
 import * as React from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import Colors from "../../constants/Color";
 import SubscriptionItem from "./SubscriptionItem";
 
@@ -7,6 +13,12 @@ const SubscriptionList = ({ navigation, results }) => {
   const subscriptions = results;
   const [eventSubscriptions, setEventSubscriptions] = React.useState([]);
 
+  const showSubDetail = (event) => {
+    navigation.navigate("Vendor", {
+      screen: "Vendor",
+      params: { event: event },
+    });
+  };
 
   return (
     <FlatList
@@ -14,7 +26,7 @@ const SubscriptionList = ({ navigation, results }) => {
       data={subscriptions}
       renderItem={({ item }) => {
         return (
-          <TouchableOpacity onPress={() => showEventDetail(item)}>
+          <TouchableOpacity onPress={() => showSubDetail(item)}>
             <SubscriptionItem event={item} />
           </TouchableOpacity>
         );
