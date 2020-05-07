@@ -19,9 +19,9 @@ const SubscriptionList = ({ navigation, results }) => {
     });
   };
 
-  React.useEffect(() => {
-    console.log(subscriptions);
-  });
+  // React.useEffect(() => {
+  //   console.log(subscriptions);
+  // });
 
   return (
     <FlatList

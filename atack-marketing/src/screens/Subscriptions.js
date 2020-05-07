@@ -8,7 +8,7 @@ import SubscriptionList from "../components/subscriptions/SubscriptionList";
 const Subscriptions = ({ navigation }) => {
   const BASE_URL =
     "https://atackmarketingapi.azurewebsites.net/api/User/subscriptionlist";
-  const [fetchedData, setFetchedData] = useState([]);
+  const [fetchedSubs, setFetchedSubs] = useState([]);
 
   const fetchData = () => {
     firebase
@@ -24,7 +24,7 @@ const Subscriptions = ({ navigation }) => {
         })
           .then((response) => response.json())
           .then((responseData) => {
-            setFetchedData(responseData.subscriptions);
+            setFetchedSubs(responseData.subscriptions);
             // console.log(responseData.subscriptions);
             // console.log(tokenResponse.token);
           });
@@ -43,7 +43,7 @@ const Subscriptions = ({ navigation }) => {
           style={styles.banner}
           source={require("../../assets/subscriptions-banner.png")}
         />
-        <SubscriptionList results={fetchedData} navigation={navigation} />
+        <SubscriptionList results={fetchedSubs} navigation={navigation} />
       </View>
     </Container>
   );
