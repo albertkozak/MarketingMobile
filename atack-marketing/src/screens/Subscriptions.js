@@ -41,7 +41,7 @@ const Subscriptions = ({ navigation }) => {
         {/* <Text style={styles.title}>Subscriptions</Text> -> Replaced with banner */}
         <Image
           style={styles.banner}
-          source={require("../../assets/subscriptions-banner.png")}
+          source={require("../../assets/my-events-banner.png")}
         />
         <SubscriptionList results={fetchedSubs} navigation={navigation} />
       </View>

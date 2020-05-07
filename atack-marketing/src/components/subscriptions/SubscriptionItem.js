@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  Dimensions,
-} from "react-native";
+import { Text, StyleSheet, SafeAreaView, Dimensions } from "react-native";
 import Colors from "../../constants/Color";
 
 const SubscriptionItem = ({ event }) => {
@@ -23,6 +18,7 @@ const styles = StyleSheet.create({
     color: Colors.WHITE,
     fontSize: 20,
     paddingVertical: 15,
+    textAlign: "center",
     width: Dimensions.get("window").width * 0.75,
   },
 });
