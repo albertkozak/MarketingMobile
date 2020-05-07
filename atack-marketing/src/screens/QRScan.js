@@ -5,6 +5,10 @@ import Container from "../components/Container";
 import { Button } from "react-native-elements";
 import Colors from "../constants/Color";
 
+import firebase from "../firebase";
+
+const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/";
+
 const QRScan = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -16,30 +20,48 @@ const QRScan = ({ navigation }) => {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
-    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-
-    //FYI: PROOF OF CONCEPT
-    //This Does *NOT* validate they joined the event
-
     let qrData = JSON.parse(data);
-    console.log(qrData);
+    // console.log("QRDATA: " + JSON.stringify(qrData));
 
-    alert(
-      `Bar code with type ${type} and data ${JSON.stringify(
-        qrData
-      )} has been scanned!`
-    );
-
-    navigation.navigate("Vendor", {
-      vendor: {
-        eventVendorId: qrData.eventVendorId,
-        vendorName: qrData.vendorName
-      },
-      eventId: qrData.eventId
-    });
+    await firebase
+      .auth()
+      .currentUser.getIdTokenResult()
+      .then(tokenResponse => {
+        fetch(BASE_URL + "User/eventlist", {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${tokenResponse.token}`
+          }
+        })
+          .then(response => response.json())
+          .then(responseData => {
+            if (validateEventScan(responseData.eventsJoined, qrData.eventId)) {
+              navigation.navigate("Vendor", {
+                vendor: {
+                  eventVendorId: qrData.eventVendorId,
+                  vendorName: qrData.vendorName
+                },
+                eventId: qrData.eventId
+              });
+            } else {
+              alert("You Must Join This Event Before Scanning Vendor QR Codes");
+            }
+          });
+      });
   };
+
+  function validateEventScan(apiResult, eventId) {
+    for (let i = 0; i < apiResult.length; i++) {
+      if (apiResult[i].eventId === eventId) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
   return (
     <Container>
