@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: Colors.WHITE,
-    fontSize: 22,
+    fontSize: 18,
     textTransform: "uppercase",
     marginBottom: 25,
   },

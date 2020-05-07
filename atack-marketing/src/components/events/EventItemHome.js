@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
   },
   event: {
     color: Colors.WHITE,
-    fontSize: 15,
+    fontSize: 16,
     textAlign: "left",
-    maxWidth: "60%",
+    maxWidth: "62%",
     paddingBottom: 20,
     paddingRight: 10,
   },
