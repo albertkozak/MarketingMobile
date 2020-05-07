@@ -12,24 +12,20 @@ import SubscriptionItem from "./SubscriptionItem";
 const SubscriptionList = ({ navigation, results }) => {
   const subscriptions = results;
 
-  const showSubDetail = (event) => {
-    navigation.navigate("Vendor", {
-      screen: "Vendor",
+  const showSubsDetail = (event) => {
+    navigation.navigate("Event", {
+      screen: "Event",
       params: { event: event },
     });
   };
 
-  // React.useEffect(() => {
-  //   console.log(subscriptions);
-  // });
-
   return (
     <FlatList
-      keyExtractor={(subscriptions) => subscriptions.eventId.toString()}
+      keyExtractor={(event) => event.eventId.toString()}
       data={subscriptions}
       renderItem={({ item }) => {
         return (
-          <TouchableOpacity onPress={() => showSubDetail(item)}>
+          <TouchableOpacity onPress={() => showSubsDetail(item)}>
             <SubscriptionItem event={item} />
           </TouchableOpacity>
         );

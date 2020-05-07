@@ -2,12 +2,12 @@ import * as React from "react";
 import { Text, StyleSheet, SafeAreaView, Dimensions } from "react-native";
 import Colors from "../../constants/Color";
 
-const SubscriptionItem = (props) => {
-  console.log(props);
+const SubscriptionItem = ({ event }) => {
+  console.log(event);
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <Text style={styles.text}>{props.event.eventName}</Text>
+      <Text style={styles.text}>{event.eventName}</Text>
     </SafeAreaView>
   );
 };
