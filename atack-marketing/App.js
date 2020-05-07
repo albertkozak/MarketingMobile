@@ -40,7 +40,7 @@ const HomeTabNavigator = ({}) => (
           iconName = "ios-home";
         } else if (route.name == "Search") {
           iconName = "ios-search";
-        } else if (route.name == "Subscriptions") {
+        } else if (route.name == "My Events") {
           iconName = "ios-star";
         } else if (route.name == "Profile") {
           iconName = "ios-person";
@@ -55,7 +55,7 @@ const HomeTabNavigator = ({}) => (
   >
     <Tab.Screen name="Home" component={HomeStackNavigator} />
     <Tab.Screen name="Search" component={SearchStackNavigator} />
-    <Tab.Screen name="Subscriptions" component={Subscriptions} />
+    <Tab.Screen name="My Events" component={Subscriptions} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
   </Tab.Navigator>
 );
@@ -70,8 +70,8 @@ function getHeaderTitle(route) {
       return "Home";
     case "Search":
       return "Search";
-    case "Subscriptions":
-      return "Subscriptions";
+    case "My Events":
+      return "My Events";
     case "Profile":
       return "Profile";
   }
