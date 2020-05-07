@@ -1,30 +1,36 @@
 import * as React from "react";
-import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import Colors from "../../constants/Color";
 import SubscriptionItem from "./SubscriptionItem";
 
 const SubscriptionList = ({ navigation, results }) => {
   const subscriptions = results;
-  const [eventSubscriptions, setEventSubscriptions] = React.useState([]);
+
+  const showSubsDetail = (event) => {
+    navigation.navigate("Event", {
+      screen: "Event",
+      params: { event: event },
+    });
+  };
 
   return (
-    <View>
-      {console.log(subscriptions)}
-      {/* PENDING CONNECTION UPDATE... */}
-      {/* {subscriptions.keys(Object.eventId.toString()).map((key) => (
-        <Text key={key}>{Object.eventId[key]}</Text>
-      ))} */}
-      {/* <FlatList
-        keyExtractor={(subscription) => subscription.eventId.toString()}
-        data={subscriptions}
-        renderItem={({ item }) => {
-          item
-            .keys(item.eventSubscriptions.eventVendorId)
-            .map((key) => <SubscriptionItem subscription={key} />);
-          // return <SubscriptionItem subscription={item} />;
-        }}
-      /> */}
-    </View>
+    <FlatList
+      keyExtractor={(event) => event.eventId.toString()}
+      data={subscriptions}
+      renderItem={({ item }) => {
+        return (
+          <TouchableOpacity onPress={() => showSubsDetail(item)}>
+            <SubscriptionItem event={item} />
+          </TouchableOpacity>
+        );
+      }}
+    />
   );
 };
 
