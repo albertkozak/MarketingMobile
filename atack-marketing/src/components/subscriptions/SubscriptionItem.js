@@ -3,7 +3,7 @@ import { Text, StyleSheet, SafeAreaView, Dimensions } from "react-native";
 import Colors from "../../constants/Color";
 
 const SubscriptionItem = (props) => {
-  console.log(props.event);
+  // console.log(props);
   return (
     <SafeAreaView style={styles.wrapper}>
       <Text style={styles.text}>{props.event.eventName}</Text>

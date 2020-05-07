@@ -25,8 +25,8 @@ const Subscriptions = ({ navigation }) => {
           .then((response) => response.json())
           .then((responseData) => {
             setFetchedData(responseData.subscriptions);
-            console.log(fetchedData);
-            console.log(responseData.subscriptions);
+            // console.log(responseData.subscriptions);
+            // console.log(tokenResponse.token);
           });
       });
   };

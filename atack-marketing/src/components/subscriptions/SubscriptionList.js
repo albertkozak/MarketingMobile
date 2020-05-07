@@ -11,7 +11,6 @@ import SubscriptionItem from "./SubscriptionItem";
 
 const SubscriptionList = ({ navigation, results }) => {
   const subscriptions = results;
-  const [eventSubscriptions, setEventSubscriptions] = React.useState([]);
 
   const showSubDetail = (event) => {
     navigation.navigate("Vendor", {
@@ -19,6 +18,10 @@ const SubscriptionList = ({ navigation, results }) => {
       params: { event: event },
     });
   };
+
+  React.useEffect(() => {
+    console.log(subscriptions);
+  });
 
   return (
     <FlatList
