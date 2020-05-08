@@ -5,6 +5,7 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import Colors from "../../constants/Color";
 import SubscriptionItem from "./SubscriptionItem";
@@ -21,6 +22,7 @@ const SubscriptionList = ({ navigation, results }) => {
 
   return (
     <FlatList
+      scrollEnabled
       keyExtractor={(event) => event.eventId.toString()}
       data={subscriptions}
       renderItem={({ item }) => {
