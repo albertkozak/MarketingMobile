@@ -7,7 +7,7 @@ export default function SubscriptionVendors(props) {
     <FlatList
       pagingEnabled={true}
       data={props.event.eventSubscriptions}
-      keyExtractor={item => item.eventVendorId.toString()}
+      keyExtractor={(item) => item.eventVendorId.toString()}
       renderItem={({ item }) => {
         return <Text style={styles.vendorText}>{item.vendorName}</Text>;
       }}
@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
     color: Colors.WHITE,
     fontSize: 15,
     marginLeft: 20,
-    paddingBottom: 5
-  }
+    paddingBottom: 5,
+  },
 });

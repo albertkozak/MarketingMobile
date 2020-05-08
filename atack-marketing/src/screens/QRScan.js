@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import Container from "../components/Container";
 import { Button } from "react-native-elements";
@@ -23,31 +23,32 @@ const QRScan = ({ navigation }) => {
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
     let qrData = JSON.parse(data);
-    // console.log("QRDATA: " + JSON.stringify(qrData));
 
     await firebase
       .auth()
       .currentUser.getIdTokenResult()
-      .then(tokenResponse => {
+      .then((tokenResponse) => {
         fetch(BASE_URL + "User/eventlist", {
           method: "GET",
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${tokenResponse.token}`
-          }
+            Authorization: `Bearer ${tokenResponse.token}`,
+          },
         })
-          .then(response => response.json())
-          .then(responseData => {
+          .then((response) => response.json())
+          .then((responseData) => {
             if (validateEventScan(responseData.eventsJoined, qrData.eventId)) {
               navigation.navigate("Vendor", {
                 vendor: {
                   eventVendorId: qrData.eventVendorId,
-                  vendorName: qrData.vendorName
+                  vendorName: qrData.vendorName,
                 },
-                eventId: qrData.eventId
+                eventId: qrData.eventId,
               });
             } else {
-              alert("You Must Join This Event Before Scanning Vendor QR Codes");
+              alert(
+                "You Must Join This Event Before Scanning Vendor QR Codes."
+              );
             }
           });
       });

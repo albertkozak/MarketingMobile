@@ -22,22 +22,22 @@ const Vendor = ({ route }) => {
     firebase
       .auth()
       .currentUser.getIdTokenResult()
-      .then(tokenResponse => {
+      .then((tokenResponse) => {
         fetch(BASE_URL + EVENT_PATH, {
           method: "GET",
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${tokenResponse.token}`
-          }
+            Authorization: `Bearer ${tokenResponse.token}`,
+          },
         })
-          .then(response => response.json())
-          .then(responseData => {
+          .then((response) => response.json())
+          .then((responseData) => {
             setVendorDetails(responseData.vendor);
           });
       });
   };
 
-  const handleButton = async event => {
+  const handleButton = async (event) => {
     event.preventDefault();
     const eventId = eventId;
     const eventVendorId = eventVendorId;
@@ -55,17 +55,14 @@ const Vendor = ({ route }) => {
         method: "POST",
         headers: {
           Accept: "application/json",
-          Authorization: `Bearer ${JWToken.token}`
+          Authorization: `Bearer ${JWToken.token}`,
         },
         body: JSON.stringify({
           eventId: eventId,
-          eventVendorId: eventVendorId
-        })
+          eventVendorId: eventVendorId,
+        }),
       });
 
-      console.log(BASE_URL);
-      console.log(statusValue);
-      console.log(result.status);
       if (result.status === 200) {
         if (status === "Subscribe") {
           setStatus("Unsubscribe");
@@ -74,9 +71,10 @@ const Vendor = ({ route }) => {
         }
       } else if (result.status === 400) {
         let error = await result.json();
-        //Check if error is because User didn't Join Event
         if (error.message === "User Must Join Event First") {
-          alert("You Must Join This Event Before You Can Subscribe To Vendors");
+          alert(
+            "You Must Join This Event Before You Can Subscribe To Vendors."
+          );
         } else {
           alert("You've already subscribed to this vendor.");
           setStatus("Unsubscribe");
@@ -91,20 +89,20 @@ const Vendor = ({ route }) => {
     await firebase
       .auth()
       .currentUser.getIdTokenResult()
-      .then(tokenResponse => {
+      .then((tokenResponse) => {
         fetch(BASE_URL + "User/subscriptionlist", {
           method: "GET",
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${tokenResponse.token}`
-          }
+            Authorization: `Bearer ${tokenResponse.token}`,
+          },
         })
-          .then(response => response.json())
-          .then(responseData => {
+          .then((response) => response.json())
+          .then((responseData) => {
             if (
               hasUserSubscribed(
                 responseData.subscriptions.filter(
-                  event => event.eventId === eventId
+                  (event) => event.eventId === eventId
                 )
               )
             ) {
@@ -131,7 +129,7 @@ const Vendor = ({ route }) => {
     checkUserSubscribed();
   }, []);
 
-  const format = amount => {
+  const format = (amount) => {
     return Number(amount)
       .toFixed(2)
       .replace(/\d(?=(\d{3})+\.)/g, "$&,");
@@ -139,7 +137,6 @@ const Vendor = ({ route }) => {
   return (
     <Container>
       <SafeAreaView style={styles.wrapper}>
-        {/* <Text style={styles.title}>{eventName}</Text> -> Replaced with banner */}
         <Text style={styles.vendor}>{vendorName}</Text>
         <Text style={styles.description}>{fetchedDetails.description}</Text>
         <View style={styles.website}>
@@ -153,7 +150,7 @@ const Vendor = ({ route }) => {
         <FlatList
           style={styles.list}
           data={fetchedDetails.products}
-          keyExtractor={product => product.productId.toString()}
+          keyExtractor={(product) => product.productId.toString()}
           renderItem={({ item }) => {
             return (
               <View style={styles.listItems}>
@@ -170,7 +167,7 @@ const Vendor = ({ route }) => {
           buttonStyle={{
             backgroundColor: Colors.ORANGE,
             width: 120,
-            alignSelf: "center"
+            alignSelf: "center",
           }}
           style={styles.button}
           onPress={handleButton}
@@ -184,63 +181,63 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 0.8,
     justifyContent: "center",
-    marginHorizontal: 25
+    marginHorizontal: 25,
   },
   title: {
     color: Colors.GREY,
     marginBottom: 25,
     fontSize: 16,
-    textAlign: "left"
+    textAlign: "left",
   },
   vendor: {
     color: Colors.WHITE,
     fontSize: 24,
-    marginBottom: 25
+    marginBottom: 25,
   },
   description: {
     color: Colors.GREY,
     fontSize: 15,
-    marginBottom: 15
+    marginBottom: 15,
   },
   website: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   websiteText: {
     color: Colors.GREY,
     fontSize: 15,
     marginLeft: 10,
-    marginBottom: 15
+    marginBottom: 15,
   },
   emailText: {
     color: Colors.GREY,
     fontSize: 15,
     marginLeft: 10,
-    marginBottom: 25
+    marginBottom: 25,
   },
   email: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   list: {
-    marginVertical: 10
+    marginVertical: 10,
   },
   listItems: {
     marginHorizontal: 30,
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   listItem: {
     color: Colors.WHITE,
     textAlign: "left",
-    paddingBottom: 12
+    paddingBottom: 12,
   },
   listItem2: {
     color: Colors.WHITE,
-    textAlign: "right"
+    textAlign: "right",
   },
-  button: {}
+  button: {},
 });
 
 export default Vendor;

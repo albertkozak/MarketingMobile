@@ -25,8 +25,6 @@ const Subscriptions = ({ navigation }) => {
           .then((response) => response.json())
           .then((responseData) => {
             setFetchedSubs(responseData.subscriptions);
-            // console.log(responseData.subscriptions);
-            // console.log(tokenResponse.token);
           });
       });
   };
@@ -38,7 +36,6 @@ const Subscriptions = ({ navigation }) => {
   return (
     <Container>
       <View style={styles.wrapper}>
-        {/* <Text style={styles.title}>Subscriptions</Text> -> Replaced with banner */}
         <Image
           style={styles.banner}
           source={require("../../assets/my-events-banner.png")}
