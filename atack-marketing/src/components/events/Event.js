@@ -8,6 +8,7 @@ import moment from "moment";
 import firebase from "../../firebase";
 
 const Event = ({ route, navigation }) => {
+  console.log(route.params);
   const { event } = route.params;
   const eventId = event.eventId;
   const eventName = event.eventName;

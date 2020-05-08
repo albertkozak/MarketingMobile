@@ -15,12 +15,12 @@ const SubscriptionItem = ({ event }) => {
 const styles = StyleSheet.create({
   wrapper: {},
   text: {
-    color: Colors.WHITE,
-    fontSize: 18,
+    color: Colors.GREY,
+    fontSize: 20,
     paddingVertical: 15,
-    textAlign: "center",
     width: Dimensions.get("window").width * 0.75,
-  },
+    marginTop: 10
+  }
 });
 
 export default SubscriptionItem;
