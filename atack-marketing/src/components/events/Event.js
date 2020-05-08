@@ -17,8 +17,8 @@ const Event = ({ route, navigation }) => {
   const [joinActive, setJoinActive] = useState(true);
   const [vendorsActive, setVendorsActive] = useState(true);
 
-  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/Events/";
-  const EVENT_URL = BASE_URL + eventId + "/";
+  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/";
+  const EVENT_URL = BASE_URL + "Events/" + eventId + "/";
   const [status, setStatus] = useState("Join");
 
   function isEventAvailable() {
@@ -39,7 +39,7 @@ const Event = ({ route, navigation }) => {
     setVendorsActive(vendorValue);
   }
 
-  const handleButton = async (event) => {
+  const handleButton = async event => {
     event.preventDefault();
     const eventId = eventId;
 
@@ -56,11 +56,11 @@ const Event = ({ route, navigation }) => {
         method: "POST",
         headers: {
           Accept: "application/json",
-          Authorization: `Bearer ${JWToken.token}`,
+          Authorization: `Bearer ${JWToken.token}`
         },
         body: JSON.stringify({
-          eventId: eventId,
-        }),
+          eventId: eventId
+        })
       });
       console.log(EVENT_URL);
       console.log(statusValue);
@@ -82,8 +82,40 @@ const Event = ({ route, navigation }) => {
     }
   };
 
+  async function checkUserJoined() {
+    await firebase
+      .auth()
+      .currentUser.getIdTokenResult()
+      .then(tokenResponse => {
+        fetch(BASE_URL + "User/eventlist", {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${tokenResponse.token}`
+          }
+        })
+          .then(response => response.json())
+          .then(responseData => {
+            if (hasUserJoinedEvent(responseData.eventsJoined)) {
+              setStatus("Leave");
+            }
+          });
+      });
+  }
+
+  function hasUserJoinedEvent(apiResult) {
+    for (let i = 0; i < apiResult.length; i++) {
+      if (apiResult[i].eventId === eventId) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   useEffect(() => {
     isEventAvailable();
+    checkUserJoined();
   }, []);
 
   return (
@@ -107,7 +139,7 @@ const Event = ({ route, navigation }) => {
             buttonStyle={{
               backgroundColor: Colors.ORANGE,
               width: 90,
-              marginRight: 50,
+              marginRight: 50
             }}
             onPress={handleButton}
           />
@@ -118,7 +150,7 @@ const Event = ({ route, navigation }) => {
             color={Colors.ORANGE}
             buttonStyle={{
               backgroundColor: Colors.ORANGE,
-              width: 90,
+              width: 90
             }}
             onPress={() =>
               navigation.navigate("VendorList", { eventId }, { eventName })
@@ -134,45 +166,45 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     marginHorizontal: 25,
-    marginTop: 100,
+    marginTop: 100
   },
   eventTitle: {
     color: Colors.WHITE,
     fontSize: 24,
-    marginBottom: 25,
+    marginBottom: 25
   },
   location: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   start: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   eventVenue: {
     color: Colors.WHITE,
     marginBottom: 25,
     fontSize: 18,
-    marginLeft: 10,
+    marginLeft: 10
   },
   eventVendors: {
     color: Colors.GREY,
     marginBottom: 25,
-    fontSize: 15,
+    fontSize: 15
   },
   eventStart: {
     color: Colors.WHITE,
     marginBottom: 25,
     fontSize: 15,
-    marginLeft: 10,
+    marginLeft: 10
   },
   buttonContainer: {
     alignSelf: "center",
     flexDirection: "row",
     justifyContent: "space-around",
     width: "60%",
-    marginTop: 20,
-  },
+    marginTop: 20
+  }
 });
 
 export default Event;
