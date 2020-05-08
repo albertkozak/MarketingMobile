@@ -39,7 +39,6 @@ function ProfileScreen({ navigation }) {
   return (
     <Container>
       <SafeAreaView style={styles.wrapper}>
-        {/* <Text style={styles.title}>Profile Screen</Text> -> Replaced with banner */}
         <Image
           style={styles.banner}
           source={require("../../assets/account-banner.png")}

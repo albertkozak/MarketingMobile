@@ -1,6 +1,6 @@
-import React, { Fragment, navigation } from "react";
+import React, { Fragment } from "react";
 import { StyleSheet, SafeAreaView, View } from "react-native";
-import { Button, Text } from "react-native-elements";
+import { Button } from "react-native-elements";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import FormInput from "../components/FormInput";

@@ -51,7 +51,6 @@ const VendorList = ({ navigation, route }) => {
   return (
     <Container>
       <SafeAreaView style={styles.wrapper}>
-        {/* <Text style={styles.title}>Vendors</Text> -> Replaced with banner */}
         <Image
           style={styles.banner}
           source={require("../../../assets/vendor-banner.png")}

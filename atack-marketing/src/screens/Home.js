@@ -24,7 +24,6 @@ const Home = ({ navigation }) => {
           .then((response) => response.json())
           .then((responseData) => {
             setFetchedData(responseData.events);
-            console.log(fetchedData);
           });
       });
   };
@@ -36,7 +35,6 @@ const Home = ({ navigation }) => {
   return (
     <Container>
       <View style={styles.wrapper}>
-        {/* <Text style={styles.title}>Upcoming Events</Text> -> Replaced with banner */}
         <Image
           style={styles.banner}
           source={require("../../assets/events-banner.png")}
