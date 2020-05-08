@@ -73,12 +73,13 @@ const Vendor = ({ route }) => {
           setStatus("Subscribe");
         }
       } else if (result.status === 400) {
+        let error = await result.json();
         //Check if error is because User didn't Join Event
-        if (await checkUserJoined()) {
+        if (error.message === "User Must Join Event First") {
+          alert("You Must Join This Event Before You Can Subscribe To Vendors");
+        } else {
           alert("You've already subscribed to this vendor.");
           setStatus("Unsubscribe");
-        } else {
-          alert("You Must Join This Event Before You Can Subscribe");
         }
       } else {
         alert("An error occurred. Please try again.");
@@ -122,35 +123,6 @@ const Vendor = ({ route }) => {
         }
       }
     }
-    return false;
-  }
-
-  async function checkUserJoined() {
-    return await firebase
-      .auth()
-      .currentUser.getIdTokenResult()
-      .then(tokenResponse => {
-        return fetch(BASE_URL + "User/eventlist", {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${tokenResponse.token}`
-          }
-        })
-          .then(response => response.json())
-          .then(responseData => {
-            return hasUserJoinedEvent(responseData.eventsJoined);
-          });
-      });
-  }
-
-  function hasUserJoinedEvent(apiResult) {
-    for (let i = 0; i < apiResult.length; i++) {
-      if (apiResult[i].eventId === eventId) {
-        return true;
-      }
-    }
-
     return false;
   }
 
