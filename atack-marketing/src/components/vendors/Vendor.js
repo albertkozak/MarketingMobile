@@ -11,10 +11,9 @@ const Vendor = ({ route }) => {
   const eventVendorId = route.params.vendor.eventVendorId;
   const vendorName = route.params.vendor.vendorName;
 
-  const EVENT_PATH = eventId + "/Vendors/" + eventVendorId;
+  const EVENT_PATH = "Events/" + eventId + "/Vendors/" + eventVendorId;
 
-  const BASE_URL =
-    "https://atackmarketingapi.azurewebsites.net/api/Events/" + EVENT_PATH;
+  const BASE_URL = "https://atackmarketingapi.azurewebsites.net/api/";
 
   const [fetchedDetails, setVendorDetails] = useState([]);
   const [status, setStatus] = useState("Subscribe");
@@ -23,22 +22,22 @@ const Vendor = ({ route }) => {
     firebase
       .auth()
       .currentUser.getIdTokenResult()
-      .then((tokenResponse) => {
-        fetch(BASE_URL, {
+      .then(tokenResponse => {
+        fetch(BASE_URL + EVENT_PATH, {
           method: "GET",
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${tokenResponse.token}`,
-          },
+            Authorization: `Bearer ${tokenResponse.token}`
+          }
         })
-          .then((response) => response.json())
-          .then((responseData) => {
+          .then(response => response.json())
+          .then(responseData => {
             setVendorDetails(responseData.vendor);
           });
       });
   };
 
-  const handleButton = async (event) => {
+  const handleButton = async event => {
     event.preventDefault();
     const eventId = eventId;
     const eventVendorId = eventVendorId;
@@ -52,17 +51,18 @@ const Vendor = ({ route }) => {
 
     let JWToken = await await firebase.auth().currentUser.getIdTokenResult();
     if (JWToken !== null) {
-      const result = await fetch(BASE_URL + statusValue, {
+      const result = await fetch(BASE_URL + EVENT_PATH + statusValue, {
         method: "POST",
         headers: {
           Accept: "application/json",
-          Authorization: `Bearer ${JWToken.token}`,
+          Authorization: `Bearer ${JWToken.token}`
         },
         body: JSON.stringify({
           eventId: eventId,
-          eventVendorId: eventVendorId,
-        }),
+          eventVendorId: eventVendorId
+        })
       });
+
       console.log(BASE_URL);
       console.log(statusValue);
       console.log(result.status);
@@ -73,18 +73,93 @@ const Vendor = ({ route }) => {
           setStatus("Subscribe");
         }
       } else if (result.status === 400) {
-        alert("You've already subscribed to this vendor.");
-        setStatus("Unsubscribe");
+        //Check if error is because User didn't Join Event
+        if (await checkUserJoined()) {
+          alert("You've already subscribed to this vendor.");
+          setStatus("Unsubscribe");
+        } else {
+          alert("You Must Join This Event Before You Can Subscribe");
+        }
       } else {
         alert("An error occurred. Please try again.");
       }
     }
   };
 
+  async function checkUserSubscribed() {
+    await firebase
+      .auth()
+      .currentUser.getIdTokenResult()
+      .then(tokenResponse => {
+        fetch(BASE_URL + "User/subscriptionlist", {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${tokenResponse.token}`
+          }
+        })
+          .then(response => response.json())
+          .then(responseData => {
+            if (
+              hasUserSubscribed(
+                responseData.subscriptions.filter(
+                  event => event.eventId === eventId
+                )
+              )
+            ) {
+              setStatus("Unsubscribe");
+            }
+          });
+      });
+  }
+
+  function hasUserSubscribed(apiResult) {
+    if (apiResult.length > 0) {
+      let subscriptions = apiResult[0].eventSubscriptions;
+      for (let i = 0; i < subscriptions.length; i++) {
+        if (subscriptions[i].eventVendorId === eventVendorId) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  async function checkUserJoined() {
+    return await firebase
+      .auth()
+      .currentUser.getIdTokenResult()
+      .then(tokenResponse => {
+        return fetch(BASE_URL + "User/eventlist", {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${tokenResponse.token}`
+          }
+        })
+          .then(response => response.json())
+          .then(responseData => {
+            return hasUserJoinedEvent(responseData.eventsJoined);
+          });
+      });
+  }
+
+  function hasUserJoinedEvent(apiResult) {
+    for (let i = 0; i < apiResult.length; i++) {
+      if (apiResult[i].eventId === eventId) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   useEffect(() => {
     fetchData();
+    checkUserSubscribed();
   }, []);
-  const format = (amount) => {
+
+  const format = amount => {
     return Number(amount)
       .toFixed(2)
       .replace(/\d(?=(\d{3})+\.)/g, "$&,");
@@ -106,7 +181,7 @@ const Vendor = ({ route }) => {
         <FlatList
           style={styles.list}
           data={fetchedDetails.products}
-          keyExtractor={(product) => product.productId.toString()}
+          keyExtractor={product => product.productId.toString()}
           renderItem={({ item }) => {
             return (
               <View style={styles.listItems}>
@@ -123,7 +198,7 @@ const Vendor = ({ route }) => {
           buttonStyle={{
             backgroundColor: Colors.ORANGE,
             width: 120,
-            alignSelf: "center",
+            alignSelf: "center"
           }}
           style={styles.button}
           onPress={handleButton}
@@ -137,63 +212,63 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 0.8,
     justifyContent: "center",
-    marginHorizontal: 25,
+    marginHorizontal: 25
   },
   title: {
     color: Colors.GREY,
     marginBottom: 25,
     fontSize: 16,
-    textAlign: "left",
+    textAlign: "left"
   },
   vendor: {
     color: Colors.WHITE,
     fontSize: 24,
-    marginBottom: 25,
+    marginBottom: 25
   },
   description: {
     color: Colors.GREY,
     fontSize: 15,
-    marginBottom: 15,
+    marginBottom: 15
   },
   website: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   websiteText: {
     color: Colors.GREY,
     fontSize: 15,
     marginLeft: 10,
-    marginBottom: 15,
+    marginBottom: 15
   },
   emailText: {
     color: Colors.GREY,
     fontSize: 15,
     marginLeft: 10,
-    marginBottom: 25,
+    marginBottom: 25
   },
   email: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   list: {
-    marginVertical: 10,
+    marginVertical: 10
   },
   listItems: {
     marginHorizontal: 30,
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   listItem: {
     color: Colors.WHITE,
     textAlign: "left",
-    paddingBottom: 12,
+    paddingBottom: 12
   },
   listItem2: {
     color: Colors.WHITE,
-    textAlign: "right",
+    textAlign: "right"
   },
-  button: {},
+  button: {}
 });
 
 export default Vendor;
